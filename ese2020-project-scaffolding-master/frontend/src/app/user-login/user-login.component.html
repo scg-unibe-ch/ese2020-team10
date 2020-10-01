@@ -4,9 +4,9 @@
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
+      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" (keydown.enter)="login()">
     </mat-form-field>
-    <button mat-flat-button color="primary" (click)="login()">Login</button>
+    <button mat-flat-button color="primary" (click)="login()" >Login</button>
   </div>
 
   <div *ngIf="loggedIn">
