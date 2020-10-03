@@ -20,8 +20,14 @@ export class UserRegistrationComponent implements OnInit {
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
     password: new FormControl('', [
       Validators.required,
-      Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$")])
+      Validators.pattern('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$')]),
+    phone: new FormControl('',[
+      Validators.pattern('^(0|0041|\\+41)?[1-9\\s][0-9\\s]{1,12}$')]),
+    address: new FormControl('', null),
+    city: new FormControl('', null),
   });
+
+  optional = false;
 
   hidePassword = true;
   get firstName() {
@@ -40,12 +46,24 @@ export class UserRegistrationComponent implements OnInit {
   get password() {
     return this.userEmailPassword.get('password')
   }
+
+  get phone(){
+    return this.userEmailPassword.get('phone');
+  }
+
+  get address(){
+    return this.userEmailPassword.get('address');
+  }
+
+  get city(){
+    return this.userEmailPassword.get('address');
+  }
   constructor() { }
 
   ngOnInit(): void {
   }
 
   register(): void {
-    
+
   }
 }
