@@ -19,6 +19,9 @@ import { UserLoginComponent } from './user-login/user-login.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { AppRoutingModule } from './app-routing.module';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
     TodoItemComponent,
     UserLoginComponent,
     UserRegistrationComponent,
+    NavBarComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +46,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatCardModule,
     MatTabsModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [
     {
