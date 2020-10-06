@@ -1,5 +1,6 @@
 <mat-card>
   <div *ngIf="!loggedIn">
+    <div class="log">Login</div>
     <mat-form-field>
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
     </mat-form-field>
@@ -10,6 +11,7 @@
   </div>
 
   <div *ngIf="loggedIn">
+    <div class="log">Logout</div>
     <button mat-flat-button color="warn" (click)="logout()">Logout</button>
     You are currently logged in as {{ userName }}
   </div>

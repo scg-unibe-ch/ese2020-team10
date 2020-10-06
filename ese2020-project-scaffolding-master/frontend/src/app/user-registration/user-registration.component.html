@@ -1,5 +1,6 @@
 <mat-card>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="register">Registration</div>
     <div>
       <mat-form-field>
         <input [class.is-invalid]="firstName.touched" type="text" matInput class="form-control" placeholder="First Name" formControlName="firstName">
