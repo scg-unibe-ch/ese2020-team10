@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-user-registration',
@@ -8,7 +10,10 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 })
 export class UserRegistrationComponent implements OnInit {
 
-  userEmailPassword = new FormGroup({
+  firstNamej = "";
+
+
+  registrationForm = new FormGroup({
     firstName: new FormControl('', [
       Validators.required]),
     lastName: new FormControl('', [
@@ -31,39 +36,50 @@ export class UserRegistrationComponent implements OnInit {
 
   hidePassword = true;
   get firstName() {
-    return this.userEmailPassword.get('firstName')
+    return this.registrationForm.get('firstName')
   }
   get lastName() {
-    return this.userEmailPassword.get('lastName')
+    return this.registrationForm.get('lastName')
   }
   get userName() {
-    return this.userEmailPassword.get('userName')
+    return this.registrationForm.get('userName')
   }
   get email() {
-    return this.userEmailPassword.get('email')
+    return this.registrationForm.get('email')
   }
 
   get password() {
-    return this.userEmailPassword.get('password')
+    return this.registrationForm.get('password')
   }
 
   get phone(){
-    return this.userEmailPassword.get('phone');
+    return this.registrationForm.get('phone');
   }
 
   get address(){
-    return this.userEmailPassword.get('address');
+    return this.registrationForm.get('address');
   }
 
   get city(){
-    return this.userEmailPassword.get('address');
+    return this.registrationForm.get('address');
   }
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  register(): void {
+  
 
-  }
+  onSubmit(): void { 
+    if(this.registrationForm.valid){
+      this.httpClient.post(environment.endpointURL + 'user/register', {
+          "firstName": this.firstName.value,
+          "lastName": this.lastName.value,
+          "userName": this.userName.value,
+          "email": this.email.value,      
+          "password": this.password.value
+        }).subscribe((res: any) => {
+      });
+   }
+}
 }

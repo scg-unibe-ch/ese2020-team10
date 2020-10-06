@@ -1,5 +1,6 @@
 <mat-card>
-  <form [formGroup]="userEmailPassword"><div>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div>  
       <mat-form-field>
         <input [class.is-invalid]="firstName.touched" type="text" matInput class="form-control" placeholder="First Name" formControlName="firstName">
       </mat-form-field>
@@ -71,7 +72,7 @@
     </div>
      <br>
      <div>
-        <button mat-flat-button color="primary" (click)="register()" >Register</button>
+        <button type = "submit" mat-flat-button color="primary" [disabled] = "!registrationForm.valid" >Register</button>
      </div>
   </form>
 </mat-card>
