@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-registration',
@@ -11,7 +12,6 @@ import { environment } from '../../environments/environment';
 export class UserRegistrationComponent implements OnInit {
 
   firstNamej = "";
-
 
   registrationForm = new FormGroup({
     firstName: new FormControl('', [
@@ -63,22 +63,21 @@ export class UserRegistrationComponent implements OnInit {
   get city(){
     return this.registrationForm.get('address');
   }
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  
-
-  onSubmit(): void { 
+  onSubmit(): void {
     if(this.registrationForm.valid){
       this.httpClient.post(environment.endpointURL + 'user/register', {
           "firstName": this.firstName.value,
           "lastName": this.lastName.value,
           "userName": this.userName.value,
-          "email": this.email.value,      
+          "email": this.email.value,
           "password": this.password.value
         }).subscribe((res: any) => {
+          this.router.navigate(['/login']);
       });
    }
 }

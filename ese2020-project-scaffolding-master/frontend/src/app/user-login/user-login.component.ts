@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
@@ -17,7 +18,7 @@ export class UserLoginComponent implements OnInit {
 
   secureEndpointResponse = '';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.checkUserStatus();
@@ -42,6 +43,9 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userName', res.user.userName);
 
       this.checkUserStatus();
+      this.router.navigate(['']);
+    }, (error: any) => {
+      window.alert('Username/Email or password incorrect. Please try again');
     });
   }
 
