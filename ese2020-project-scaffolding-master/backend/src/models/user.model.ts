@@ -22,9 +22,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     userName!: string;
     email!: string;
     password!: string;
-    phone!: string;
-    address!: string;
-    city!: string;
+    phone: string;
+    address: string;
+    city: string;
 
     public static initialize(sequelize: Sequelize) {
         User.init({
