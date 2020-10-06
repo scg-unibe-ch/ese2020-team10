@@ -42,6 +42,8 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userName', res.user.userName);
 
       this.checkUserStatus();
+    }, (error: any) => {
+      window.alert('Username/Email or password incorrect. Please try again');
     });
   }
 
