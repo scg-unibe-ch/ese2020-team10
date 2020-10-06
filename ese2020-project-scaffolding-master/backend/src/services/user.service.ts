@@ -2,7 +2,8 @@ import { UserAttributes, User } from '../models/user.model';
 import { LoginResponse, LoginRequest } from '../models/login.model';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { Op } from 'sequelize';
+// import { Op } from 'sequelize';
+
 
 export class UserService {
 
@@ -13,11 +14,11 @@ export class UserService {
     }
 
     public login(loginRequestee: LoginRequest): Promise<User | LoginResponse> {
-        // const { Op } = require('sequelize');
+        const { Op } = require('sequelize');
         const secret = process.env.JWT_SECRET;
         return User.findOne({
             where: {
-                [Op.and]: [
+                [Op.or]: [
                     { userName: loginRequestee.userName },
                     { email: loginRequestee.userName }
                   ]
