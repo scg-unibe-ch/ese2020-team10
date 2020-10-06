@@ -1,6 +1,6 @@
 <mat-card>
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
-    <div>  
+    <div>
       <mat-form-field>
         <input [class.is-invalid]="firstName.touched" type="text" matInput class="form-control" placeholder="First Name" formControlName="firstName">
       </mat-form-field>
@@ -48,7 +48,7 @@
       </div>
      </div>
     <div>
-      <a href="#optional" (click)="optional=true" [hidden]="optional">Optional</a>
+      <a href="#optional" routerLink="/register" (click)="optional=true" [hidden]="optional">Optional</a>
       <div id="optional" [hidden]="!optional">
         <div>
           <mat-form-field>
