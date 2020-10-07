@@ -11,6 +11,7 @@ export interface UserAttributes {
     phone: string;
     address: string;
     city: string;
+    isAdmin: boolean;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
@@ -25,6 +26,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     phone: string;
     address: string;
     city: string;
+    isAdmin!: boolean;
 
     public static initialize(sequelize: Sequelize) {
         User.init({
@@ -64,6 +66,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             city: {
                 type: DataTypes.STRING,
                 // allowNull: false
+            },
+            isAdmin: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
             }
         },
             {
