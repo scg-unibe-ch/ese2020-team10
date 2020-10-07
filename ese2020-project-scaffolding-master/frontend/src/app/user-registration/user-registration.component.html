@@ -3,7 +3,7 @@
     <div class="register">Registration</div>
     <div>
       <mat-form-field>
-        <input [class.is-invalid]="firstName.touched" type="text" matInput class="form-control" placeholder="First Name" formControlName="firstName">
+        <input [class.is-invalid]="firstName.touched && firstName.invalid" type="text" matInput class="form-control" placeholder="First Name" formControlName="firstName">
       </mat-form-field>
       <div style="color: red" *ngIf="(firstName.invalid && firstName.touched) || firstName.dirty">
         <small *ngIf="firstName.errors?.required" class="text.danger">First Name is required</small>
@@ -12,7 +12,7 @@
 
     <div>
        <mat-form-field>
-        <input [class.is-invalid]="lastName.touched" type="text" matInput class="form-control" placeholder="Last Name" formControlName="lastName">
+        <input [class.is-invalid]="lastName.touched && lastName.invalid" type="text" matInput class="form-control" placeholder="Last Name" formControlName="lastName">
       </mat-form-field>
       <div style="color: red" *ngIf="(lastName.invalid && lastName.touched) || lastName.dirty">
         <small *ngIf="lastName.errors?.required" class="text.danger">Last Name is required</small>
@@ -21,7 +21,7 @@
 
     <div>
         <mat-form-field>
-          <input [class.is-invalid]="userName.touched" type="text" matInput class="form-control" placeholder="User Name" formControlName="userName">
+          <input [class.is-invalid]="userName.touched && userName.invalid" type="text" matInput class="form-control" placeholder="User Name" formControlName="userName">
         </mat-form-field>
         <div style="color: red" *ngIf="(userName.invalid && userName.touched) || userName.dirty">
           <small *ngIf="userName.errors?.required" class="text.danger">User Name is required</small>
@@ -53,9 +53,9 @@
       <div id="optional" [hidden]="!optional">
         <div>
           <mat-form-field>
-          <input [class.is-invalid]="phone.touched" matInput class="form-control" placeholder="Telephone (only swiss)" type="tel" formControlName="phone">
+          <input [class.is-invalid]="phone.touched && phone.invalid" matInput class="form-control" placeholder="Telephone (only swiss)" type="tel" formControlName="phone">
           </mat-form-field>
-          <div style="..." *ngIf="(phone.invalid && phone.touched) || phone.dirty">
+          <div style="color: red" *ngIf="(phone.invalid && phone.touched) || phone.dirty">
             <small *ngIf="phone.errors?.pattern" class="text.danger">Please enter a valid phone number</small>
           </div>
         </div>
