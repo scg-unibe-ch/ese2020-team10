@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -8,11 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class LandingPageComponent implements OnInit {
 
   user: string;
+  isAdmin: string;
 
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
-    this.user = localStorage.getItem('userName');
+    this.user = this.auth.getUserName();
     this.user = this.user[0].toUpperCase() + this.user.substr(1).toLowerCase();
   }
 

@@ -22,6 +22,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     UserRegistrationComponent,
     NavBarComponent,
     LandingPageComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
