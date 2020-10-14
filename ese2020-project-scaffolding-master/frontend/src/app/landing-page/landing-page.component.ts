@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
+  user: string;
+
   constructor() { }
 
   ngOnInit(): void {
+    this.user = localStorage.getItem('userName');
+    this.user = this.user[0].toUpperCase() + this.user.substr(1).toLowerCase();
   }
 
 }
