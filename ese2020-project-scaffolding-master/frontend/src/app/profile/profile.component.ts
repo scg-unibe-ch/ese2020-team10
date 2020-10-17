@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +8,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  constructor() { }
+  userName: string;
+  private sub: any;
+  constructor(private activatedRoute: ActivatedRoute, public auth: AuthService) { }
 
-  userName = localStorage.getItem('userName');
   ngOnInit(): void {
+    this.sub = this.activatedRoute.paramMap.subscribe(params => {
+      this.userName = params['userName'];
+    });
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
+
+  getUserName(): string {
+    return this.auth.getUserName();
+  }
 }

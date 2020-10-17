@@ -6,10 +6,10 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="navbar-nav ml-auto">
       <a class="nav-link" routerLink="/admin" [hidden]='!isAdmin()'>Admin</a> <!--go to admin page-->
-      <a class="nav-link" routerLink="/profile" [hidden]='!isLoggedIn()'>
+      <a class="nav-link" routerLink="/profile/{{ getUserName() }}" [hidden]='!isLoggedIn()'>
         <mat-icon>person</mat-icon>
       </a>
-      <a class="nav-link" routerLink="/login">{{isLoggedIn() ? 'Logout' : 'Login'}}</a>
+      <a class="nav-link" routerLink="/login">{{ isLoggedIn() ? 'Logout' : 'Login'}}</a>
       <a class="nav-link" routerLink="/register" [hidden]='isLoggedIn()'>Register</a>
     </div>
   </div>

@@ -7,7 +7,7 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  user: string;
+  userName: string;
   loggedIn: boolean;
   admin: boolean;
 
@@ -24,5 +24,7 @@ export class NavBarComponent implements OnInit {
     return this.loggedIn = this.auth.isLoggedIn();
   }
 
-
+  getUserName(): string {
+    return this.auth.getUserName();
+  }
 }
