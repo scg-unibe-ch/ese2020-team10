@@ -5,12 +5,14 @@ import {UserRegistrationComponent} from './user-registration/user-registration.c
 import {LandingPageComponent} from './landing-page/landing-page.component';
 import {AdminComponent} from './admin/admin.component';
 import {AuthGuard} from './auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'login', component: UserLoginComponent},
   { path: 'register', component: UserRegistrationComponent},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({

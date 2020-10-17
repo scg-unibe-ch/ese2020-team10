@@ -23,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AdminComponent } from './admin/admin.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { AdminComponent } from './admin/admin.component';
     NavBarComponent,
     LandingPageComponent,
     AdminComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
