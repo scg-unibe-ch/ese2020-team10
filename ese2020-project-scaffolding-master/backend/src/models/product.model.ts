@@ -1,9 +1,10 @@
 import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { User} from './user.model';
 
 
 
 
-export interface ProductAttributes{
+export interface ProductAttributes {
     productId: number;
     title: string;
     price: number;
@@ -12,12 +13,13 @@ export interface ProductAttributes{
     sellOrLend: boolean;
     status: boolean;
     shippable: boolean;
+    userId: number;
 
 }
 
-export interface ProductCreationAttributes extends Optional<Product, 'productId'> { }  
+export interface ProductCreationAttributes extends Optional<Product, 'productId'> { }
 
-export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes{
+export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
     productId!: number;
     title!: string;
     price!: number;
@@ -26,8 +28,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     sellOrLend!: boolean;
     status!: boolean;
     shippable!: boolean;
+    userId!: number;
 
-    public static initialize(sequelize: Sequelize){
+    public static initialize(sequelize: Sequelize) {
         Product.init({
             productId: {
                 type: DataTypes.INTEGER,
@@ -39,7 +42,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             price: {
                 type: DataTypes.INTEGER,
             },
-            description:{
+            description: {
                 type: DataTypes.STRING,
             },
             location: {
@@ -53,6 +56,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             },
             shippable: {
                 type: DataTypes.BOOLEAN,
+            },
+            userId: {
+                type: DataTypes.INTEGER,
+                allowNull: false
             }
         },
             {
@@ -60,5 +67,12 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 tableName: 'products'
             }
         );
+    }
+    public static createAssociations() {
+        Product.belongsTo(User, {
+            targetKey: 'userId',
+            onDelete: 'cascade',
+            foreignKey: 'userId'
+        });
     }
 }
