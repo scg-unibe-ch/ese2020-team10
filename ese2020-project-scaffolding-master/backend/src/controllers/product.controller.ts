@@ -1,8 +1,16 @@
 import express from 'express';
 import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
+import { ProductService } from '../services/product.service';
 
 const productController: Router = express.Router();
+const productService = new ProductService();
+
+productController.get('/productList',
+    (req: Request, res: Response) => {
+        productService.getAll().then(products => res.send(products)).catch(err => res.status(500).send(err));
+    }
+);
 
 productController.post('/', (req: Request, res: Response) => {
     Product.create(req.body)
