@@ -11,8 +11,7 @@ export interface ProductAttributes{
     location: string;
     sellOrLend: boolean;
     status: boolean;
-    shippable: boolean;
-
+    deliverable: boolean;
 }
 
 export interface ProductCreationAttributes extends Optional<Product, 'productId'> { }  
@@ -25,7 +24,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     location!: string;
     sellOrLend!: boolean;
     status!: boolean;
-    shippable!: boolean;
+    deliverable!: boolean;
 
     public static initialize(sequelize: Sequelize){
         Product.init({
@@ -51,7 +50,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             status: {
                 type: DataTypes.BOOLEAN,
             },
-            shippable: {
+            deliverable: {
                 type: DataTypes.BOOLEAN,
             }
         },
