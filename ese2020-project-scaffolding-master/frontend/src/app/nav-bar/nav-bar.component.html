@@ -6,7 +6,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="navbar-nav ml-auto">
       <a class="nav-link" routerLink="/admin" [hidden]='!isAdmin()'><i class="far fa-user"></i> Admin</a>
-      <a class="nav-link" [routerLink]="['/profile', getUserName()]" [hidden]='!isLoggedIn() && !isAdmin()'><i class="far fa-user"></i> My Profile</a>
+      <a class="nav-link" [routerLink]="['/profile', getUserName()]" *ngIf="!isAdmin() && isLoggedIn()"><i class="far fa-user"></i> My Profile</a>
       <a class="nav-link" routerLink="/login" [hidden]='isLoggedIn()'>Login</a>
       <a class="nav-link" routerLink="/login" [hidden]='!isLoggedIn()'>Logout</a>
       <a class="nav-link" routerLink="/register" [hidden]='isLoggedIn()'>Register</a>

@@ -29,7 +29,7 @@ export class UserLoginComponent implements OnInit {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
     this.userName = localStorage.getItem('userName');
-    this.isAdmin = (localStorage.getItem('isAdmin') == "true")
+    this.isAdmin = (localStorage.getItem('isAdmin') === 'true');
     // Set boolean whether a user is logged in or not
     this.loggedIn = !!(this.userToken);
   }
