@@ -13,7 +13,11 @@ productController.get('/productList',
     }
 );
 
-productController.post('/add', verifyToken, );
+productController.post('/add', verifyToken,
+(req: Request, res: Response) => {
+    productService.addProduct(req.body, req.body.tokenPayload.userId).then(productAdded =>
+        res.send(productAdded)).catch(err => res.status(500).send(err));
+});
 /**productController.post('/', (req: Request, res: Response) => {
     Product.create(req.body)
         .then(inserted => res.send(inserted))

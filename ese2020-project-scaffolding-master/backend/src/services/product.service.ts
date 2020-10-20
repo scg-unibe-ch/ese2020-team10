@@ -1,3 +1,4 @@
+import { IntegerDataTypeConstructor } from 'sequelize/types';
 import { ProductAttributes, Product } from '../models/product.model';
 import { User} from '../models/user.model';
 
@@ -8,8 +9,8 @@ export class ProductService {
     public getAll(): Promise<Product[]> {
         return Product.findAll();
     }
-    public addProduct(product: ProductAttributes, user: User): Promise<ProductAttributes> {
-        product.userId = user.userId;
+    public addProduct(product: ProductAttributes, userId: number): Promise<ProductAttributes> {
+        product.userId = userId;
         return Product.create(product).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
     }
     public deleteProduct() {
