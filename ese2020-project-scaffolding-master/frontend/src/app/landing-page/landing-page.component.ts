@@ -15,7 +15,6 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.auth.getUserName();
-    this.user = this.user[0].toUpperCase() + this.user.substr(1).toLowerCase();
   }
 
 }
