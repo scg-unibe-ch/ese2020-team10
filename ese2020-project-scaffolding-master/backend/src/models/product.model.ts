@@ -6,35 +6,42 @@ import { User} from './user.model';
 
 export interface ProductAttributes {
     productId: number;
+    category: Enumerator;
     title: string;
     price: number;
     description: string;
     location: string;
-    sellOrLend: boolean;
+    type: Enumerator;
     status: boolean;
     shippable: boolean;
     userId: number;
+    approved: boolean;
 
 }
 
-export interface ProductCreationAttributes extends Optional<Product, 'productId'> { }
+export interface ProductCreationAttributes extends Optional<ProductAttributes, 'productId'> { }
 
 export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
     productId!: number;
+    category!: Enumerator;
     title!: string;
     price!: number;
     description!: string;
     location!: string;
-    sellOrLend!: boolean;
+    type!: Enumerator;
     status!: boolean;
     shippable!: boolean;
     userId!: number;
+    approved!: boolean;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
             productId: {
                 type: DataTypes.INTEGER,
                 primaryKey: true
+            },
+            category: {
+                type: DataTypes.ENUM('PartyCatering', 'Clothing', 'Games', 'Books', 'Electronics', 'MovingTransport', 'ClassesTutoring', 'HouseholdCleaning')
             },
             title: {
                 type: DataTypes.STRING,
@@ -48,8 +55,8 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             location: {
                 type: DataTypes.STRING,
             },
-            sellOrLend: {
-                type: DataTypes.BOOLEAN,
+            type: {
+                type: DataTypes.ENUM('Sell', 'Lend', 'Hire'),
             },
             status: {
                 type: DataTypes.BOOLEAN,
@@ -60,6 +67,10 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             userId: {
                 type: DataTypes.INTEGER,
                 allowNull: false
+            },
+            approved: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
             }
         },
             {

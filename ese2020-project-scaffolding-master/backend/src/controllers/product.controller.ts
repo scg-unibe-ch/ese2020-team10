@@ -2,6 +2,7 @@ import express from 'express';
 import { Router, Request, Response } from 'express';
 import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
+import { verifyToken } from '../middlewares/checkAuth';
 
 const productController: Router = express.Router();
 const productService = new ProductService();
@@ -12,7 +13,8 @@ productController.get('/productList',
     }
 );
 
-productController.post('/', (req: Request, res: Response) => {
+productController.post('/add', verifyToken, );
+/**productController.post('/', (req: Request, res: Response) => {
     Product.create(req.body)
         .then(inserted => res.send(inserted))
         .catch(err => res.status(500).send(err));
@@ -43,6 +45,6 @@ productController.delete('/:id', (req: Request, res: Response) => {
             }
         })
         .catch(err => res.status(500).send(err));
-});
+});*/
 
 export const ProductController: Router = productController;
