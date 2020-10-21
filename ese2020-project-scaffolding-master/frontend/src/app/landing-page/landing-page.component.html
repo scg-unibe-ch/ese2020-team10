@@ -55,6 +55,9 @@
 
   <h2 style="margin-top: 16px;">Recently added in "sell"</h2>
 
+  <div *ngFor="let product of sellProducts | async">
+    {{ product | json }}
+  </div>  
 
   <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
 
