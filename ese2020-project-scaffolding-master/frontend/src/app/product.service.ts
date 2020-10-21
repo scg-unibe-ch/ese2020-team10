@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Product } from './models/product.model';
+import { Product, Category, Type } from './models/product.model';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { environment } from '../environments/environment';
 })
 export class ProductService {
 
-  constructor( private httpClien: HttpClient) { }
+  constructor( private httpClient: HttpClient) { }
 
   products : Observable<Product[]>;
 
@@ -18,7 +18,20 @@ export class ProductService {
     this.getProducts();
   }
   getProducts() {
-    this.products = this.httpClien.get<Product[]>(environment.endpointURL+'product/productList');
+    this.products = this.httpClient.get<Product[]>(environment.endpointURL+'product/productList');
   }
+
+  getProductsByCategory(category:Category): Observable<Product[]>{
+    return this.httpClient.get<Product[]>(environment.endpointURL + 'product/' + category);
+  }
+
+  getProductsByType(type: Type): Observable<Product[]>{
+    return this.httpClient.get<Product[]>(environment.endpointURL + 'product/' + type);
+  }
+  
+  addProducts(product : Product) {
+    this.httpClient.post(environment.endpointURL + 'product/add', {
+      product
+    });
   
 }
