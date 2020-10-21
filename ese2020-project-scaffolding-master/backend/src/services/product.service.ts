@@ -1,4 +1,4 @@
-import { IntegerDataTypeConstructor } from 'sequelize/types';
+import { IntegerDataTypeConstructor, where } from 'sequelize/types';
 import { ProductAttributes, Product } from '../models/product.model';
 import { User} from '../models/user.model';
 
@@ -15,20 +15,22 @@ export class ProductService {
         return Product.create(product).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
     }
 
-    /**public deleteProduct(productId: number, userId: number) : void{
-        let product = Product.findByPk(productId);
-        let user = User.findByPk(userId);
-        if(user.isAdmin || userId == product.userId){
-            product.des
-        }
-    }*/
-    public updateProduct() {
-
+    public getProductByCategory(category: any): Promise<Product[]> {
+        return Product.findAll({where: {
+            category: category
+        }});
     }
-    public getProduct() {
 
+    public getProductByType(type: any): Promise<Product[]> {
+        return Product.findAll({where: {
+            type : type
+        }});
     }
-    public getProductsByUser() {
+
+    public getProductByUser(userId: any): Promise<Product[]> {
+        return Product.findAll({ where: {
+            userId : userId
+        }});
 
     }
 }
