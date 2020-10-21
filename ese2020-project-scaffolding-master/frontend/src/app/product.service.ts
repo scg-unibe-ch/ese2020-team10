@@ -21,11 +21,11 @@ export class ProductService {
     this.products = this.httpClient.get<Product[]>(environment.endpointURL+'product/productList');
   }
 
-  getProductsByCategory(category: Category){
+  getProductsByCategory(category:Category): Observable<Product[]>{
     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/' + category);
   }
 
-  getProductsByType(type: Type){
+  getProductsByType(type: Type): Observable<Product[]>{
     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/' + type);
   }
   
