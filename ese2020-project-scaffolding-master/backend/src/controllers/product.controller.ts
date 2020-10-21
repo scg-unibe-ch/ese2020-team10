@@ -12,6 +12,22 @@ productController.get('/productList',
         productService.getAll().then(products => res.send(products)).catch(err => res.status(500).send(err));
     }
 );
+productController.get('/productByCategory/:category',
+    (req: Request, res: Response) => {
+        productService.getProductByCategory(req.params.category).then(products =>
+            res.send(products)).catch(err => res.status(500).send(err));
+    }
+);
+productController.get('/productByType/:type',
+    (req: Request, res: Response) => {
+        productService.getProductByType(req.params.type).then(products => res.send(products)).catch(err => res.status(500).send(err));
+    }
+);
+productController.get('/productByUser/:user',
+    (req: Request, res: Response) => {
+        productService.getProductByUser(req.params.user).then(products => res.send(products)).catch(err => res.status(500).send(err));
+    }
+);
 
 productController.post('/add', verifyToken,
 (req: Request, res: Response) => {
