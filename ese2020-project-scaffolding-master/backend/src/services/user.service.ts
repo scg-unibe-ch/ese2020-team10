@@ -26,7 +26,7 @@ export class UserService {
         })
         .then(user => {
             if (bcrypt.compareSync(loginRequestee.password, user.password)) {// compares the hash with the password from the lognin request
-                const token: string = jwt.sign({ userName: user.userName, userId: user.userId }, secret, { expiresIn: '2h' });
+                const token: string = jwt.sign({ userName: user.userName, userId: user.userId, isAdmin: user.isAdmin }, secret, { expiresIn: '2h' });
                 return Promise.resolve({ user, token });
             } else {
                 return Promise.reject({ message: 'not authorized' });

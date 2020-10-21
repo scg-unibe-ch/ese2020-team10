@@ -18,16 +18,25 @@ productController.post('/add', verifyToken,
     productService.addProduct(req.body, req.body.tokenPayload.userId).then(productAdded =>
         res.send(productAdded)).catch(err => res.status(500).send(err));
 });
-/**productController.post('/', (req: Request, res: Response) => {
-    Product.create(req.body)
-        .then(inserted => res.send(inserted))
+
+productController.delete('/:id', verifyToken,
+(req: Request, res: Response) => {
+    Product.findByPk(req.params.id)
+        .then(found => {
+            if (found != null && (found.userId === req.body.tokenPayload.userId || req.body.tokenPayload.isAdmin)) {
+                found.destroy().then(() => res.status(200).send());
+            } else {
+                res.sendStatus(404);
+            }
+        })
         .catch(err => res.status(500).send(err));
 });
 
-productController.put('/:id', (req: Request, res: Response) => {
+productController.put('/:id', verifyToken,
+(req: Request, res: Response) => {
     Product.findByPk(req.params.id)
         .then(found => {
-            if (found != null) {
+            if (found != null && (found.userId === req.body.tokenPayload.userId || req.body.tokenPayload.isAdmin)) {
                 found.update(req.body).then(updated => {
                     res.status(200).send(updated);
                 });
@@ -36,19 +45,7 @@ productController.put('/:id', (req: Request, res: Response) => {
             }
         })
         .catch(err => res.status(500).send(err));
-
 });
 
-productController.delete('/:id', (req: Request, res: Response) => {
-    Product.findByPk(req.params.id)
-        .then(found => {
-            if (found != null) {
-                found.destroy().then(() => res.status(200).send());
-            } else {
-                res.sendStatus(404);
-            }
-        })
-        .catch(err => res.status(500).send(err));
-});*/
 
 export const ProductController: Router = productController;
