@@ -41,7 +41,8 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
                 primaryKey: true
             },
             category: {
-                type: DataTypes.ENUM('PartyCatering', 'Clothing', 'Games', 'Books', 'Electronics', 'MovingTransport', 'ClassesTutoring', 'HouseholdCleaning')
+                type: DataTypes.ENUM('Accessories', 'AudioTV', 'Books', 'Clothing', 'Electronics', 'Games',
+                    'Animals', 'ClassesTutoring', 'ComputerMobilePhones', 'HouseholdCleaning', 'MovingTransport', 'PartyCatering')
             },
             title: {
                 type: DataTypes.STRING,
