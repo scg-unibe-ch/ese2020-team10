@@ -1,0 +1,51 @@
+<mat-card>
+  <form [formGroup]="createOfferForm" (ngSubmit)="onSubmit()">
+    <div class="createOffer">Create Offer</div>
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Product or Service?</mat-label>
+        <select matNativeControl required>
+          <option value="product">Product</option>
+          <option value="service">Service</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field>
+        <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title">
+      </mat-form-field>
+      <div style="color: red" *ngIf="(title.invalid && title.touched) || title.dirty">
+          <small *ngIf="title.errors?.required" class="text.danger">Title is required</small>
+      </div>
+      <mat-form-field>
+        <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="Price" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
+      </mat-form-field>
+      <div style="color: red" *ngIf="(price.invalid && price.touched) || price.dirty">
+          <small *ngIf="price.errors?.required" class="text.danger">Price is required</small>
+      </div>
+      <mat-form-field appearance="fill">
+        <mat-label>Sell or Lend?</mat-label>
+        <select matNativeControl required>
+          <option value="sell">Sell</option>
+          <option value="lend">Lend</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Is delivery available?</mat-label>
+        <select matNativeControl required>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </mat-form-field>
+      <mat-form-field>
+        <input [class.is-invalid]="pictureLink.touched && pictureLink.invalid" type="text" matInput class="form-control" placeholder="Picture Link" formControlName="pictureLink" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
+      </mat-form-field>
+      <div style="color: red" *ngIf="(pictureLink.invalid && pictureLink.touched) || pictureLink.dirty">
+          <small *ngIf="pictureLink.errors?.required" class="text.danger">Picture link is required</small>
+      </div>
+  </div>
+    <br>
+    <div>
+      <button type = "submit" mat-flat-button color="primary" [disabled] = "!createOfferForm.valid">Publish Offer</button>
+    </div>
+  </form>
+</mat-card>
+  
