@@ -13,6 +13,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatRadioModule } from '@angular/material/radio';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { TodoItemComponent } from './todo-list/todo-item/todo-item.component';
@@ -57,6 +58,7 @@ import { CreateOfferComponent } from './create-offer/create-offer.component';
     MatFormFieldModule,
     MatTabsModule,
     MatToolbarModule,
+    MatRadioModule,
     ReactiveFormsModule,
     AppRoutingModule
   ],

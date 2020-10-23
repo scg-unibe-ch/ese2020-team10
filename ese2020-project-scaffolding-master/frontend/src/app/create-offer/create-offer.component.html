@@ -2,13 +2,11 @@
   <form [formGroup]="createOfferForm" (ngSubmit)="onSubmit()">
     <div class="createOffer">Create Offer</div>
     <div>
-      <mat-form-field appearance="fill">
-        <mat-label>Product or Service?</mat-label>
-        <select matNativeControl required>
-          <option value="product">Product</option>
-          <option value="service">Service</option>
-        </select>
-      </mat-form-field>
+      <div>Product or Service?</div>
+      <mat-radio-group aria-label="Select an option" formControlName="type">
+        <mat-radio-button value="true">Product</mat-radio-button>
+        <mat-radio-button value="false">Service</mat-radio-button>
+      </mat-radio-group>
       <mat-form-field>
         <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title">
       </mat-form-field>
@@ -16,27 +14,36 @@
           <small *ngIf="title.errors?.required" class="text.danger">Title is required</small>
       </div>
       <mat-form-field>
+        <textarea [class.is-invalid]="description.touched && description.invalid" type="text" matInput class="form-control" placeholder="Description" formControlName="description"></textarea>
+      </mat-form-field>
+      <div style="color: red" *ngIf="(description.invalid && description.touched) || description.dirty">
+          <small *ngIf="description.errors?.required" class="text.danger">Description is required</small>
+      </div>
+      <mat-form-field>
         <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="Price" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
       </mat-form-field>
       <div style="color: red" *ngIf="(price.invalid && price.touched) || price.dirty">
           <small *ngIf="price.errors?.required" class="text.danger">Price is required</small>
       </div>
-      <mat-form-field appearance="fill">
-        <mat-label>Sell or Lend?</mat-label>
-        <select matNativeControl required>
-          <option value="sell">Sell</option>
-          <option value="lend">Lend</option>
-        </select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Is delivery available?</mat-label>
-        <select matNativeControl required>
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
-      </mat-form-field>
       <mat-form-field>
-        <input [class.is-invalid]="pictureLink.touched && pictureLink.invalid" type="text" matInput class="form-control" placeholder="Picture Link" formControlName="pictureLink" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
+        <input [class.is-invalid]="location.touched && location.invalid" type="text" matInput class="form-control" placeholder="Location" formControlName="location">
+      </mat-form-field>
+      <div style="color: red" *ngIf="(location.invalid && location.touched) || location.dirty">
+          <small *ngIf="location.errors?.required" class="text.danger">Location is required</small>
+      </div>
+      <div>Sell or lend?</div>
+      <mat-radio-group aria-label="Select an option" formControlName="sellOrLend">
+        <mat-radio-button value="true">Sell</mat-radio-button>
+        <mat-radio-button value="false">Lend</mat-radio-button>
+      </mat-radio-group>
+      <div>Delivery available?</div>
+      <mat-radio-group aria-label="Select an option" formControlName="shippable">
+        <mat-radio-button value="true">Yes</mat-radio-button>
+        <mat-radio-button value="false">No</mat-radio-button>
+      </mat-radio-group>
+      <br>
+      <mat-form-field>
+        <input [class.is-invalid]="pictureLink.touched && pictureLink.invalid" type="text" matInput class="form-control" placeholder="Picture Link" formControlName="pictureLink">
       </mat-form-field>
       <div style="color: red" *ngIf="(pictureLink.invalid && pictureLink.touched) || pictureLink.dirty">
           <small *ngIf="pictureLink.errors?.required" class="text.danger">Picture link is required</small>
