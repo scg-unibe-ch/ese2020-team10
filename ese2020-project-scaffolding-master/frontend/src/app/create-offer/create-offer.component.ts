@@ -5,6 +5,11 @@ import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 
+interface Select {
+  value: string,
+  viewValue: string,
+}
+
 @Component({
   selector: 'app-create-offer',
   templateUrl: './create-offer.component.html',
@@ -13,6 +18,25 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 export class CreateOfferComponent implements OnInit {
   formattedAmount;
   amount;
+  categories: Select[] = [
+    {value: 'PartyCatering', viewValue: 'PartyCatering'},
+    {value: 'Clothing', viewValue: 'Clothing'},
+    {value: 'Games', viewValue: 'Games'},
+    {value: 'Books', viewValue: 'Books'},
+    {value: 'Electronics', viewValue: 'Electronics'},
+    {value: 'MovingTransport', viewValue: 'MovingTransport'},
+    {value: 'ClassesTutoring', viewValue: 'ClassesTutoring'},
+    {value: 'HouseholdCleaning', viewValue: 'HouseholdCleaning'},
+  ]
+
+  types: Select[] = [
+    {value: 'Product', viewValue: 'Product'},
+    {value: 'Service', viewValue: 'Service'},
+  ]
+
+  categoryControl = new FormControl(this.categories[0].value);
+  typeControl = new FormControl(this.types[0].value);
+  
   constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe) { }
 
   ngOnInit(): void {
@@ -25,21 +49,16 @@ export class CreateOfferComponent implements OnInit {
   }    
 
   createOfferForm = new FormGroup({
-    category: new FormControl('', [
-      Validators.required]),
+    category: this.categoryControl,
     title: new FormControl('', [
-      Validators.required]),
-    price: new FormControl('', [
       Validators.required]),
     description: new FormControl('', [
       Validators.required]),
-    location: new FormControl(''),
-    type: new FormControl(true, [
+    price: new FormControl('', [
       Validators.required]),
-    sellOrLend: new FormControl(true, [
-      Validators.required]),
-    shippable: new FormControl(false, [
-      Validators.required]),
+    type: this.typeControl,
+    sellOrLend: new FormControl(),
+    shippable: new FormControl(),
     pictureLink: new FormControl('', [
       Validators.required]),
   });
@@ -50,14 +69,11 @@ export class CreateOfferComponent implements OnInit {
   get title() {
     return this.createOfferForm.get('title');
   }
-  get price() {
-    return this.createOfferForm.get('price');
-  }
   get description() {
     return this.createOfferForm.get('description');
   }
-  get location() {
-    return this.createOfferForm.get('location');
+  get price() {
+    return this.createOfferForm.get('price');
   }
   get type() {
     return this.createOfferForm.get('type');
@@ -72,15 +88,14 @@ export class CreateOfferComponent implements OnInit {
     return this.createOfferForm.get('pictureLink');
   }
 
-
   onSubmit(): void {
     if(this.createOfferForm.valid){
       this.httpClient.post(environment.endpointURL + 'user/createOffer', {
         "category": this.category.value,
         "title": this.title.value,
-        "price": this.price.value,
         "description": this.description.value,
-        "location": this.location.value,
+        "price": this.price.value,
+        //"location": this.location.value,
         "type": this.type.value,
         "sellOrLend": this.sellOrLend.value,
         "shippable": this.shippable.value,
@@ -89,8 +104,5 @@ export class CreateOfferComponent implements OnInit {
         this.router.navigate(['']);
     });
    }
-  }
-  onFileChanged(event) {
-    const file = event.target.files[0]
   }
 }

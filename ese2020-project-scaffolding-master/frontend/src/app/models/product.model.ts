@@ -16,5 +16,16 @@ export class Product {
         approved: boolean
     ) {}
 }
-export type Category = 'PartyCatering' | 'Clothing' | 'Games' | 'Books' | 'Electronics' | 'MovingTransport' | 'ClassesTutoring' | 'HouseholdCleaning'
+
+export enum Category {
+    PartyCatering = 'PartyCatering',
+    Clothing = 'Clothing',
+    Games = 'Games',
+    Books = 'Books',
+    Electronics = 'Electronics',
+    MovingTransport = 'MovingTransport',
+    ClassesTutoring = 'ClassesTutoring',
+    HouseholdCleaning = 'HouseholdCleaning'
+}
+
 export type Type = 'Sell' | 'Lend' | 'Hire'

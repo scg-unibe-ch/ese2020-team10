@@ -2,53 +2,74 @@
   <form [formGroup]="createOfferForm" (ngSubmit)="onSubmit()">
     <div class="createOffer">Create Offer</div>
     <div>
-      <div>Product or Service?</div>
-      <mat-radio-group aria-label="Select an option" formControlName="type">
-        <mat-radio-button value="true">Product</mat-radio-button>
-        <mat-radio-button value="false">Service</mat-radio-button>
-      </mat-radio-group>
-      <mat-form-field>
-        <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title">
-      </mat-form-field>
-      <div style="color: red" *ngIf="(title.invalid && title.touched) || title.dirty">
+      <div>
+        <div appearance="fill">
+          <label>Select Type:</label>
+          <select [formControl]="type" name="type">
+            <option *ngFor="let type of types" [value]="type.value">
+              {{type.viewValue}}
+            </option>
+          </select>
+        </div>
+
+        <div appearance="fill">
+          <label>Category</label>
+          <select [formControl]="category" name="category">
+            <option *ngFor="let category of categories" [value]="category.value">
+              {{category.viewValue}}
+            </option>
+          </select>
+        </div>
+
+        <mat-form-field>
+          <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title" #title maxlemgth="40">
+          <mat-hint align="end">{{title.value.length}} /40</mat-hint>
+        </mat-form-field>
+        <div style="color: red" *ngIf="(title.invalid && title.touched) || title.dirty">
           <small *ngIf="title.errors?.required" class="text.danger">Title is required</small>
-      </div>
-      <mat-form-field>
-        <textarea [class.is-invalid]="description.touched && description.invalid" type="text" matInput class="form-control" placeholder="Description" formControlName="description"></textarea>
-      </mat-form-field>
-      <div style="color: red" *ngIf="(description.invalid && description.touched) || description.dirty">
+        </div>
+
+        <mat-form-field>
+          <textarea [class.is-invalid]="description.touched && description.invalid"  matInput class="form-control" placeholder="Description" formControlName="description" #description maxlength="5000"></textarea>
+          <mat-hint align="end">{{description.value.length}} / 5000</mat-hint>
+        </mat-form-field>
+        <div style="color: red" *ngIf="(description.invalid && description.touched) || description.dirty">
           <small *ngIf="description.errors?.required" class="text.danger">Description is required</small>
-      </div>
-      <mat-form-field>
-        <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="Price" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
-      </mat-form-field>
-      <div style="color: red" *ngIf="(price.invalid && price.touched) || price.dirty">
+        </div>
+
+        <mat-form-field>
+          <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="Price" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
+        </mat-form-field>
+        <div style="color: red" *ngIf="(price.invalid && price.touched) || price.dirty">
           <small *ngIf="price.errors?.required" class="text.danger">Price is required</small>
-      </div>
-      <mat-form-field>
-        <input [class.is-invalid]="location.touched && location.invalid" type="text" matInput class="form-control" placeholder="Location" formControlName="location">
-      </mat-form-field>
-      <div style="color: red" *ngIf="(location.invalid && location.touched) || location.dirty">
-          <small *ngIf="location.errors?.required" class="text.danger">Location is required</small>
-      </div>
-      <div>Sell or lend?</div>
-      <mat-radio-group aria-label="Select an option" formControlName="sellOrLend">
-        <mat-radio-button value="true">Sell</mat-radio-button>
-        <mat-radio-button value="false">Lend</mat-radio-button>
-      </mat-radio-group>
-      <div>Delivery available?</div>
-      <mat-radio-group aria-label="Select an option" formControlName="shippable">
-        <mat-radio-button value="true">Yes</mat-radio-button>
-        <mat-radio-button value="false">No</mat-radio-button>
-      </mat-radio-group>
-      <br>
-      <mat-form-field>
-        <input [class.is-invalid]="pictureLink.touched && pictureLink.invalid" type="text" matInput class="form-control" placeholder="Picture Link" formControlName="pictureLink">
-      </mat-form-field>
-      <div style="color: red" *ngIf="(pictureLink.invalid && pictureLink.touched) || pictureLink.dirty">
+        </div>
+
+        <div [hidden]="!(type.value==='Product')" appearance="fill">
+          <label>Sell or Lend?</label>
+          <select [formControl]="sellOrLend" name="sellOrLend">
+            <option [value]="true">Sell</option>
+            <option [value]="false">Lend</option>
+          </select>
+        </div>
+
+        <div [hidden]="!(type.value==='Product')" appearance="fill">
+          <label>Is delivery available?</label>
+          <select [formControl]="shippable" name="shippable">
+            <option [value]="true">Yes</option>
+            <option [value]="false">No</option>
+          </select>
+        </div>
+
+
+        <mat-form-field>
+          <input [class.is-invalid]="pictureLink.touched && pictureLink.invalid" type="text" matInput class="form-control" placeholder="Picture Link" formControlName="pictureLink">
+        </mat-form-field>
+        <div style="color: red" *ngIf="(pictureLink.invalid && pictureLink.touched) || pictureLink.dirty">
           <small *ngIf="pictureLink.errors?.required" class="text.danger">Picture link is required</small>
+        </div>
+        
       </div>
-  </div>
+    </div>
     <br>
     <div>
       <button type = "submit" mat-flat-button color="primary" [disabled] = "!createOfferForm.valid">Publish Offer</button>
