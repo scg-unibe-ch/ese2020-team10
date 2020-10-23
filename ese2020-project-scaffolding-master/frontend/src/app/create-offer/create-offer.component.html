@@ -60,6 +60,12 @@
           </select>
         </div>
 
+        <div [hidden]="!(type.value==='Service')" appearance="fill">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Location" formControlName="location">
+          </mat-form-field>
+        </div>
+
 
         <mat-form-field>
           <input [class.is-invalid]="pictureLink.touched && pictureLink.invalid" type="text" matInput class="form-control" placeholder="Picture Link" formControlName="pictureLink">

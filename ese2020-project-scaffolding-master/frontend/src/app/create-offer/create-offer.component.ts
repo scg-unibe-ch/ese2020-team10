@@ -61,6 +61,7 @@ export class CreateOfferComponent implements OnInit {
     shippable: new FormControl(),
     pictureLink: new FormControl('', [
       Validators.required]),
+    location: new FormControl(),
   });
  
   get category() {
@@ -87,6 +88,9 @@ export class CreateOfferComponent implements OnInit {
   get pictureLink() {
     return this.createOfferForm.get('pictureLink');
   }
+  get location() {
+    return this.createOfferForm.get('location');
+  }
 
   onSubmit(): void {
     if(this.createOfferForm.valid){
@@ -95,7 +99,7 @@ export class CreateOfferComponent implements OnInit {
         "title": this.title.value,
         "description": this.description.value,
         "price": this.price.value,
-        //"location": this.location.value,
+        "location": this.location.value,
         "type": this.type.value,
         "sellOrLend": this.sellOrLend.value,
         "shippable": this.shippable.value,
