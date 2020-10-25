@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { Validators, FormGroup, FormControl, FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { Category} from '../models/product.model';
 
 interface Select {
   value: string,
@@ -18,54 +19,40 @@ interface Select {
 export class CreateOfferComponent implements OnInit {
   formattedAmount;
   amount;
-  categories: Select[] = [
-    {value: 'PartyCatering', viewValue: 'PartyCatering'},
-    {value: 'Clothing', viewValue: 'Clothing'},
-    {value: 'Games', viewValue: 'Games'},
-    {value: 'Books', viewValue: 'Books'},
-    {value: 'Electronics', viewValue: 'Electronics'},
-    {value: 'MovingTransport', viewValue: 'MovingTransport'},
-    {value: 'ClassesTutoring', viewValue: 'ClassesTutoring'},
-    {value: 'HouseholdCleaning', viewValue: 'HouseholdCleaning'},
-  ]
-
-  types: Select[] = [
-    {value: 'Product', viewValue: 'Product'},
-    {value: 'Service', viewValue: 'Service'},
-  ]
-
-  categoryControl = new FormControl(this.categories[0].value);
-  typeControl = new FormControl(this.types[0].value);
+  @Input() Category = Category;
+  selectedCategory;
+  shippable;
+  type: string;
   
   constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe) { }
 
   ngOnInit(): void {
+    this.selectedCategory = Category[0];
+    this.shippable = 'false';
+    this.type = 'Sell';
   }
 
   transformAmount(element){
     this.formattedAmount = this.currencyPipe.transform(this.formattedAmount, '$');
-
     element.target.value = this.formattedAmount;
   }    
 
   createOfferForm = new FormGroup({
-    category: this.categoryControl,
+    productOrService: new FormControl(),
     title: new FormControl('', [
       Validators.required]),
     description: new FormControl('', [
       Validators.required]),
     price: new FormControl('', [
       Validators.required]),
-    type: this.typeControl,
-    sellOrLend: new FormControl(),
-    shippable: new FormControl(),
     pictureLink: new FormControl('', [
       Validators.required]),
     location: new FormControl(),
   });
  
-  get category() {
-    return this.createOfferForm.get('category');
+
+  get productOrService() {
+    return this.createOfferForm.get('productOrService');
   }
   get title() {
     return this.createOfferForm.get('title');
@@ -75,15 +62,6 @@ export class CreateOfferComponent implements OnInit {
   }
   get price() {
     return this.createOfferForm.get('price');
-  }
-  get type() {
-    return this.createOfferForm.get('type');
-  }
-  get sellOrLend() {
-    return this.createOfferForm.get('sellOrLend');
-  }
-  get shippable() {
-    return this.createOfferForm.get('shippable');
   }
   get pictureLink() {
     return this.createOfferForm.get('pictureLink');
@@ -95,14 +73,13 @@ export class CreateOfferComponent implements OnInit {
   onSubmit(): void {
     if(this.createOfferForm.valid){
       this.httpClient.post(environment.endpointURL + 'user/createOffer', {
-        "category": this.category.value,
+        "category": this.selectedCategory,
         "title": this.title.value,
         "description": this.description.value,
         "price": this.price.value,
         "location": this.location.value,
-        "type": this.type.value,
-        "sellOrLend": this.sellOrLend.value,
-        "shippable": this.shippable.value,
+        "type": this.type,
+        "shippable": this.shippable,
         "pictureLink": this.pictureLink.value,
       }).subscribe((res: any) => {
         this.router.navigate(['']);

@@ -19,7 +19,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.auth.getUserName();
-    this.sellProducts = this.productService.getProductsByType('Sell');
+   // this.sellProducts = this.productService.getProductsByType('Sell');
   }
 
 }

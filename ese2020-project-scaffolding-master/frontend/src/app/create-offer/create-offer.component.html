@@ -1,25 +1,24 @@
 <mat-card>
-  <form [formGroup]="createOfferForm" (ngSubmit)="onSubmit()">
+  <form [(formGroup)]="createOfferForm" (ngSubmit)="onSubmit()">
     <div class="createOffer">Create Offer</div>
     <div>
       <div>
-        <div appearance="fill">
+        <mat-form-field appearance="fill">
           <label>Select Type:</label>
-          <select [formControl]="type" name="type">
-            <option *ngFor="let type of types" [value]="type.value">
-              {{type.viewValue}}
-            </option>
-          </select>
-        </div>
+          <mat-select matInput formControlName="productOrService">
+            <mat-option value="Product">Product</mat-option>
+            <mat-option value="Service">Service</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <div appearance="fill">
+        <mat-form-field appearance="fill">
           <label>Category</label>
-          <select [formControl]="category" name="category">
-            <option *ngFor="let category of categories" [value]="category.value">
-              {{category.viewValue}}
-            </option>
-          </select>
-        </div>
+          <mat-select [(ngModel)]="selectedCategory">
+            <mat-option *ngFor="let category of Category.values()" [value]="category">
+              {{category}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
 
         <mat-form-field>
           <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title" #title maxlemgth="40">
@@ -44,23 +43,24 @@
           <small *ngIf="price.errors?.required" class="text.danger">Price is required</small>
         </div>
 
-        <div [hidden]="!(type.value==='Product')" appearance="fill">
-          <label>Sell or Lend?</label>
-          <select [formControl]="sellOrLend" name="sellOrLend">
-            <option [value]="true">Sell</option>
-            <option [value]="false">Lend</option>
-          </select>
-        </div>
+        <mat-form-field appearance="fill">
+          <label>Do you want to ... ?</label>
+          <mat-select [value]="type">
+            <mat-option value="Sell">Sell</mat-option>
+            <mat-option value="Lend">Lend</mat-option>
+            <mat-option value="Hire">Hire</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <div [hidden]="!(type.value==='Product')" appearance="fill">
+        <mat-form-field appearance="fill">
           <label>Is delivery available?</label>
-          <select [formControl]="shippable" name="shippable">
-            <option [value]="true">Yes</option>
-            <option [value]="false">No</option>
-          </select>
-        </div>
+          <mat-select [value]="shippable">
+            <mat-option value="true">Yes</mat-option>
+            <mat-option value="false">No</mat-option>
+          </mat-select>
+        </mat-form-field>
 
-        <div [hidden]="!(type.value==='Service')" appearance="fill">
+        <div appearance="fill">
           <mat-form-field>
             <input type="text" matInput class="form-control" placeholder="Location" formControlName="location">
           </mat-form-field>

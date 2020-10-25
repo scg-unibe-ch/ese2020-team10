@@ -28,4 +28,13 @@ export enum Category {
     HouseholdCleaning = 'HouseholdCleaning'
 }
 
-export type Type = 'Sell' | 'Lend' | 'Hire'
+export namespace Category {
+
+    export function values() {
+      return Object.keys(Category).filter(
+        (category) => isNaN(<any>category) && category !== 'values'
+      );
+    }
+  }
+
+  export type Type = 'Sell' | 'Lend' | 'Hire'

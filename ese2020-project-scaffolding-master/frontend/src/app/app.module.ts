@@ -56,6 +56,7 @@ import { CreateOfferComponent } from './create-offer/create-offer.component';
     MatCheckboxModule,
     MatCardModule,
     MatFormFieldModule,
+    MatSelectModule,
     MatTabsModule,
     MatToolbarModule,
     MatRadioModule,
