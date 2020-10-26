@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Category, Product} from '../models/product.model';
+import { categoryTypes, Product} from '../models/product.model';
 import { AuthService } from '../auth.service';
 
 interface Select {
@@ -20,8 +20,8 @@ interface Select {
 export class CreateOfferComponent implements OnInit {
   formattedAmount;
   amount;
-  @Input() Category = Category;
-  selectedCategory;
+  @Input() categories = categoryTypes;
+  selectedCategory: string;
   shippable;
   type: string;
   userId: string;
@@ -30,7 +30,7 @@ export class CreateOfferComponent implements OnInit {
   constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
 
   ngOnInit(): void {
-    this.selectedCategory = Category[0];
+    this.selectedCategory = this.categories[0];
     this.shippable = 'false';
     this.type = 'Sell';
   }
@@ -75,18 +75,18 @@ export class CreateOfferComponent implements OnInit {
 
   onSubmit(): void {
     this.userId =  this.auth.getUserId();
-    this.product = new Product(123,
-      this.selectedCategory,
-      this.title.value,
-      this.price.value,
-      this.description.value,
-      this.location.value,
-      this.type, false,
-      this.shippable,
-      this.userId,
-      false);
     if(this.createOfferForm.valid){
-      this.httpClient.post(environment.endpointURL + 'product/add', {"product": this.product})
+      this.httpClient.post(environment.endpointURL + 'product/add', {
+        "category": this.selectedCategory,
+        "title": this.title.value,
+        "description": this.description.value,
+        "price": this.price.value,
+        "location": this.location.value,
+        "type": this.type,
+        "shippable": this.shippable,
+        "pictureLink": this.pictureLink.value,
+        "userId": this.userId
+      })
       .subscribe((res: any) => {
         this.router.navigate(['']);
     });

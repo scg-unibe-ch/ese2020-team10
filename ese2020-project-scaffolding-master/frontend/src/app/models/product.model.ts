@@ -3,7 +3,7 @@ import { ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core'
 export class Product { 
     constructor(
         productId: number,
-        category: Category,
+        category: string,
         title: string,
         price: number,
         description: string,
@@ -16,24 +16,15 @@ export class Product {
     ) {}
 }
 
-export enum Category {
-    PartyCatering = 'PartyCatering',
-    Clothing = 'Clothing',
-    Games = 'Games',
-    Books = 'Books',
-    Electronics = 'Electronics',
-    MovingTransport = 'MovingTransport',
-    ClassesTutoring = 'ClassesTutoring',
-    HouseholdCleaning = 'HouseholdCleaning'
-}
-
-export namespace Category {
-
-    export function values() {
-      return Object.keys(Category).filter(
-        (category) => isNaN(<any>category) && category !== 'values'
-      );
-    }
-  }
+export let categoryTypes: string[] = [
+  "PartyCatering",
+  "Clothing",
+  "Games",
+  "Books",
+  "Electronics",
+  "MovingTransport",
+  "ClassesTutoring",
+  "HouseholdCleaning",
+]
 
   export type Type = 'Sell' | 'Lend' | 'Hire'
