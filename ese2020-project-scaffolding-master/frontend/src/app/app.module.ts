@@ -17,12 +17,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
 
+import { ProductViewComponent } from './product-view/product-view.component'
+import {MatRadioModule} from '@angular/material/radio';
+
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     TodoItemComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    ProductViewComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,8 @@ import { UserLoginComponent } from './user-login/user-login.component';
     MatCheckboxModule,
     MatCardModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule
   ],
   providers: [
     {
