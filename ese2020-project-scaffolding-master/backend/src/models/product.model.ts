@@ -3,7 +3,7 @@ import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
 
 
 
-export interface ProductAttributes{
+export interface ProductAttributes {
     productId: number;
     title: string;
     price: number;
@@ -14,9 +14,9 @@ export interface ProductAttributes{
     deliverable: boolean;
 }
 
-export interface ProductCreationAttributes extends Optional<Product, 'productId'> { }  
+export interface ProductCreationAttributes extends Optional<Product, 'productId'> { }
 
-export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes{
+export class Product extends Model<ProductAttributes, ProductCreationAttributes> implements ProductAttributes {
     productId!: number;
     title!: string;
     price!: number;
@@ -26,7 +26,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     status!: boolean;
     deliverable!: boolean;
 
-    public static initialize(sequelize: Sequelize){
+    public static initialize(sequelize: Sequelize) {
         Product.init({
             productId: {
                 type: DataTypes.INTEGER,
@@ -38,7 +38,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             price: {
                 type: DataTypes.INTEGER,
             },
-            description:{
+            description: {
                 type: DataTypes.STRING,
             },
             location: {
