@@ -4,7 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
 import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Category} from '../models/product.model';
+import { Category, Product} from '../models/product.model';
+import { AuthService } from '../auth.service';
 
 interface Select {
   value: string,
@@ -23,8 +24,10 @@ export class CreateOfferComponent implements OnInit {
   selectedCategory;
   shippable;
   type: string;
+  userId: string;
+  product: Product;
   
-  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe) { }
+  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
 
   ngOnInit(): void {
     this.selectedCategory = Category[0];
@@ -71,17 +74,20 @@ export class CreateOfferComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.userId =  this.auth.getUserId();
+    this.product = new Product(123,
+      this.selectedCategory,
+      this.title.value,
+      this.price.value,
+      this.description.value,
+      this.location.value,
+      this.type, false,
+      this.shippable,
+      this.userId,
+      false);
     if(this.createOfferForm.valid){
-      this.httpClient.post(environment.endpointURL + 'user/createOffer', {
-        "category": this.selectedCategory,
-        "title": this.title.value,
-        "description": this.description.value,
-        "price": this.price.value,
-        "location": this.location.value,
-        "type": this.type,
-        "shippable": this.shippable,
-        "pictureLink": this.pictureLink.value,
-      }).subscribe((res: any) => {
+      this.httpClient.post(environment.endpointURL + 'product/add', {"product": this.product})
+      .subscribe((res: any) => {
         this.router.navigate(['']);
     });
    }

@@ -8,11 +8,10 @@ export class Product {
         price: number,
         description: string,
         location: string,
-        type: Type,
-        sellOrLend: boolean,
+        type: string,
         status: boolean,
         shippable: boolean,
-        userId: number,
+        userId: string,
         approved: boolean
     ) {}
 }
