@@ -9,7 +9,7 @@ import { Product} from '../models/product.model';
 export class ProductItemComponent {
 
   @Input()
-  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null, null);
+  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
 
 }
 
