@@ -25,6 +25,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ProductViewComponent } from './product-view/product-view.component';
+import { ProductItemComponent } from './product-item/product-item.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ProductViewComponent } from './product-view/product-view.component';
     AdminComponent,
     ProfileComponent,
     ProductViewComponent,
+    ProductItemComponent,
   ],
   imports: [
     BrowserModule,
