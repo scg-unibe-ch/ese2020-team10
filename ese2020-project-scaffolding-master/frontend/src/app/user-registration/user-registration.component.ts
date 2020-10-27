@@ -75,7 +75,10 @@ export class UserRegistrationComponent implements OnInit {
           "lastName": this.lastName.value,
           "userName": this.userName.value,
           "email": this.email.value,
-          "password": this.password.value
+          "password": this.password.value,
+          "phone": this.phone.value,
+          "address": this.address.value,
+          "city": this.city.value
         }).subscribe((res: any) => {
           this.router.navigate(['/login']);
       });
