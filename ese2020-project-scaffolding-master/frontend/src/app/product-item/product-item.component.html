@@ -1,24 +1,27 @@
 <div class="card" style="width: 90%;">
     <div class="card-body">
-      <h1 class="card-title;" style="float:left">{{product.title}}</h1>
-      <h1 class="card-price;" style="float:right">{{product.price}} CHF</h1>
+      <h1 style="float:left">{{product.title}}</h1>
+      <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price}} CHF</h1>
+      <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price}} CHF/h</h1>
+      <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price}} CHF/h</h1>
       <div style="clear:left;"></div>
-      <p class="card-description">Description: {{product.description}}</p>
-      <p class="card-location">Location: {{product.location}}</p>
+      <p>Description: {{product.description}}</p>
+      <p>Location: {{product.location}}</p>
       <p *ngIf="product.status == true" style="float:left">
-        This product: available / 
+          available / 
       </p>
       <p *ngIf="product.status == false" style="float:left">
-          This product: unavailable / 
+          unavailable / 
       </p>
 
+      <p class="card-category" style="float:right">{{product.category}}</p>
+
       <p *ngIf="product.shippable == true" style="float:center">
-        shippable
+          shippable
       </p>
       <p *ngIf="product.shippable == false" style="float:center">
           unshippable
       </p>
-      <footer class="card-category" style="float:right">{{product.category}}</footer>
     </div>
   </div>
   
