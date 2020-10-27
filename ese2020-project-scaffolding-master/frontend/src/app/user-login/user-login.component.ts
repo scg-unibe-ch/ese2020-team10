@@ -46,6 +46,7 @@ export class UserLoginComponent implements OnInit {
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
       localStorage.setItem('isAdmin', res.user.isAdmin);
+      localStorage.setItem('userId', res.user.userId);
 
       this.checkUserStatus();
       this.router.navigate(['']);

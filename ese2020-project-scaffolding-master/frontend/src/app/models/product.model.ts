@@ -2,7 +2,7 @@ import { ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core'
 
 export class Product { 
     productId: number;
-    category: Category;
+    category: string;
     title: string;
     price: number;
     description: string;
@@ -15,18 +15,32 @@ export class Product {
     approved: boolean;
     constructor(
         productId: number,
-        category: Category,
+        category: string,
         title: string,
         price: number,
         description: string,
         location: string,
-        type: Type,
-        sellOrLend: boolean,
+        type: string,
         status: boolean,
         shippable: boolean,
-        userId: number,
+        userId: string,
         approved: boolean
     ) {}
 }
-export type Category = 'PartyCatering' | 'Clothing' | 'Games' | 'Books' | 'Electronics' | 'MovingTransport' | 'ClassesTutoring' | 'HouseholdCleaning'
-export type Type = 'Sell' | 'Lend' | 'Hire'
+
+export let categoryTypes: string[] = [
+  'Accessories',
+  'AudioTV',
+  'Books',
+  'Clothing',
+  'Electronics',
+  'Games',
+  'Animals',
+  'ClassesTutoring',
+  'ComputerMobilePhones',
+  'HouseholdCleaning',
+  'MovingTransport',
+  'PartyCatering'
+]
+
+  export type Type = 'Sell' | 'Lend' | 'Hire'
