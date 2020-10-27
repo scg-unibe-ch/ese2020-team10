@@ -1,4 +1,9 @@
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs";
+import {Product} from "./models/product.model";
+import {environment} from "../environments/environment";
+import {User} from "./models/user.model";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +11,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   user: string;
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getToken(): string{
     return localStorage.getItem('userToken');
@@ -27,6 +32,10 @@ export class AuthService {
       return true;
     }
     return false;
+  }
+
+  getInfoByUser(userId: string): Observable<User[]>{
+    return this.httpClient.get<User[]>(environment.endpointURL + 'user/' + userId);
   }
 
 
