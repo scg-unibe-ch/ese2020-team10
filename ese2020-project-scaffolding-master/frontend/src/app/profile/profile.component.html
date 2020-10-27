@@ -3,7 +3,48 @@
   <h1>Profile - {{getUserName()}}</h1>
 </div>
 <mat-tab-group>
-    <mat-tab label="User Information">User Information</mat-tab>
+    <mat-tab label="User Information"> <div *ngFor="let user of userInfo | async">
+      <div class="row">
+        <div class="col-lg-4">
+          <h2 style="margin-top: 10px">Account Details</h2>
+          <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Email: {{user.email}}</li>
+              <li class="list-group-item">Password: *****</li>
+              <li class="list-group-item">Registered as: Private Person </li>
+              <li class="list-group-item">UserId: {{user.userId}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <h2 style="margin-top: 10px">User Information</h2>
+          <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">First Name: {{user.firstName}}</li>
+              <li class="list-group-item">Last Name: {{user.lastName}}</li>
+              <li class="list-group-item">User Name: {{user.userName}}</li>
+              <li class="list-group-item" *ngIf="user.phone==null">Phone Number: none</li>
+              <li class="list-group-item" *ngIf="user.phone!=null">Phone Number: {{user.phone}}</li>
+            </ul>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4">
+          <h2 style="margin-top: 10px">Address</h2>
+          <div class="card" style="width: 18rem;">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item" *ngIf="user.address==null">Address: none</li>
+              <li class="list-group-item" *ngIf="user.address!=null">Phone Number: {{user.address}}</li>
+              <li class="list-group-item" *ngIf="user.city==null">City: none</li>
+              <li class="list-group-item" *ngIf="user.city!=null">Phone Number: {{user.city}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    </mat-tab>
     <mat-tab label="Open Offers">Open Offers</mat-tab>
     <mat-tab label="Sold">Sold</mat-tab> <!-- should only be viewable by user -->
     <mat-tab label="Bought">Bought</mat-tab> <!-- should only be viewable by user -->
