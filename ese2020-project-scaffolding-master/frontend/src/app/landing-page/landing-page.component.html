@@ -62,12 +62,12 @@
   <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
 
   <div *ngFor="let product of lendProducts | async">
-    {{ product | json }}
+    <app-product-item [product] = "product"></app-product-item>
   </div>
 
   <h2 style="margin-top: 16px;">Recently added in "hire"</h2>
   <div *ngFor="let product of hireProducts | async">
-   {{ product | json }}
+    <app-product-item [product] = "product"></app-product-item>
   </div>
 
 
