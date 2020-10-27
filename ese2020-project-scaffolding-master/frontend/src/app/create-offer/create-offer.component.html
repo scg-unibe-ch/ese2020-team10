@@ -11,10 +11,18 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-form-field [hidden]="isService()" appearance="fill">
+          <label>Do you want to ... ?</label>
+          <mat-select formControlName="type">
+            <mat-option value="Sell">Sell</mat-option>
+            <mat-option value="Lend">Lend</mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-form-field appearance="fill">
           <label>Category</label>
-          <mat-select [value]="selectedCategory">
-            <mat-option *ngFor="let category of categories" value="category">
+          <mat-select formControlName="selectedCategory">
+            <mat-option *ngFor="let category of categories" value="{{category}}">
               {{category}}
             </mat-option>
           </mat-select>
@@ -37,30 +45,21 @@
         </div>
 
         <mat-form-field>
-          <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="Price" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
+          <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="{{priceFormat()}}" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
         </mat-form-field>
         <div style="color: red" *ngIf="(price.invalid && price.touched) || price.dirty">
           <small *ngIf="price.errors?.required" class="text.danger">Price is required</small>
         </div>
 
-        <mat-form-field appearance="fill">
-          <label>Do you want to ... ?</label>
-          <mat-select [value]="type">
-            <mat-option value="Sell">Sell</mat-option>
-            <mat-option value="Lend">Lend</mat-option>
-            <mat-option value="Hire">Hire</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
+        <mat-form-field [hidden]="isService()" appearance="fill">
           <label>Is delivery available?</label>
-          <mat-select [value]="shippable">
+          <mat-select formControlName="shippable">
             <mat-option value="true">Yes</mat-option>
             <mat-option value="false">No</mat-option>
           </mat-select>
         </mat-form-field>
 
-        <div appearance="fill">
+        <div [hidden]="isProduct()" appearance="fill">
           <mat-form-field>
             <input type="text" matInput class="form-control" placeholder="Location" formControlName="location">
           </mat-form-field>

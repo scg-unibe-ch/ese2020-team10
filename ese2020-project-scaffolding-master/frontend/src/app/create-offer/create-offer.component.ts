@@ -21,18 +21,17 @@ export class CreateOfferComponent implements OnInit {
   formattedAmount;
   amount;
   @Input() categories = categoryTypes;
-  selectedCategory: string;
-  shippable;
-  type: string;
   userId: string;
   product: Product;
   
   constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
 
   ngOnInit(): void {
-    this.selectedCategory = this.categories[0];
-    this.shippable = 'false';
-    this.type = 'Sell';
+    //sets default value for select
+    this.productOrService.setValue('Product');
+    this.type.setValue('Sell');
+    this.selectedCategory.setValue(this.categories[0]);
+    this.shippable.setValue('false');
   }
 
   transformAmount(element){
@@ -41,6 +40,7 @@ export class CreateOfferComponent implements OnInit {
   }    
 
   createOfferForm = new FormGroup({
+    selectedCategory: new FormControl(),
     productOrService: new FormControl(),
     title: new FormControl('', [
       Validators.required]),
@@ -51,9 +51,13 @@ export class CreateOfferComponent implements OnInit {
     pictureLink: new FormControl('', [
       Validators.required]),
     location: new FormControl(),
+    type: new FormControl(),
+    shippable: new FormControl(),
   });
  
-
+  get selectedCategory() {
+    return this.createOfferForm.get('selectedCategory');
+  }
   get productOrService() {
     return this.createOfferForm.get('productOrService');
   }
@@ -72,18 +76,24 @@ export class CreateOfferComponent implements OnInit {
   get location() {
     return this.createOfferForm.get('location');
   }
+  get type() {
+    return this.createOfferForm.get('type');
+  }
+  get shippable() {
+    return this.createOfferForm.get('shippable');
+  }
 
   onSubmit(): void {
     this.userId =  this.auth.getUserId();
     if(this.createOfferForm.valid){
       this.httpClient.post(environment.endpointURL + 'product/add', {
-        "category": this.selectedCategory,
+        "category": this.selectedCategory.value,
         "title": this.title.value,
         "description": this.description.value,
         "price": this.price.value,
         "location": this.location.value,
-        "type": this.type,
-        "shippable": this.shippable,
+        "type": this.type.value,
+        "shippable": this.shippable.value,
         "pictureLink": this.pictureLink.value,
         "userId": this.userId
       })
@@ -92,4 +102,28 @@ export class CreateOfferComponent implements OnInit {
     });
    }
   }
+
+  isService(): boolean {
+    if(this.productOrService.value === 'Service') {
+      this.type.setValue('Hire');
+      this.shippable.setValue('false');
+    }
+    return this.productOrService.value === 'Service';
+  }
+
+  isProduct(): boolean {
+    if(this.productOrService.value === 'Product') {
+      this.location.setValue('');
+    }
+    return this.productOrService.value === 'Product';
+  }
+
+priceFormat(): string {
+  if(this.type.value === 'Sell') {
+    return 'Price';
+  } else {
+    return 'Price per Hour'
+  }
+}
+
 }
