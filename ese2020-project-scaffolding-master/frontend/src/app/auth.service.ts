@@ -26,6 +26,10 @@ export class AuthService {
     return this.user[0].toUpperCase() + this.user.substr(1).toLowerCase();
   }
 
+
+  getUserId(): string {
+    return localStorage.getItem('userId');
+  }
   isLoggedIn(): boolean{
     const token = this.getToken();
     if (token !== null){

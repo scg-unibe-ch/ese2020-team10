@@ -1,0 +1,84 @@
+<mat-card>
+  <form [(formGroup)]="createOfferForm" (ngSubmit)="onSubmit()">
+    <div class="createOffer">Create Offer</div>
+    <div>
+      <div>
+        <mat-form-field appearance="fill">
+          <label>Select Type:</label>
+          <mat-select matInput formControlName="productOrService">
+            <mat-option value="Product">Product</mat-option>
+            <mat-option value="Service">Service</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field [hidden]="isService()" appearance="fill">
+          <label>Do you want to ... ?</label>
+          <mat-select formControlName="type">
+            <mat-option value="Sell">Sell</mat-option>
+            <mat-option value="Lend">Lend</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <label>Category</label>
+          <mat-select formControlName="selectedCategory">
+            <mat-option *ngFor="let category of categories" value="{{category}}">
+              {{category}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title" #title maxlemgth="40">
+          <mat-hint align="end">{{title.value.length}} /40</mat-hint>
+        </mat-form-field>
+        <div style="color: red" *ngIf="(title.invalid && title.touched) || title.dirty">
+          <small *ngIf="title.errors?.required" class="text.danger">Title is required</small>
+        </div>
+
+        <mat-form-field>
+          <textarea [class.is-invalid]="description.touched && description.invalid"  matInput class="form-control" placeholder="Description" formControlName="description" #description maxlength="5000"></textarea>
+          <mat-hint align="end">{{description.value.length}} / 5000</mat-hint>
+        </mat-form-field>
+        <div style="color: red" *ngIf="(description.invalid && description.touched) || description.dirty">
+          <small *ngIf="description.errors?.required" class="text.danger">Description is required</small>
+        </div>
+
+        <mat-form-field>
+          <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="{{priceFormat()}}" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
+        </mat-form-field>
+        <div style="color: red" *ngIf="(price.invalid && price.touched) || price.dirty">
+          <small *ngIf="price.errors?.required" class="text.danger">Price is required</small>
+        </div>
+
+        <mat-form-field [hidden]="isService()" appearance="fill">
+          <label>Is delivery available?</label>
+          <mat-select formControlName="shippable">
+            <mat-option value="true">Yes</mat-option>
+            <mat-option value="false">No</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div [hidden]="isProduct()" appearance="fill">
+          <mat-form-field>
+            <input type="text" matInput class="form-control" placeholder="Location" formControlName="location">
+          </mat-form-field>
+        </div>
+
+
+        <mat-form-field>
+          <input [class.is-invalid]="pictureLink.touched && pictureLink.invalid" type="text" matInput class="form-control" placeholder="Picture Link" formControlName="pictureLink">
+        </mat-form-field>
+        <div style="color: red" *ngIf="(pictureLink.invalid && pictureLink.touched) || pictureLink.dirty">
+          <small *ngIf="pictureLink.errors?.required" class="text.danger">Picture link is required</small>
+        </div>
+        
+      </div>
+    </div>
+    <br>
+    <div>
+      <button type = "submit" mat-flat-button color="primary" [disabled] = "!createOfferForm.valid">Publish Offer</button>
+    </div>
+  </form>
+</mat-card>
+  
