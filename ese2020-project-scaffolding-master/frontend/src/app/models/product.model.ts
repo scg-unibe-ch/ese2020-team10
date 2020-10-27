@@ -1,6 +1,6 @@
 import { ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core'
 
-export class Product { 
+export class Product {
     constructor(
         productId: number,
         category: string,
@@ -17,14 +17,18 @@ export class Product {
 }
 
 export let categoryTypes: string[] = [
-  "PartyCatering",
-  "Clothing",
-  "Games",
-  "Books",
-  "Electronics",
-  "MovingTransport",
-  "ClassesTutoring",
-  "HouseholdCleaning",
+  'Accessories',
+  'AudioTV',
+  'Books',
+  'Clothing',
+  'Electronics',
+  'Games',
+  'Animals',
+  'ClassesTutoring',
+  'ComputerMobilePhones',
+  'HouseholdCleaning',
+  'MovingTransport',
+  'PartyCatering'
 ]
 
   export type Type = 'Sell' | 'Lend' | 'Hire'
