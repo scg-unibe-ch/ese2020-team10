@@ -13,7 +13,7 @@ export class LandingPageComponent implements OnInit {
 
   user: string;
   isAdmin: string;
-  public sellProducts : Observable<Product[]>
+  public sellProducts: Observable<Product[]>;
 
   constructor(public auth: AuthService, public productService : ProductService) { }
 

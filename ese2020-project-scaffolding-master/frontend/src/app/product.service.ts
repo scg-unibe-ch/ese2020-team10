@@ -25,12 +25,12 @@ export class ProductService {
   getProductsByCategory(category:Category): Observable<Product[]>{
     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/productByCategory/' + category);
   }
-  // Returns all current offers of the specified type (sell, lend or hire) 
+  // Returns all current offers of the specified type (sell, lend or hire)
   getProductsByType(type: Type): Observable<Product[]>{
     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/productByType/' + type);
   }
   // Returns all current offers of the specified User. Doesen't require admin rights
-  getProductsByUser(userId: number): Observable<Product[]>{
+  getProductsByUser(userId: string): Observable<Product[]>{
     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/productByUser/' + userId);
   }
   // Adds a completly new Product. It belongs automaticly to the currently logged in user

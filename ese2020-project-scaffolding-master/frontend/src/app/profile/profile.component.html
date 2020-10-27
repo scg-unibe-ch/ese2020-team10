@@ -45,7 +45,13 @@
       </div>
     </div>
     </mat-tab>
-    <mat-tab label="Open Offers">Open Offers</mat-tab>
+    <mat-tab label="Open Offers">
+      <h2 style="margin-top: 10px">Your Offers</h2>
+      <div *ngFor="let product of products | async">
+          {{product | json}}
+        <app-product-view></app-product-view>
+      </div>
+    </mat-tab>
     <mat-tab label="Sold">Sold</mat-tab> <!-- should only be viewable by user -->
     <mat-tab label="Bought">Bought</mat-tab> <!-- should only be viewable by user -->
 </mat-tab-group>

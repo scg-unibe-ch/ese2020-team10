@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import {Observable} from "rxjs";
 import {User} from "../models/user.model";
+import {Product} from "../models/product.model";
+import {ProductService} from "../product.service";
 
 @Component({
   selector: 'app-profile',
@@ -14,8 +16,9 @@ export class ProfileComponent implements OnInit {
   private sub: any;
   userId: string;
   userInfo: Observable<User[]>;
+  public products: Observable<Product[]>;
 
-  constructor(private activatedRoute: ActivatedRoute, public auth: AuthService) { }
+  constructor(private activatedRoute: ActivatedRoute, public auth: AuthService, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.sub = this.activatedRoute.paramMap.subscribe(params => {
@@ -23,6 +26,7 @@ export class ProfileComponent implements OnInit {
     });
     this.userId = localStorage.getItem('userId');
     this.userInfo = this.auth.getInfoByUser(this.userId);
+    this.products = this.productService.getProductsByUser(this.userId);
   }
 
   ngOnDestroy() {
