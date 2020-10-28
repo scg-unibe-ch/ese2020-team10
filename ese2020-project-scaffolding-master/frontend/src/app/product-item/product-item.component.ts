@@ -28,5 +28,11 @@ export class ProductItemComponent {
   onProductDelete(productId: number): void{
     this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe();
   }
+
+  onApprove(productId: number): void{
+    this.httpClient.put(environment.endpointURL + 'product/' + productId, {
+      approved: true
+    }).subscribe();
+  }
 }
 
