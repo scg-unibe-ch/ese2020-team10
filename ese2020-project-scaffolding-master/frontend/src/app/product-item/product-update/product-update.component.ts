@@ -57,6 +57,9 @@ export class ProductUpdateComponent implements OnInit {
       title: this.title.value,
       description: this.description.value,
       price: this.price.value
-    }).subscribe();
+    }).subscribe((res:any) =>{
+      window.location.reload()
+    }
+    );
   }
 }
