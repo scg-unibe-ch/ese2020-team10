@@ -12,7 +12,10 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ProductItemComponent {
   userId: string;
+  userName: string;
   admin: boolean;
+
+  change: boolean;
 
   @Input()
   product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
@@ -22,7 +25,9 @@ export class ProductItemComponent {
 
   ngOnInit(): void{
     this.userId = this.auth.getUserId();
+    this.userName = this.auth.getUserName();
     this.admin = this.auth.getAdmin();
+    this.change = false;
   }
 
   onProductDelete(productId: number): void{
