@@ -33,4 +33,11 @@ export class ProductService {
         }});
 
     }
+
+    public getUnapprovedProducts(): Promise<Product[]> {
+        return Product.findAll({ where: {
+                approved : '0'
+            }});
+
+    }
 }

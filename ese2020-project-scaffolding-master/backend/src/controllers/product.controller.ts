@@ -28,6 +28,10 @@ productController.get('/productByUser/:user',
         productService.getProductByUser(req.params.user).then(products => res.send(products)).catch(err => res.status(500).send(err));
     }
 );
+productController.get('/unapprovedProducts',
+    (req: Request, res: Response) => {
+    productService.getUnapprovedProducts().then(products => res.send(products)).catch(err => res.status(500).send(err));
+});
 
 productController.post('/add', verifyToken,
 (req: Request, res: Response) => {
