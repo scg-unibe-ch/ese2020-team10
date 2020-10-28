@@ -17,6 +17,12 @@ export class ProductUpdateComponent implements OnInit {
   product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
 
   userId: string;
+  @Input()
+  productTitle: string;
+  @Input()
+  productDescription: string;
+  @Input()
+  productPrice: string;
 
   createOfferForm = new FormGroup({
     title: new FormControl(),
@@ -27,7 +33,9 @@ export class ProductUpdateComponent implements OnInit {
   constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
 
   ngOnInit(): void {
-
+    this.title.setValue(this.productTitle);
+    this.description.setValue(this.productDescription);
+    this.price.setValue(this.productPrice);
   }
 
   get title() {

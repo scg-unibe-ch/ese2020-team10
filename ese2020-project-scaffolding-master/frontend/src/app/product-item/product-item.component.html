@@ -30,7 +30,10 @@
       <button type="button" class="btn btn-md btn-outline-danger" *ngIf="admin" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
       <button type="button" class="btn btn-md btn-dark" *ngIf="userId==product.userId.toString()" (click)="change=true" [hidden]="change" style="float:right">Change</button>
       <div id="change" [hidden]="!change">
-        <app-product-update [product]="product"></app-product-update>
+        <app-product-update [productTitle]="product.title"
+        [productDescription]="product.description"
+        [productPrice]="product.price.toString()">
+        </app-product-update>
       </div>
     </div>
   </div>
