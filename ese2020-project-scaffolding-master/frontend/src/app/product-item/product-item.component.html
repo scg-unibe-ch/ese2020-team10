@@ -1,6 +1,7 @@
 <div class="card" style="width: 90%;">
     <div class="card-body">
       <h1 style="float:left">{{product.title}}</h1>
+      <span *ngIf="product.approved" style="margin-left: 15px"><i class="fas fa-check-square"></i></span>
       <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price}} CHF</h1>
       <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price}} CHF/h</h1>
       <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price}} CHF/h</h1>
@@ -8,20 +9,25 @@
       <p>Description: {{product.description}}</p>
       <p>Location: {{product.location}}</p>
       <p *ngIf="product.status == true" style="float:left">
-          available / 
+          available /
       </p>
       <p *ngIf="product.status == false" style="float:left">
-          unavailable / 
+          unavailable /
       </p>
 
       <p class="card-category" style="float:right">{{product.category}}</p>
 
-      <p *ngIf="product.shippable == true" style="float:center">
+      <p *ngIf="product.shippable == true">
           shippable
       </p>
-      <p *ngIf="product.shippable == false" style="float:center">
+      <p *ngIf="product.shippable == false">
           unshippable
       </p>
+      <hr>
+      <button type="button" class="btn btn-md btn-info" *ngIf="userId!=product.userId" style="float:right">Buy</button>
+      <button type="button" class="btn btn-md btn-dark" *ngIf="userId==product.userId" style="float:right">Change</button>
+      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="userId==product.userId" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
+      <button type="button" class="btn btn-md btn-dark" *ngIf="admin && !product.approved" style="float:right">Approve</button>
+      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="admin" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
     </div>
   </div>
-  

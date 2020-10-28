@@ -48,8 +48,7 @@
     <mat-tab label="Open Offers">
       <h2 style="margin-top: 10px">Your Offers</h2>
       <div *ngFor="let product of products | async">
-          {{product | json}}
-        <app-product-view></app-product-view>
+        <app-product-item [product] = "product"></app-product-item>
       </div>
     </mat-tab>
     <mat-tab label="Sold">Sold</mat-tab> <!-- should only be viewable by user -->

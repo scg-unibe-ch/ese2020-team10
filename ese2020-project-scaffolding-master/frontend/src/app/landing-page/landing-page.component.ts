@@ -18,13 +18,13 @@ export class LandingPageComponent implements OnInit {
   public hireProducts: Observable<Product[]>;
 
 
-  constructor(public auth: AuthService, public productService : ProductService) { }
+  constructor(public auth: AuthService, public productService: ProductService) { }
 
   ngOnInit(): void {
-    this.user = this.auth.getUserName();
     this.sellProducts = this.productService.getProductsByType('Sell'); // Gets all the current 'sell' products from the backend via productService
     this.lendProducts = this.productService.getProductsByType('Lend');
     this.hireProducts = this.productService.getProductsByType('Hire');
+    this.user = this.auth.getUserName();
   }
 
 }
