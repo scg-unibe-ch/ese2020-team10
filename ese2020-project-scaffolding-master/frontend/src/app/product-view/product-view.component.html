@@ -1,0 +1,61 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>{{ title }} </mat-card-title>
+        <mat-card-title>{{ category }} </mat-card-title>
+        <mat-card-title> {{ price }} </mat-card-title>
+    </mat-card-header>
+
+    <div>
+        <mat-card-content>
+            <p>
+            Description: {{ description }}
+            </p>
+        </mat-card-content>
+    </div>
+    
+
+    <div>
+        <mat-card-content>
+            <p>
+            Location: {{ location }}
+            </p>
+        </mat-card-content>
+    </div>
+
+    <div>
+        <mat-card-content>
+            <p *ngIf="sellOrLend == true">
+                This product is for sale.
+            </p>
+
+            <p *ngIf="sellOrLend == false">
+                This product can be lent.
+            </p>
+        </mat-card-content>
+    </div>
+
+    <div>
+        <mat-card-content>
+            <p *ngIf="status == true">
+                This product is available.
+            </p>
+
+            <p *ngIf="status == false">
+                This product is unavailable.
+            </p>
+        </mat-card-content>
+    </div>
+
+    <div>
+        <mat-card-content>
+            <p *ngIf="shippable == true">
+                This product is deliverable.
+            </p>
+
+            <p *ngIf="shippable == false">
+                This product is undeliverable.
+            </p>
+        </mat-card-content>
+    </div>
+
+</mat-card>

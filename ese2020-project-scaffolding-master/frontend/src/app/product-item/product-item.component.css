@@ -1,0 +1,9 @@
+.card{
+    border-radius: 1rem;
+    margin-left: 5%;
+    margin-bottom: 1rem;
+}
+
+.card-category{
+    color:grey;
+}

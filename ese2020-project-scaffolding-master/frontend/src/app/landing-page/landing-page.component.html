@@ -1,3 +1,79 @@
 <hr>
-<h1>Welcome!</h1>
+<h1>Welcome {{user}}!</h1>
+
+  <h2>Popular Categories
+  <div class="btn-group">
+  <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    all
+  </button>
+  <div class="dropdown-menu scrollable-menu">
+    <span class="dropdown-item-text">Products</span>
+    <a class="dropdown-item">Accessories</a>
+    <a class="dropdown-item">Audio & TV</a>
+    <a class="dropdown-item">Books</a>
+    <a class="dropdown-item">Clothing</a>
+    <a class="dropdown-item">Electronics</a>
+    <a class="dropdown-item">Games</a>
+    <div class="dropdown-divider"></div>
+    <span class="dropdown-item-text">Services</span>
+    <a class="dropdown-item">Animals</a>
+    <a class="dropdown-item">Classes & Tutoring</a>
+    <a class="dropdown-item">Computer & Mobile Phones</a>
+    <a class="dropdown-item">Household & Cleaning</a>
+    <a class="dropdown-item">Moving & Transport</a>
+    <a class="dropdown-item">Party & Catering</a>
+  </div>
+  </div>
+  </h2>
+
+  <div class="all-icons row">
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/toast.png" alt="toast-icon"><small>Party & Catering</small></a>
+    </div>
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/shirt.png" alt="shirt-icon"><small>Clothing</small></a>
+    </div>
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/gamepad.png" alt="shirt-icon"><small>Games</small></a>
+    </div>
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/library.png" alt="shirt-icon"><small>Books</small></a>
+    </div>
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/mouse.png" alt="shirt-icon"><small>Electronics</small></a>
+    </div>
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/truck.png" alt="shirt-icon"><small>Moving & Transport</small></a>
+    </div>
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/blackboard.png" alt="shirt-icon"><small>Classes & Tutoring</small></a>
+    </div>
+    <div class="icon-div col">
+      <a class="icon-link" href=""><img class="icon" src="assets/icons/vacuum-cleaner.png" alt="shirt-icon"><small>Household & Cleaning</small></a>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 16px;">Recently added in "sell"</h2>
+
+  <div *ngFor="let product of sellProducts | async">
+    <app-product-item [product] = "product"></app-product-item>
+  </div>
+
+  <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
+
+  <div *ngFor="let product of lendProducts | async">
+    <app-product-item [product] = "product"></app-product-item>
+  </div>
+
+  <h2 style="margin-top: 16px;">Recently added in "hire"</h2>
+  <div *ngFor="let product of hireProducts | async">
+    <app-product-item [product] = "product"></app-product-item>
+  </div>
+
+
+  <div class="footer">
+    Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+  </div>
+
+
 

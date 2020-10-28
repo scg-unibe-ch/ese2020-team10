@@ -1,0 +1,53 @@
+.scrollable-menu {
+  height: auto;
+  max-height: 325px;
+  overflow-x: hidden;
+}
+
+.icon-link{
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 0px;
+  border: 0px;
+  margin: 0px 0.875rem;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.icon-div{
+  display: flex;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  padding-top: 0.25rem;
+}
+
+.small{
+  margin-top: 0.75rem;
+  width: 80px;
+  text-align: center;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.icon{
+  width: 60px;
+  opacity: 1;
+}
+
+.icon:hover{
+  opacity: 0.7;
+}
+
+
+.footer{
+  text-align: center;
+  margin-top: 500px;
+}

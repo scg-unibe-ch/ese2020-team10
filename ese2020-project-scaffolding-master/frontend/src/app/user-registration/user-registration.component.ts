@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-registration',
@@ -61,7 +61,7 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   get city(){
-    return this.registrationForm.get('address');
+    return this.registrationForm.get('city');
   }
   constructor(private httpClient: HttpClient, private router: Router) { }
 
@@ -75,7 +75,10 @@ export class UserRegistrationComponent implements OnInit {
           "lastName": this.lastName.value,
           "userName": this.userName.value,
           "email": this.email.value,
-          "password": this.password.value
+          "password": this.password.value,
+          "phone": this.phone.value,
+          "address": this.address.value,
+          "city": this.city.value
         }).subscribe((res: any) => {
           this.router.navigate(['/login']);
       });
