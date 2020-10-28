@@ -1,10 +1,11 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {categoryTypes, Product} from "../../models/product.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CurrencyPipe} from "@angular/common";
 import {AuthService} from "../../auth.service";
 import {FormControl, FormGroup} from "@angular/forms";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-product-update',
@@ -23,6 +24,9 @@ export class ProductUpdateComponent implements OnInit {
   productDescription: string;
   @Input()
   productPrice: string;
+
+  @Output()
+  update = new EventEmitter<Product>();
 
   createOfferForm = new FormGroup({
     title: new FormControl(),
@@ -49,6 +53,10 @@ export class ProductUpdateComponent implements OnInit {
   }
 
   onSubmit(): void {
-    //update
+    this.httpClient.put(environment.endpointURL + 'product/' + this.product.productId, {
+      title: this.title.value,
+      description: this.description.value,
+      price: this.price.value
+    }).subscribe();
   }
 }
