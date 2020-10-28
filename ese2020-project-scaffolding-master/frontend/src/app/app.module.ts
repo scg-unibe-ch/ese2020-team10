@@ -16,13 +16,22 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { UserLoginComponent } from './user-login/user-login.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatIconModule} from '@angular/material/icon';
+import { AppRoutingModule } from './app-routing.module';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     TodoItemComponent,
-    UserLoginComponent
+    UserLoginComponent,
+    UserRegistrationComponent,
+    NavBarComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,11 +40,14 @@ import { UserLoginComponent } from './user-login/user-login.component';
     HttpClientModule,
     MatButtonModule,
     MatListModule,
+    MatIconModule,
     MatInputModule,
     MatCheckboxModule,
     MatCardModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [
     {

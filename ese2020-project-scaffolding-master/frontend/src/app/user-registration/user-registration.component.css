@@ -1,14 +1,14 @@
 .mat-card{
-  width: 450px;
+  width: 350px;
+  height: auto;
   display: block;
   margin-left:auto;
   margin-right:auto;
   vertical-align:middle;
 }
 
-.log{
+.register{
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
 }
-

@@ -3,16 +3,30 @@ import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 
 export interface UserAttributes {
     userId: number;
+    firstName: string;
+    lastName: string;
     userName: string;
+    email: string;
     password: string;
+    phone: string;
+    address: string;
+    city: string;
+    isAdmin: boolean;
 }
 
 export interface UserCreationAttributes extends Optional<UserAttributes, 'userId'> { }
 
 export class User extends Model<UserAttributes, UserCreationAttributes> implements UserAttributes {
     userId!: number;
+    firstName!: string;
+    lastName!: string;
     userName!: string;
+    email!: string;
     password!: string;
+    phone: string;
+    address: string;
+    city: string;
+    isAdmin!: boolean;
 
     public static initialize(sequelize: Sequelize) {
         User.init({
@@ -21,13 +35,41 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
                 autoIncrement: true,
                 primaryKey: true
             },
+            firstName: {
+                type: DataTypes.STRING,
+                // allowNull: false
+            },
+            lastName: {
+                type : DataTypes.STRING,
+                // allowNull: false
+            },
             userName: {
                 type: DataTypes.STRING,
                 allowNull: false
             },
+            email: {
+                type: DataTypes.STRING,
+                // allowNull: false
+            },
             password: {
                 type: DataTypes.STRING,
                 allowNull: false
+            },
+            phone: {
+                type: DataTypes.STRING,
+                // allowNull: false
+            },
+            address: {
+                type: DataTypes.STRING,
+                // allowNull: false
+            },
+            city: {
+                type: DataTypes.STRING,
+                // allowNull: false
+            },
+            isAdmin: {
+                type: DataTypes.BOOLEAN,
+                defaultValue: false
             }
         },
             {

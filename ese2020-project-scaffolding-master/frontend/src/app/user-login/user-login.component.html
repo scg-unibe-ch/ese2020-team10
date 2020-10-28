@@ -1,15 +1,17 @@
 <mat-card>
   <div *ngIf="!loggedIn">
+    <div class="log">Login</div>
     <mat-form-field>
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password">
+      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" (keydown.enter)="login()">
     </mat-form-field>
-    <button mat-flat-button color="primary" (click)="login()">Login</button>
+    <button mat-flat-button color="primary" (click)="login()" >Login</button>
   </div>
 
   <div *ngIf="loggedIn">
+    <div class="log">Logout</div>
     <button mat-flat-button color="warn" (click)="logout()">Logout</button>
     You are currently logged in as {{ userName }}
   </div>
@@ -18,4 +20,10 @@
 <mat-card>
   <button mat-flat-button color="primary" (click)="accessSecuredEndpoint()">Access Secure Endpoint (only for logged in users)</button>
   {{ secureEndpointResponse }}
+</mat-card>
+
+<mat-card *ngIf="isAdmin">
+  <div>
+    You are an administrator
+  </div>
 </mat-card>

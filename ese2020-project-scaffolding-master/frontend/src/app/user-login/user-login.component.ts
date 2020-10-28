@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
@@ -14,10 +15,11 @@ export class UserLoginComponent implements OnInit {
 
   userToken: string;
   loggedIn = false;
+  isAdmin: boolean = false;
 
   secureEndpointResponse = '';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     this.checkUserStatus();
@@ -27,7 +29,7 @@ export class UserLoginComponent implements OnInit {
     // Get user data from local storage
     this.userToken = localStorage.getItem('userToken');
     this.userName = localStorage.getItem('userName');
-
+    this.isAdmin = (localStorage.getItem('isAdmin') == "true")
     // Set boolean whether a user is logged in or not
     this.loggedIn = !!(this.userToken);
   }
@@ -40,8 +42,12 @@ export class UserLoginComponent implements OnInit {
       // Set user data in local storage
       localStorage.setItem('userToken', res.token);
       localStorage.setItem('userName', res.user.userName);
+      localStorage.setItem('isAdmin', res.user.isAdmin);
 
       this.checkUserStatus();
+      this.router.navigate(['']);
+    }, (error: any) => {
+      window.alert('Username/Email or password incorrect. Please try again');
     });
   }
 
@@ -49,7 +55,7 @@ export class UserLoginComponent implements OnInit {
     // Remove user data from local storage
     localStorage.removeItem('userToken');
     localStorage.removeItem('userName');
-
+    localStorage.removeItem('isAdmin');
     this.checkUserStatus();
   }
 
