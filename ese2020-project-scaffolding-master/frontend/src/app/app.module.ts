@@ -29,7 +29,6 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { AdminComponent } from './admin/admin.component';
 import { ProfileComponent } from './profile/profile.component';
-import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { ProductUpdateComponent } from './product-item/product-update/product-update.component';
@@ -45,7 +44,6 @@ import { ProductUpdateComponent } from './product-item/product-update/product-up
     LandingPageComponent,
     AdminComponent,
     ProfileComponent,
-    ProductViewComponent,
     ProductItemComponent,
     CreateOfferComponent,
     ProductUpdateComponent,

@@ -7,6 +7,7 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
+import { SearchUIComponent } from './search-UI/search-UI.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   { path: 'profile/:userName', component: ProfileComponent },
   { path: 'createOffer', component: CreateOfferComponent},
+  { path: 'search', component: SearchUIComponent},
  
 ];
 
