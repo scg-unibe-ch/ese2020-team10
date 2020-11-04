@@ -18,7 +18,7 @@
         max="100">
     </mat-slider>
     <h5>Max:</h5>
-    <mat-slider 
+    <mat-slider
         thumbLabel
         [displayWith]="formatLabel"
         tickInterval="1"
@@ -29,3 +29,11 @@
     <mat-slide-toggle color="primary">Deliverable</mat-slide-toggle>
     <button style="float:right" mat-flat-button color="primary" (click)="search()">Search</button>
 </mat-card>
+
+
+<input type="text" [formControl]="filter" placeholder="Search for ...">
+<div class="row">
+  <div *ngFor="let product of filteredProducts | async">
+    <app-product-item [product]="product"></app-product-item>
+  </div>
+</div>

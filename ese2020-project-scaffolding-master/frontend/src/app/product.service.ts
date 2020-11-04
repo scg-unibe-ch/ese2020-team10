@@ -1,4 +1,3 @@
-//import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -12,14 +11,14 @@ export class ProductService {
 
   constructor( private httpClient: HttpClient) { }
 
-  products : Observable<Product[]>;
+  products: Observable<Product[]>;
 
   ngOnInit(): void {
     this.getProducts();
   }
   // Returns all current offers
-  getProducts() {
-    this.products = this.httpClient.get<Product[]>(environment.endpointURL+'product/productList');
+  getProducts(): Observable<Product[]> {
+    return this.products = this.httpClient.get<Product[]>(environment.endpointURL + 'product/productList');
   }
 
   getProductsByCategory(category: string): Observable<Product[]>{
@@ -34,12 +33,14 @@ export class ProductService {
     return this.httpClient.get<Product[]>(environment.endpointURL + 'product/productByUser/' + userId);
   }
   // Adds a completly new Product. It belongs automaticly to the currently logged in user
-  addProducts(product : Product) {
+  // tslint:disable-next-line:typedef
+  addProducts(product: Product) {
     this.httpClient.post(environment.endpointURL + 'product/add', {
       product
     });
   }
   // Make changes to an existin Product. Make sure to use the original productId as it can't be changed
+  // tslint:disable-next-line:typedef
   updateProduct(product: Product, productId: number){
     this.httpClient.put(environment.endpointURL + 'product/' + productId, {
       product
