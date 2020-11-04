@@ -7,4 +7,23 @@
     <mat-form-field>
         <input matInput placeholder="from">
     </mat-form-field>
+    <div></div>
+    <h3>Price range:</h3>
+    <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        tickInterval="1"
+        min="1"
+        max="100">
+    </mat-slider>
+    <mat-slider 
+        thumbLabel
+        [displayWith]="formatLabel"
+        tickInterval="1"
+        min="1"
+        max="100">
+    </mat-slider>
+    <div></div>
+    <mat-slide-toggle color="primary">Deliverable</mat-slide-toggle>
+    <button style="float:right" mat-flat-button color="primary" (click)="search()">Search</button>
 </mat-card>

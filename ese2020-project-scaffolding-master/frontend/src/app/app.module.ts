@@ -33,6 +33,8 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { ProductUpdateComponent } from './product-item/product-update/product-update.component';
 import { SearchUIComponent } from './search-UI/search-UI.component';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { SearchUIComponent } from './search-UI/search-UI.component';
     CreateOfferComponent,
     ProductUpdateComponent,
     SearchUIComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -67,7 +70,9 @@ import { SearchUIComponent } from './search-UI/search-UI.component';
     MatToolbarModule,
     MatRadioModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatSliderModule,
+    MatSlideToggleModule
   ],
   providers: [
     {

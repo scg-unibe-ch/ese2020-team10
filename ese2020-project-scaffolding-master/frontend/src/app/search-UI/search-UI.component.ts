@@ -10,4 +10,16 @@ import { Router } from '@angular/router';
   })
 
   export class SearchUIComponent {
+
+    formatLabel(value: number) {
+      if (value >= 1000) {
+        return Math.round(value / 1000) + 'k';
+      }
+  
+      return value;
+    }
+
+    search() {
+      
+    }
   }
