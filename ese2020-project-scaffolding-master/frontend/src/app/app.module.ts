@@ -32,6 +32,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ProductItemComponent } from './product-item/product-item.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { ProductUpdateComponent } from './product-item/product-update/product-update.component';
+import { SearchUIComponent } from './search-UI/search-UI.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { ProductUpdateComponent } from './product-item/product-update/product-up
     ProductItemComponent,
     CreateOfferComponent,
     ProductUpdateComponent,
+    SearchUIComponent,
   ],
   imports: [
     BrowserModule,
