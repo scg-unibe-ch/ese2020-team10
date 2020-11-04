@@ -27,4 +27,8 @@ export class LandingPageComponent implements OnInit {
     this.user = this.auth.getUserName();
   }
 
+  search(): void{
+    
+  }
+
 }
