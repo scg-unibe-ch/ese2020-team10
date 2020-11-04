@@ -12,6 +12,7 @@ export interface UserAttributes {
     phone: string;
     address: string;
     city: string;
+    wallet: number;
     isAdmin: boolean;
 }
 
@@ -27,6 +28,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     phone: string;
     address: string;
     city: string;
+    wallet: number;
     isAdmin!: boolean;
 
     public static initialize(sequelize: Sequelize) {
@@ -63,6 +65,10 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             address: {
                 type: DataTypes.STRING,
                 // allowNull: false
+            },
+            wallet: {
+                type: DataTypes.NUMBER,
+                defaultValue: 0
             },
             city: {
                 type: DataTypes.STRING,
