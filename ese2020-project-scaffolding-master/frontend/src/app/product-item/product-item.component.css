@@ -1,7 +1,8 @@
 .card{
     border-radius: 1rem;
-    margin-left: 5%;
+    margin-left: 1rem;
     margin-bottom: 1rem;
+    width: 500px;
 }
 
 .card-category{

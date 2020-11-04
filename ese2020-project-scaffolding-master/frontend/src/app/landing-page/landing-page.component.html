@@ -7,15 +7,12 @@
     all
   </button>
   <div class="dropdown-menu scrollable-menu">
-    <span class="dropdown-item-text">Products</span>
     <a class="dropdown-item">Accessories</a>
     <a class="dropdown-item">Audio & TV</a>
     <a class="dropdown-item">Books</a>
     <a class="dropdown-item">Clothing</a>
     <a class="dropdown-item">Electronics</a>
     <a class="dropdown-item">Games</a>
-    <div class="dropdown-divider"></div>
-    <span class="dropdown-item-text">Services</span>
     <a class="dropdown-item">Animals</a>
     <a class="dropdown-item">Classes & Tutoring</a>
     <a class="dropdown-item">Computer & Mobile Phones</a>
@@ -54,21 +51,28 @@
   </div>
 
   <h2 style="margin-top: 16px;">Recently added in "sell"</h2>
-
-  <div *ngFor="let product of sellProducts | async">
-    <app-product-item [product] = "product"></app-product-item>
+  <div class="row">
+    <div *ngFor="let product of sellProducts | async">
+      <app-product-item [product] = "product"></app-product-item>
+    </div>
   </div>
+
 
   <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
-
-  <div *ngFor="let product of lendProducts | async">
-    <app-product-item [product] = "product"></app-product-item>
+  <div class="row">
+    <div *ngFor="let product of lendProducts | async">
+      <app-product-item [product] = "product"></app-product-item>
+    </div>
   </div>
+
 
   <h2 style="margin-top: 16px;">Recently added in "hire"</h2>
-  <div *ngFor="let product of hireProducts | async">
-    <app-product-item [product] = "product"></app-product-item>
+  <div class="row">
+    <div *ngFor="let product of hireProducts | async">
+      <app-product-item [product] = "product"></app-product-item>
+    </div>
   </div>
+
 
 
   <div class="footer">

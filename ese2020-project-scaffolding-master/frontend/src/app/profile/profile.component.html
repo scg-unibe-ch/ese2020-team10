@@ -48,8 +48,10 @@
 
     <mat-tab label="Open Offers">
       <h2 style="margin-top: 10px">Your Offers</h2>
-      <div *ngFor="let product of products | async">
-        <app-product-item [product] = "product"></app-product-item>
+      <div class="row">
+        <div *ngFor="let product of products | async">
+          <app-product-item [product] = "product"></app-product-item>
+        </div>
       </div>
     </mat-tab>
 
