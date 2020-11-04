@@ -53,22 +53,32 @@
     </div>
   </div>
 
-  <h2 style="margin-top: 16px;">Recently added in "sell"</h2>
 
-  <div *ngFor="let product of sellProducts | async">
-    <app-product-item [product] = "product"></app-product-item>
-  </div>
+    <h2 style="margin-top: 16px;">Recently added in "sell"</h2>
+    <div class="row">
+      <div *ngFor="let product of sellProducts | async">
+        <app-product-item [product] = "product"></app-product-item>
+      </div>
+    </div>
 
-  <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
 
-  <div *ngFor="let product of lendProducts | async">
-    <app-product-item [product] = "product"></app-product-item>
-  </div>
+
+
+    <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
+    <div class="row">
+    <div *ngFor="let product of lendProducts | async">
+      <app-product-item [product] = "product"></app-product-item>
+    </div>
+    </div>
+
 
   <h2 style="margin-top: 16px;">Recently added in "hire"</h2>
+  <div class="row">
   <div *ngFor="let product of hireProducts | async">
     <app-product-item [product] = "product"></app-product-item>
   </div>
+  </div>
+
 
 
   <div class="footer">
