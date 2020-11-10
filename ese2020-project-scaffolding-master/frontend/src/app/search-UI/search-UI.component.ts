@@ -4,9 +4,10 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import {combineLatest, Observable} from "rxjs";
 import {Product} from "../models/product.model";
-import {FormControl} from "@angular/forms";
+import {Form, FormControl} from "@angular/forms";
 import {map} from "rxjs/operators";
 import {ProductService} from "../product.service";
+import {Search} from "../models/search.model";
 
 @Component({
     selector: 'search',
@@ -16,26 +17,26 @@ import {ProductService} from "../product.service";
 
   export class SearchUIComponent {
 
+  allProducts: Observable<Product[]>;
   products: Observable<Product[]>;
-  searchOption: string;
   filteredProducts: Observable<Product[]>;
-  filter: FormControl;
+  titleFilter: FormControl;
   filters: Observable<string>;
 
+
   constructor(private productService: ProductService, private httpClient: HttpClient) {
-    this.products = this.productService.getProducts();
-    this.filter = new FormControl('');
-    this.filters = this.filter.valueChanges;
+    this.titleFilter = new FormControl('');
+    this.allProducts = this.productService.getProducts();
   }
 
   ngOnInit(): void{
-    if(this.searchOption == null){
-      this.filteredProducts = combineLatest(this.products, this.filters).pipe(map(([products, filterString]) =>
-        products.filter(product => product.title.toLowerCase().indexOf(filterString.toLowerCase()) !== -1)));
-    }
+    this.products = this.productService.getProducts();
+    this.filters = this.titleFilter.valueChanges;
+    this.filteredProducts = combineLatest(this.products, this.filters).pipe(map(([products, filterString]) =>
+      products.filter(product => product.title.toLowerCase().indexOf(filterString.toLowerCase()) !== -1)));
   }
 
-    formatLabel(value: number) {
+ /*   formatLabel(value: number) {
       if (value >= 1000) {
         return Math.round(value / 1000) + 'k';
       }
@@ -45,5 +46,5 @@ import {ProductService} from "../product.service";
 
     search() {
 
-    }
+    }*/
   }

@@ -1,3 +1,4 @@
+<!--
 <mat-card>
     <mat-card-title>Search</mat-card-title>
     <mat-form-field>
@@ -29,9 +30,21 @@
     <mat-slide-toggle color="primary">Deliverable</mat-slide-toggle>
     <button style="float:right" mat-flat-button color="primary" (click)="search()">Search</button>
 </mat-card>
+-->
+<h1 style="margin-top: 10px;">Search</h1>
+
+<input type="text" [formControl]="titleFilter" placeholder="Search for ..." style="margin-top: 10px">
 
 
-<input type="text" [formControl]="filter" placeholder="Search for ...">
+  <ul>Locations:
+    <div class="container" *ngFor="let location of allProducts | async">
+      <ls *ngIf="location.location != ''">
+        {{location.location}}
+      </ls>
+    </div>
+  </ul>
+
+
 <div class="row">
   <div *ngFor="let product of filteredProducts | async">
     <app-product-item [product]="product"></app-product-item>
