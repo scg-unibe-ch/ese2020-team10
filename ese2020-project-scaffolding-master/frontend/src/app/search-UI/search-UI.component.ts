@@ -7,7 +7,6 @@ import {Product} from "../models/product.model";
 import {Form, FormControl} from "@angular/forms";
 import {map} from "rxjs/operators";
 import {ProductService} from "../product.service";
-import {Search} from "../models/search.model";
 
 @Component({
     selector: 'search',

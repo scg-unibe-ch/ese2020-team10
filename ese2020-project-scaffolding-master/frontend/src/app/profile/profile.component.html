@@ -57,4 +57,12 @@
 
     <mat-tab label="Sold">Sold</mat-tab> <!-- should only be viewable by user -->
     <mat-tab label="Bought">Bought</mat-tab> <!-- should only be viewable by user -->
+    <mat-tab label="Wallet">
+      <h2 style="margin-top: 10px;">Wallet</h2>
+      <div *ngFor="let user of userInfo | async">
+        <p>You've got {{user.wallet}} CHF in your Wallet.</p>
+        <p *ngIf="user.wallet > 0">Let's buy something!</p>
+        <p *ngIf="user.wallet <= 0">Let's try to sell something!</p>
+      </div>
+    </mat-tab>
 </mat-tab-group>

@@ -9,6 +9,7 @@ export class User {
         public isAdmin: boolean,
         public phone: string,
         public address: string,
-        public city: string
+        public city: string,
+        public wallet: number
     ) {}
 }
