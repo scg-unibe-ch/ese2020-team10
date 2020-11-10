@@ -35,6 +35,7 @@ import { ProductUpdateComponent } from './product-item/product-update/product-up
 import { SearchUIComponent } from './search-UI/search-UI.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ProductfilterPipe } from './productfilter.pipe';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     CreateOfferComponent,
     ProductUpdateComponent,
     SearchUIComponent,
+    ProductfilterPipe,
 
   ],
   imports: [

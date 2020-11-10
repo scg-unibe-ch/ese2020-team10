@@ -31,22 +31,24 @@
     <button style="float:right" mat-flat-button color="primary" (click)="search()">Search</button>
 </mat-card>
 -->
-<h1 style="margin-top: 10px;">Search</h1>
 
-<input type="text" [formControl]="titleFilter" placeholder="Search for ..." style="margin-top: 10px">
+<input type="text" [(ngModel)]="filterText"  placeholder="Search for ..." style="margin-top: 10px">
+<input type="text" [(ngModel)]="filterLocation" placeholder="Search for ..." style="margin-top: 10px">
+<input type="number" [(ngModel)]="maxPrice" placeholder="maxPrice" style="margin-top: 10px">
+<input type="number" [(ngModel)]="minPrice" placeholder="minPrice" style="margin-top: 10px">
+<input type="checkbox" [(ngModel)]="availability" placeholder="Search for ..." style="margin-top: 10px">
 
-
-  <ul>Locations:
+ <!-- <ul>Locations:
     <div class="container" *ngFor="let location of allProducts | async">
       <ls *ngIf="location.location != ''">
         {{location.location}}
       </ls>
     </div>
   </ul>
-
+-->
 
 <div class="row">
-  <div *ngFor="let product of filteredProducts | async">
+  <div *ngFor="let product of products | async | productfilter: filterText : filterLocation: maxPrice ">
     <app-product-item [product]="product"></app-product-item>
   </div>
 </div>
