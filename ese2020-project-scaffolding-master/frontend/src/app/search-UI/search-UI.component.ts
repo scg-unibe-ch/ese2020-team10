@@ -15,43 +15,19 @@ import {ProductService} from "../product.service";
   })
 
   export class SearchUIComponent {
-  
+
   availability : boolean;
   filterText: String;
   filterLocation: String;
   maxPrice: Number;
   minPrice: Number;
-
-  
-  //allProducts: Observable<Product[]>;
   products: Observable<Product[]>;
-  //filteredProducts: Observable<Product[]>;
-  //titleFilter: FormControl;
-  //filters: Observable<string>;
 
-
-  constructor(private productService: ProductService, private httpClient: HttpClient) {
-    //this.titleFilter = new FormControl('');
-    //this.allProducts = this.productService.getProducts();
+  constructor(private productService: ProductService) {
   }
 
   ngOnInit(): void{
     this.products = this.productService.getProducts();
-    
-    //this.filters = this.titleFilter.valueChanges;
-    //this.filteredProducts = combineLatest(this.products, this.filters).pipe(map(([products, filterString]) =>
-      //products.filter(product => product.title.toLowerCase().indexOf(filterString.toLowerCase()) !== -1)));
   }
 
- /*   formatLabel(value: number) {
-      if (value >= 1000) {
-        return Math.round(value / 1000) + 'k';
-      }
-
-      return value;
-    }
-
-    search() {
-
-    }*/
   }
