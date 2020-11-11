@@ -1,0 +1,22 @@
+<form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title>Confirm Purchase</h1>
+<div>
+  <p>{{data.title}}</p>
+</div>
+<div>
+  <p>Price: {{data.price}}</p>
+</div>
+<div *ngIf="data.shippable">
+  <mat-form-field>
+    <input [class.is-invalid]="deliveryAddress.touched && deliveryAddress.invalid" type="text" matInput class="form-control" placeholder="Delivery Address" formControlName="deliveryAddress">
+  </mat-form-field>
+  <div style="color: red" *ngIf="(deliveryAddress.invalid && deliveryAddress.touched) || deliveryAddress.dirty">
+    <small *ngIf="deliveryAddress.errors?.required" class="text.danger">Delivery Address is required</small>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.title" cdkFocusInitial [disabled]="!purchaseForm.valid&&data.shippable">Purchase</button>
+</div>
+
+</form>
