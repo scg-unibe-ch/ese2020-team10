@@ -48,7 +48,7 @@
 -->
 
 <div class="row">
-  <div *ngFor="let product of products | async | productfilter: filterText : filterLocation: maxPrice ">
+  <div *ngFor="let product of products | async | productfilter: filterText : filterLocation : maxPrice : minPrice : availability">
     <app-product-item [product]="product"></app-product-item>
   </div>
 </div>
