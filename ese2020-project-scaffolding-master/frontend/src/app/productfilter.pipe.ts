@@ -29,16 +29,6 @@ export class ProductfilterPipe implements PipeTransform {
       && product.location.toLocaleLowerCase().includes(location.toLocaleLowerCase())
       &&(availability || product.shippable));
   }
-  /**
-   * transform(Products: Product[], searchText: String, minPrice: Number, maxPrice: Number, location: String, availability: boolean): Product[] {
-    if(!Products)
-      return Products;
-    
-    return Products.filter(product =>
-      product.title.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()) && product.price >= minPrice && product.price <= maxPrice && 
-      product.location.toLocaleLowerCase().includes(location.toLocaleLowerCase()) && (availability || product.shippable));
-  }
-   */
 
 }
 

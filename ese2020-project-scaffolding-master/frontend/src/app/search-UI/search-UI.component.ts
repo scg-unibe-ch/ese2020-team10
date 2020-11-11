@@ -23,11 +23,11 @@ import {ProductService} from "../product.service";
   minPrice: Number;
 
   
-  allProducts: Observable<Product[]>;
+  //allProducts: Observable<Product[]>;
   products: Observable<Product[]>;
-  filteredProducts: Observable<Product[]>;
-  titleFilter: FormControl;
-  filters: Observable<string>;
+  //filteredProducts: Observable<Product[]>;
+  //titleFilter: FormControl;
+  //filters: Observable<string>;
 
 
   constructor(private productService: ProductService, private httpClient: HttpClient) {
