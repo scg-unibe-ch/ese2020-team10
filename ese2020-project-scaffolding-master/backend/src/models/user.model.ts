@@ -1,6 +1,7 @@
 import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { Product} from './product.model';
+import { Sale} from './sale.model';
 
 export interface UserAttributes {
     userId: number;
@@ -87,6 +88,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
     }
     public static createAssociations() {
         User.hasMany(Product, {
+            foreignKey: 'userId'
+        });
+        User.hasMany(Sale, {
             foreignKey: 'userId'
         });
     }
