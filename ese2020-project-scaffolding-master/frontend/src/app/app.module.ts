@@ -11,6 +11,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
@@ -36,6 +37,7 @@ import { SearchUIComponent } from './search-UI/search-UI.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ProductfilterPipe } from './productfilter.pipe';
+import { PurchaseDialogComponent } from './product-item/purchase-dialog/purchase-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { ProductfilterPipe } from './productfilter.pipe';
     ProductUpdateComponent,
     SearchUIComponent,
     ProductfilterPipe,
+    PurchaseDialogComponent,
 
   ],
   imports: [
@@ -66,6 +69,7 @@ import { ProductfilterPipe } from './productfilter.pipe';
     MatInputModule,
     MatCheckboxModule,
     MatCardModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatSelectModule,
     MatTabsModule,
