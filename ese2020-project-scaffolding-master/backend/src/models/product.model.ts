@@ -1,4 +1,5 @@
 import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { Sale } from './sale.model';
 import { User} from './user.model';
 
 
@@ -85,6 +86,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             targetKey: 'userId',
             onDelete: 'cascade',
             foreignKey: 'userId'
+        });
+        Product.hasMany(Sale, {
+            foreignKey: 'prductId'
         });
     }
 }
