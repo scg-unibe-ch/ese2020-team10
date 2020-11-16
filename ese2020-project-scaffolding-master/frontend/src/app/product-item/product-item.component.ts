@@ -35,7 +35,7 @@ export class ProductItemComponent {
   openPurchaseDialog(): void {
     const dialogRef = this.dialog.open(PurchaseDialogComponent, {
       width: '1000 px',
-      data: {title: this.product.title, price: this.product.price, shippable: this.product.shippable}
+      data: {title: this.product.title, price: this.product.price, shippable: this.product.shippable, type: this.product.type}
     });
 
     dialogRef.afterClosed().subscribe(result => {
