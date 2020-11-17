@@ -1,11 +1,11 @@
 <hr>
 <h1 style="float:left">Welcome {{user}}!</h1>
   <h2>
-    <a routerLink="/search" style="float:right; color: cadetblue"><i class="fas fa-search"></i> Search</a>
+    <a routerLink="/search" style="float:right; color: #68b0ab"><i class="fas fa-search"></i> Search</a>
   </h2>
   <div style="clear:left;"></div>
 
-  <h2>Popular Categories
+  <h1>Popular Categories
   <div class="btn-group">
   <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     all
@@ -25,7 +25,7 @@
     <a class="dropdown-item">Party & Catering</a>
   </div>
   </div>
-  </h2>
+  </h1>
 
   <div class="all-icons row">
     <div class="icon-div col">
@@ -54,7 +54,7 @@
     </div>
   </div>
 
-  <h2 style="margin-top: 16px;">Recently added in "sell"</h2>
+  <h1 style="margin-top: 16px;">Recently added in "sell"</h1>
   <div class="row">
     <div *ngFor="let product of sellProducts | async">
       <app-product-item [product] = "product"></app-product-item>
@@ -62,7 +62,7 @@
   </div>
 
 
-  <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
+  <h1 style="margin-top: 16px;">Recently added in "lend"</h1>
   <div class="row">
     <div *ngFor="let product of lendProducts | async">
       <app-product-item [product] = "product"></app-product-item>
@@ -70,7 +70,7 @@
   </div>
 
 
-  <h2 style="margin-top: 16px;">Recently added in "hire"</h2>
+  <h1 style="margin-top: 16px;">Recently added in "hire"</h1>
   <div class="row">
     <div *ngFor="let product of hireProducts | async">
       <app-product-item [product] = "product"></app-product-item>
