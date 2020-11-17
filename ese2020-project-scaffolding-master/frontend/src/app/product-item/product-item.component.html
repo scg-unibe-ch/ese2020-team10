@@ -35,20 +35,20 @@
       <div>
         <p *ngIf="product.location != ''">Location: {{product.location}}</p>
         <p *ngIf="product.location == ''" style="color: white;">...</p>
-        <p *ngIf="product.status == true" style="float:left">
-          available /
+        <p *ngIf="product.status == true" style="float:left; margin-right: 5px">
+          available
         </p>
         <p *ngIf="product.status == false" style="float:left">
-          unavailable /
+          unavailable
         </p>
 
         <p class="card-category" style="float:right">{{product.category}}</p>
 
         <p *ngIf="product.shippable == true">
-          shippable
+          / shippable
         </p>
         <p *ngIf="product.shippable == false">
-          unshippable
+          / unshippable
         </p>
       </div>
 
