@@ -11,6 +11,9 @@
         <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price}} CHF/h</h1>
       </div>
       <div style="clear:left;"></div>
+      <small *ngIf="product.type == 'Sell'">Product to buy.</small>
+      <small *ngIf="product.type == 'Hire'">Service to hire.</small>
+      <small *ngIf="product.type == 'Lend'">Product to lend.</small>
       <div class="card-description">
       <div style="margin-bottom: 10px">
         <mat-accordion>
