@@ -2,7 +2,7 @@
     <div>
       <div>
         <mat-form-field>
-          <input type="text" matInput class="form-control" placeholder="Title" formControlName="title" #title maxlemgth="40">
+          <input type="text" matInput class="form-control" placeholder="Title" formControlName="title" #title maxlength="40">
           <mat-hint align="end">{{title.value.length}} /40</mat-hint>
         </mat-form-field>
 
@@ -14,6 +14,8 @@
         <mat-form-field>
           <input type="text" matInput class="form-control"  placeholder="Price" formControlName="price">
         </mat-form-field>
+
+        <mat-slide-toggle color ="primary" [checked]="productStatus==true" (change)="setValue($event)">Availability</mat-slide-toggle>
 
       </div>
     </div>

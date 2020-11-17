@@ -24,6 +24,8 @@ export class ProductUpdateComponent implements OnInit {
   productDescription: string;
   @Input()
   productPrice: string;
+  @Input()
+  productStatus: boolean;
 
   @Output()
   update = new EventEmitter<Product>();
@@ -52,11 +54,20 @@ export class ProductUpdateComponent implements OnInit {
     return this.createOfferForm.get('price');
   }
 
+  setValue(e): void{
+    if (e.checked){
+      this.productStatus = true;
+    } else {
+      this.productStatus = false;
+    }
+  }
+
   onSubmit(): void {
     this.httpClient.put(environment.endpointURL + 'product/' + this.product.productId, {
       title: this.title.value,
       description: this.description.value,
-      price: this.price.value
+      price: this.price.value,
+      status: this.productStatus
     }).subscribe((res:any) =>{
       window.location.reload()
     }
