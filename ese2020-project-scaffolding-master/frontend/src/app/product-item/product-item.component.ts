@@ -66,9 +66,7 @@ export class ProductItemComponent {
   onBuy():void{
     this.httpClient.post(environment.endpointURL + 'sale/buy',{
       "productId": this.product.productId,
-      "buyerId":this.auth.getUserId,
-      "sellerId": this.product.userId,
-      "pointOfSalePrice":this.product.price
+      "deliveryAddress": ""
     }).subscribe();
   }
 }
