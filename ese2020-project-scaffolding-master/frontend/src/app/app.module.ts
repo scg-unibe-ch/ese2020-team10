@@ -39,6 +39,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ProductfilterPipe } from './productfilter.pipe';
 import { PurchaseDialogComponent } from './product-item/purchase-dialog/purchase-dialog.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatStepperModule} from "@angular/material/stepper";
+import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 
 @NgModule({
   declarations: [
@@ -59,29 +61,30 @@ import {MatExpansionModule} from "@angular/material/expansion";
     PurchaseDialogComponent,
 
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        HttpClientModule,
-        MatButtonModule,
-        MatListModule,
-        MatIconModule,
-        MatInputModule,
-        MatCheckboxModule,
-        MatCardModule,
-        MatDialogModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatTabsModule,
-        MatToolbarModule,
-        MatRadioModule,
-        ReactiveFormsModule,
-        AppRoutingModule,
-        MatSliderModule,
-        MatSlideToggleModule,
-        MatExpansionModule
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatListModule,
+    MatIconModule,
+    MatInputModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatRadioModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatExpansionModule,
+    MatStepperModule
+  ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -89,6 +92,10 @@ import {MatExpansionModule} from "@angular/material/expansion";
       multi: true
     },
     [CurrencyPipe],
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true}
+    }
   ],
   bootstrap: [
     AppComponent
