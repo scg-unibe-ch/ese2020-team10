@@ -21,7 +21,7 @@ export class ProductItemComponent {
   userId: string;
   userName: string;
   admin: boolean;
-
+  panelOpenState: boolean;
   change: boolean;
 
   @Input()
@@ -48,6 +48,7 @@ export class ProductItemComponent {
     this.userName = this.auth.getUserName();
     this.admin = this.auth.getAdmin();
     this.change = false;
+    this.panelOpenState = false;
   }
 
   onProductDelete(productId: number): void{

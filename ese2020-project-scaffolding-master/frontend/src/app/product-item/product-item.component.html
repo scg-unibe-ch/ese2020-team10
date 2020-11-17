@@ -11,25 +11,45 @@
         <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price}} CHF/h</h1>
       </div>
       <div style="clear:left;"></div>
-      <div>
-        <p>Description: {{product.description}}</p>
+      <div class="card-description">
+      <div style="margin-bottom: 10px">
+        <mat-accordion>
+          <mat-expansion-panel (opened)="panelOpenState = true"
+                               (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Description
+              </mat-panel-title>
+              <mat-panel-description>
+                Click to {{panelOpenState ? 'close' : 'read'}} description.
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>{{product.description}}</p>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
-      <p *ngIf="product.location != ''">Location: {{product.location}}</p>
-      <p *ngIf="product.status == true" style="float:left">
-        available /
-      </p>
-      <p *ngIf="product.status == false" style="float:left">
-        unavailable /
-      </p>
 
-      <p class="card-category" style="float:right">{{product.category}}</p>
+      <div>
+        <p *ngIf="product.location != ''">Location: {{product.location}}</p>
+        <p *ngIf="product.location == ''" style="color: white;">...</p>
+        <p *ngIf="product.status == true" style="float:left">
+          available /
+        </p>
+        <p *ngIf="product.status == false" style="float:left">
+          unavailable /
+        </p>
 
-      <p *ngIf="product.shippable == true">
-        shippable
-      </p>
-      <p *ngIf="product.shippable == false">
-        unshippable
-      </p>
+        <p class="card-category" style="float:right">{{product.category}}</p>
+
+        <p *ngIf="product.shippable == true">
+          shippable
+        </p>
+        <p *ngIf="product.shippable == false">
+          unshippable
+        </p>
+      </div>
+
+     </div>
       <hr>
       <button type="button" class="btn btn-md btn-info" *ngIf="userId!=product.userId.toString() && userId != null && product.status == true && !admin" (click)="onBuy()" style="float:right">Buy</button>
       <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(userId==product.userId.toString())" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>

@@ -38,6 +38,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ProductfilterPipe } from './productfilter.pipe';
 import { PurchaseDialogComponent } from './product-item/purchase-dialog/purchase-dialog.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -58,28 +59,29 @@ import { PurchaseDialogComponent } from './product-item/purchase-dialog/purchase
     PurchaseDialogComponent,
 
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatListModule,
-    MatIconModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatCardModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatRadioModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    MatSliderModule,
-    MatSlideToggleModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatListModule,
+        MatIconModule,
+        MatInputModule,
+        MatCheckboxModule,
+        MatCardModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatRadioModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatExpansionModule
+    ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -87,7 +89,7 @@ import { PurchaseDialogComponent } from './product-item/purchase-dialog/purchase
       multi: true
     },
     [CurrencyPipe],
-  ], 
+  ],
   bootstrap: [
     AppComponent
   ],
