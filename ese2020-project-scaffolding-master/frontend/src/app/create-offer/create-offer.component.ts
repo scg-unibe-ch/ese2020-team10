@@ -18,8 +18,6 @@ interface Select {
   styleUrls: ['./create-offer.component.css']
 })
 export class CreateOfferComponent implements OnInit {
-  formattedAmount;
-  amount;
   @Input() categories = categoryTypes;
   userId: string;
   product: Product;
@@ -32,12 +30,7 @@ export class CreateOfferComponent implements OnInit {
     this.type.setValue('Sell');
     this.selectedCategory.setValue(this.categories[0]);
     this.shippable.setValue('false');
-  }
-
-  transformAmount(element){
-    this.formattedAmount = this.currencyPipe.transform(this.formattedAmount, '$');
-    element.target.value = this.formattedAmount;
-  }    
+  }  
 
   createOfferForm = new FormGroup({
     selectedCategory: new FormControl(),

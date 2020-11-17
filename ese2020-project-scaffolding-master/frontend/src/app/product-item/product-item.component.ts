@@ -39,7 +39,9 @@ export class ProductItemComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The Dialog was closed');
+      if(result) {
+        this.onBuy();
+      }
     })
   }
 
