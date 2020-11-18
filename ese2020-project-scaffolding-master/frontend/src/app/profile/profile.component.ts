@@ -5,6 +5,8 @@ import {Observable} from "rxjs";
 import {User} from "../models/user.model";
 import {Product, Sale, Type} from "../models/product.model";
 import {ProductService} from "../product.service";
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +23,10 @@ export class ProfileComponent implements OnInit {
   soldOffers: Observable<Sale[]>;
   boughtOffers: Observable<Sale[]>;
 
-  constructor(private activatedRoute: ActivatedRoute, public auth: AuthService, private productService: ProductService) { }
+  constructor(private activatedRoute: ActivatedRoute, 
+    public auth: AuthService, 
+    private productService: ProductService,
+    private httpClient: HttpClient) { }
 
   ngOnInit(): void {
     this.sub = this.activatedRoute.paramMap.subscribe(params => {
@@ -42,12 +47,19 @@ export class ProfileComponent implements OnInit {
     return this.auth.getUserName();
   }
 
-  onDelete(): void{
-
+  onDelete(productId: number): void{
+    this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe(res =>{
+      window.location.reload();
+    });
   }
 
-  onChange(): void{
 
+  onMakeAvailable(productId: number): void{
+    this.httpClient.put(environment.endpointURL + 'product/' +productId, {
+      "status": true
+    }).subscribe(res => {
+      window.location.reload();
+    })
   }
 
 }

@@ -65,7 +65,7 @@
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
                 <p>Delivery Address: {{sold.deliveryAddress}}</p>
-                <button class="btn btn-sm btn-light" (click)="onDelete()">Delete Product</button>
+                <button class="btn btn-sm btn-light" (click)="onDelete(sold.productId)">Delete Product</button>
               </mat-card-content>
             </mat-card>
           </div>
@@ -77,7 +77,7 @@
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
-                <button class="btn btn-sm btn-light" (click)="onChange()">Change to available</button>
+                <button class="btn btn-sm btn-light" (click)="onMakeAvailable(sold.productId)">Change to available</button>
               </mat-card-content>
             </mat-card>
           </div>
@@ -89,7 +89,7 @@
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
-                <button class="btn btn-sm btn-light" (click)="onChange()">Change to available</button>
+                <button class="btn btn-sm btn-light" (click)="onMakeAvailable(sold.productId)">Change to available</button>
               </mat-card-content>
             </mat-card>
           </div>
