@@ -1,17 +1,17 @@
 .mat-card{
-    width: 350px;
+    width: 500px;
     height: auto;
     display: block;
     margin-left:auto;
     margin-right:auto;
   }
-  
+
 .createOffer {
   font-size: 2rem;
   font-weight: bold;
   margin-bottom: 20px;
 }
-  
+
 .mat-radio-button ~ .mat-radio-button {
   margin-left: 16px;
   margin-bottom: 10px;
