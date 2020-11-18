@@ -14,6 +14,7 @@ export interface SaleAttributes {
     deliveryAddress: string;
     title: string;
     type: Enumerator;
+    amountOfHours: number;
 }
 
 export interface SaleCreationAttributes extends Optional<SaleAttributes, 'SaleId'> { }
@@ -27,6 +28,7 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
     deliveryAddress: string;
     title: string;
     type: Enumerator;
+    amountOfHours: number;
 
     public static initialize(sequelize: Sequelize) {
         Sale.init({
@@ -59,6 +61,9 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
             },
             type: {
                 type: DataTypes.ENUM('Sell', 'Lend', 'Hire'),
+            },
+            amountOfHours: {
+                type: DataTypes.NUMBER
             }
 
         },

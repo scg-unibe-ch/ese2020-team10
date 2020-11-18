@@ -8,4 +8,5 @@ export interface PurchaseResponse {
 export interface PurchaseRequest {
     productId: number;
     deliveryAddress: string;
+    amountOfHours?: number;
 }
