@@ -12,7 +12,8 @@ export interface SaleAttributes {
     sellerId: number;
     pointOfSalePrice: number;
     deliveryAddress: string;
-
+    title: string;
+    type: Enumerator;
 }
 
 export interface SaleCreationAttributes extends Optional<SaleAttributes, 'SaleId'> { }
@@ -24,6 +25,8 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
     sellerId: number;
     pointOfSalePrice: number;
     deliveryAddress: string;
+    title: string;
+    type: Enumerator;
 
     public static initialize(sequelize: Sequelize) {
         Sale.init({
@@ -49,8 +52,15 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
                 allowNull: false
             },
             deliveryAddress: {
-                type: DataTypes.STRING,
+                type: DataTypes.STRING
+            },
+            title: {
+                type: DataTypes.STRING
+            },
+            type: {
+                type: DataTypes.ENUM('Sell', 'Lend', 'Hire'),
             }
+
         },
             {
                 sequelize,
@@ -61,17 +71,17 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
     public static createAssociations() {
         Sale.belongsTo(User, {
             targetKey: 'userId',
-            onDelete: 'cascade',
+            onDelete: 'set null',
             foreignKey: 'sellerId'
         });
         Sale.belongsTo(User, {
             targetKey: 'userId',
-            onDelete: 'cascade',
+            onDelete: 'set null',
             foreignKey: 'buyerId'
         });
         Sale.belongsTo(Product, {
             targetKey: 'productId',
-            onDelete: 'cascade',
+            onDelete: 'set null',
             foreignKey: 'productId'
         });
     }

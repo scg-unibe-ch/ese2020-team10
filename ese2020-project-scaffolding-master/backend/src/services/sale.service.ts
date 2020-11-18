@@ -49,12 +49,14 @@ export class SaleService {
                     'buyerId': buyerId,
                     'sellerId': seller.userId,
                     'pointOfSalePrice': product.price,
-                    'deliveryAddress': purchaseRequest.deliveryAddress
+                    'deliveryAddress': purchaseRequest.deliveryAddress,
+                    'title': product.title,
+                    'type': product.type
                 });
 
                 return Promise.resolve(sale);
             } catch (err) {
-                throw new Error('');
+                throw new Error(err);
             }
 
 
@@ -63,4 +65,20 @@ export class SaleService {
             return Promise.reject({message: err.toString()});
         }
     }
+    public getSoldSales(userid: number): Promise<Sale[]> {
+        return Sale.findAll({
+            where: {
+                sellerId: userid
+            }
+        });
+    }
+
+    public getBoughtSales(userid: number): Promise<Sale[]> {
+        return Sale.findAll({
+            where: {
+                buyerId: userid
+            }
+        });
+    }
+
 }
