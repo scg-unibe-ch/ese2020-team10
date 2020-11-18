@@ -47,10 +47,18 @@
     </mat-tab>
 
     <mat-tab label="Open Offers">
-      <h2 style="margin-top: 10px">Your Offers</h2>
       <div class="row">
-        <div *ngFor="let product of products | async">
-          <app-product-item *ngIf="product.status == true" [product] = "product"></app-product-item>
+        <div class="col">
+          <h2 style="margin-top: 10px">Your Available Offers</h2>
+          <div *ngFor="let product of products | async">
+            <app-product-item *ngIf="product.status == true" [product] = "product"></app-product-item>
+          </div>
+        </div>
+        <div class="col">
+          <h2 style="margin-top: 10px">Your Unavailable Offers</h2>
+          <div *ngFor="let product of products | async">
+            <app-product-item *ngIf="product.status == false" [product] = "product"></app-product-item>
+          </div>
         </div>
       </div>
     </mat-tab>
@@ -73,7 +81,7 @@
         <div class="col">
           <h2 style="margin-top: 10px">Your Lent Offers</h2>
           <div *ngFor="let sold of soldOffers | async">
-            <mat-card style="width: 300px;" *ngIf="sold.type == 'Lent'">
+            <mat-card style="width: 300px;" *ngIf="sold.type == 'Lend'">
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
@@ -115,7 +123,7 @@
         <div class="col">
           <h2 style="margin-top: 10px">Offers you lent</h2>
           <div *ngFor="let bought of boughtOffers | async">
-            <mat-card style="width: 300px;" *ngIf="bought.type == 'Lent'">
+            <mat-card style="width: 300px;" *ngIf="bought.type == 'Lend'">
               <mat-card-title>{{bought.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
@@ -135,6 +143,7 @@
           </div>
         </div>
       </div>
+
     </mat-tab>
 
 
@@ -144,6 +153,17 @@
         <p>You've got {{user.wallet}} CHF in your Wallet.</p>
         <p *ngIf="user.wallet > 0">Let's buy something!</p>
         <p *ngIf="user.wallet <= 0">Let's try to sell something!</p>
+      </div>
+
+      <h2 style="margin-top: 10px">Your Lent Offers</h2>
+      <div *ngFor="let sold of soldOffers | async">
+        <mat-card style="width: 300px;" *ngIf="sold.type == 'Lend'">
+          <mat-card-title>{{sold.title}}</mat-card-title>
+          <mat-card-content>
+            <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
+            <button class="btn btn-sm btn-light" (click)="onChange()">Change to available</button>
+          </mat-card-content>
+        </mat-card>
       </div>
     </mat-tab>
 </mat-tab-group>
