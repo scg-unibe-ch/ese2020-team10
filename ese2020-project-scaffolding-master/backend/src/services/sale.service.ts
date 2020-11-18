@@ -19,8 +19,8 @@ export class SaleService {
             if (product == null) {
                 throw new Error('Product not found');
             }
-            // make sure product is shippable
-            if (!product.shippable) {
+            // make sure product is available
+            if (!product.status) {
                 throw new Error('Product is not shippable');
             }
             // find buyer
@@ -35,7 +35,7 @@ export class SaleService {
             // cant use transaction yet because it requires sequelize
             try {
                 // make product unavailable
-                await product.update({shippable: false});
+                await product.update({status: false});
 
                 // decrease the buyers wallet by sellingprice
                 await buyer.update({wallet: buyer.wallet - product.price});
