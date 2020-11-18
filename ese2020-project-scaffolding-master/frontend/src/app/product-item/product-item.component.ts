@@ -54,7 +54,9 @@ export class ProductItemComponent {
   }
 
   onProductDelete(productId: number): void{
-    this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe();
+    this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe((res:any) =>{
+      window.location.reload();
+    });
   }
 
   onApprove(productId: number): void{
