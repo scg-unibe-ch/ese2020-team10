@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { PurchaseDialogComponent } from './purchase-dialog/purchase-dialog.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 export interface DialogData {
   animal: string;
@@ -23,6 +24,8 @@ export class ProductItemComponent {
   admin: boolean;
   panelOpenState: boolean;
   change: boolean;
+  deliveryAddress: string;
+  amountOfHours: number;
 
   @Input()
   product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
@@ -35,11 +38,13 @@ export class ProductItemComponent {
   openPurchaseDialog(): void {
     const dialogRef = this.dialog.open(PurchaseDialogComponent, {
       width: '1000 px',
-      data: {title: this.product.title, price: this.product.price, shippable: this.product.shippable, type: this.product.type}
+      data: {title: this.product.title, price: this.product.price, shippable: this.product.shippable, type: this.product.type, deliveryAddress: this.deliveryAddress, amountOfHours: this.amountOfHours, purchaseIt: true}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      this.deliveryAddress = result.deliveryAddress;
+      this.amountOfHours = result.amountOfHours;
+      if(result.purchaseIt) {
         this.onBuy();
       }
     })
@@ -66,7 +71,7 @@ export class ProductItemComponent {
   onBuy():void{
     this.httpClient.post(environment.endpointURL + 'sale/buy',{
       "productId": this.product.productId,
-      "deliveryAddress": ""
+      "deliveryAddress": this.deliveryAddress
     }).subscribe();
   }
 }
