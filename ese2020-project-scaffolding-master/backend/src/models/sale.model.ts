@@ -11,6 +11,7 @@ export interface SaleAttributes {
     buyerId: number;
     sellerId: number;
     pointOfSalePrice: number;
+    deliveryAddress: string;
 
 }
 
@@ -22,6 +23,7 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
     buyerId: number;
     sellerId: number;
     pointOfSalePrice: number;
+    deliveryAddress: string;
 
     public static initialize(sequelize: Sequelize) {
         Sale.init({
@@ -45,6 +47,9 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
             pointOfSalePrice: {
                 type: DataTypes.INTEGER,
                 allowNull: false
+            },
+            deliveryAddress: {
+                type: DataTypes.STRING,
             }
         },
             {

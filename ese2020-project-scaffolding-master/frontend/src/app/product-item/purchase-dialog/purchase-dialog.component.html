@@ -1,14 +1,15 @@
-<form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()">
-  <div>Confirm Purchase</div>
+<form [formGroup]="purchaseForm" class="example-form">
+  <div class="purchase">Confirm Purchase</div>
   <div>
     <p>{{data.title}}</p>
   </div>
   <div>
-    <p>Price: {{data.price}}</p>
+    <p>Price: {{data.price}} {{data.type == 'Sell' ? 'CHF' : 'CHF/h'}}</p>
   </div>
   <div *ngIf="data.shippable">
     <mat-form-field>
-      <input [class.is-invalid]="data.shippable && deliveryAddress.touched && deliveryAddress.invalid" type="text" matInput class="form-control" placeholder="Delivery Address" formControlName="deliveryAddress">
+      <mat-label>Delivery Address</mat-label>
+      <input matInput type="text" formControlName="deliveryAddress" placeholder="Delivery Address">
     </mat-form-field>
     <div style="color: red" *ngIf="(deliveryAddress.invalid && deliveryAddress.touched) || deliveryAddress.dirty">
       <small *ngIf="deliveryAddress.errors?.required" class="text.danger">Delivery Address is required</small>
@@ -16,11 +17,12 @@
   </div>
   <div *ngIf="data.type == 'Lend'|| data.type == 'Hire'">
     <mat-form-field>
-      <input type="number" matInput class="form-control" min="1" max="10" placeholder="Amount of Hours" formControlName="amountOfHours">
+      <mat-label>How many hours?</mat-label>
+      <input matInput type="number" min="1" max="10" formControlName="amountOfHours" value="1">
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data.title" cdkFocusInitial [disabled]="!purchaseForm.valid">Purchase</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="!purchaseForm.valid">Purchase</button>
   </div>
 </form>

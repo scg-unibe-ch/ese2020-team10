@@ -39,7 +39,9 @@ export class ProductItemComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The Dialog was closed');
+      if(result) {
+        this.onBuy();
+      }
     })
   }
 
@@ -64,9 +66,7 @@ export class ProductItemComponent {
   onBuy():void{
     this.httpClient.post(environment.endpointURL + 'sale/buy',{
       "productId": this.product.productId,
-      "buyerId":this.auth.getUserId,
-      "sellerId": this.product.userId,
-      "pointOfSalePrice":this.product.price
+      "deliveryAddress": ""
     }).subscribe();
   }
 }

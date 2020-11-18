@@ -29,7 +29,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title" #title maxlemgth="40">
+          <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title" #title maxlength="40">
           <mat-hint align="end">{{title.value.length}} /40</mat-hint>
         </mat-form-field>
         <div style="color: red" *ngIf="(title.invalid && title.touched) || title.dirty">
@@ -45,7 +45,7 @@
         </div>
 
         <mat-form-field>
-          <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="{{priceFormat()}}" formControlName="price" (blur)="transformAmount($event)" [(ngModel)]="formattedAmount">
+          <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="{{priceFormat()}}" formControlName="price">
         </mat-form-field>
         <div style="color: red" *ngIf="(price.invalid && price.touched) || price.dirty">
           <small *ngIf="price.errors?.required" class="text.danger">Price is required</small>

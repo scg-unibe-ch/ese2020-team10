@@ -8,8 +8,7 @@ import { DialogData } from '../product-item.component';
   templateUrl: './purchase-dialog.component.html',
   styleUrls: ['./purchase-dialog.component.css']
 })
-export class PurchaseDialogComponent {
-
+export class PurchaseDialogComponent implements OnInit{
   constructor(
     public dialogRef:
     MatDialogRef<PurchaseDialogComponent>,
@@ -24,12 +23,13 @@ export class PurchaseDialogComponent {
     amountOfHours: new FormControl('')
   });
 
-  get deliveryAddress(){
-    return this.purchaseForm.get('deliveryAddress');
+  ngOnInit() {
   }
-  get amountOfHours(){
-    return this.purchaseForm.get('amountOfHours');
+
+  get deliveryAddress() {
+    return this.purchaseForm.get('deliveryAddress')
   }
-  onSubmit(): void {
+  get amountOfHours() {
+    return this.purchaseForm.get('amountOfHours')
   }
 }
