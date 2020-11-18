@@ -8,28 +8,14 @@ import { DialogData } from '../product-item.component';
   templateUrl: './purchase-dialog.component.html',
   styleUrls: ['./purchase-dialog.component.css']
 })
-export class PurchaseDialogComponent implements OnInit{
+export class PurchaseDialogComponent {
   constructor(
     public dialogRef:
     MatDialogRef<PurchaseDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {title: string, price: string, shippable: boolean, type: string}) { }
+    @Inject(MAT_DIALOG_DATA) public data: {title: string, price: string, shippable: boolean, type: string, deliveryAddress: string, amountOfHours: number, purchaseIt: boolean }) { }
 
   onNoClick(): void {
+    this.data.purchaseIt = false
     this.dialogRef.close();
-  }
-
-  purchaseForm = new FormGroup({
-    deliveryAddress: new FormControl(''),
-    amountOfHours: new FormControl('')
-  });
-
-  ngOnInit() {
-  }
-
-  get deliveryAddress() {
-    return this.purchaseForm.get('deliveryAddress')
-  }
-  get amountOfHours() {
-    return this.purchaseForm.get('amountOfHours')
   }
 }
