@@ -11,10 +11,10 @@ export interface SaleAttributes {
     buyerId: number;
     sellerId: number;
     pointOfSalePrice: number;
-    deliveryAddress: string;
+    deliveryAddress?: string;
     title: string;
     type: Enumerator;
-    amountOfHours: number;
+    amountOfHours?: number;
 }
 
 export interface SaleCreationAttributes extends Optional<SaleAttributes, 'SaleId'> { }

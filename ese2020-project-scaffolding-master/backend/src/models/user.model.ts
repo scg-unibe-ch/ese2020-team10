@@ -91,7 +91,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             foreignKey: 'userId'
         });
         User.hasMany(Sale, {
-            foreignKey: 'userId'
+            foreignKey: 'buyerId'
         });
     }
 }

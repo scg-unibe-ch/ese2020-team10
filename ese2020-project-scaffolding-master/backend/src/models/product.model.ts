@@ -88,7 +88,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             foreignKey: 'userId'
         });
         Product.hasMany(Sale, {
-            foreignKey: 'prductId'
+            foreignKey: 'productId'
         });
     }
 }
