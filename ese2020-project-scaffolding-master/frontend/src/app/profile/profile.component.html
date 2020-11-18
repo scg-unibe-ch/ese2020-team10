@@ -46,17 +46,17 @@
     </div>
     </mat-tab>
 
-    <mat-tab label="Open Offers">
+    <mat-tab label="Your Offers">
       <div class="row">
         <div class="col">
           <h2 style="margin-top: 10px">Your Available Offers</h2>
-          <div *ngFor="let product of products | async">
+          <div *ngFor="let product of products | async" style="width: 500px">
             <app-product-item *ngIf="product.status == true" [product] = "product"></app-product-item>
           </div>
         </div>
         <div class="col">
           <h2 style="margin-top: 10px">Your Unavailable Offers</h2>
-          <div *ngFor="let product of products | async">
+          <div *ngFor="let product of products | async" style="width: 500px">
             <app-product-item *ngIf="product.status == false" [product] = "product"></app-product-item>
           </div>
         </div>
@@ -64,6 +64,7 @@
     </mat-tab>
 
     <mat-tab label="Sold">
+      <h2 style="color: #68b0ab">Please delete Products you sold and update Services and Products you lent in "Your Offers".</h2>
       <div class="row">
         <div class="col">
           <h2 style="margin-top: 10px">Your Sold Offers</h2>
@@ -73,7 +74,6 @@
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
                 <p>Delivery Address: {{sold.deliveryAddress}}</p>
-                <button class="btn btn-sm btn-light" (click)="onDelete(sold.productId)">Delete Product</button>
               </mat-card-content>
             </mat-card>
           </div>
@@ -85,7 +85,6 @@
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
-                <button class="btn btn-sm btn-light" (click)="onMakeAvailable(sold.productId)">Change to available</button>
               </mat-card-content>
             </mat-card>
           </div>
@@ -97,7 +96,6 @@
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
-                <button class="btn btn-sm btn-light" (click)="onMakeAvailable(sold.productId)">Change to available</button>
               </mat-card-content>
             </mat-card>
           </div>
