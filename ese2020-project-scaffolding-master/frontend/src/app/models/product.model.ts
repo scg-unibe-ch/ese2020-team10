@@ -1,6 +1,6 @@
 import { ɵAPP_ID_RANDOM_PROVIDER } from '@angular/core'
 
-export class Product { 
+export class Product {
     productId: number;
     category: string;
     title: string;
@@ -44,3 +44,12 @@ export let categoryTypes: string[] = [
 ]
 
   export type Type = 'Sell' | 'Lend' | 'Hire'
+
+export class Sale {
+  buyerId: number;
+  sellerId: number;
+  pointOfSalePrice: number;
+  deliveryAddress: string;
+  title: string;
+  type: Type;
+}

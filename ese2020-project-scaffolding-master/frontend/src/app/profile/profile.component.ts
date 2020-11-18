@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import {Observable} from "rxjs";
 import {User} from "../models/user.model";
-import {Product} from "../models/product.model";
+import {Product, Sale, Type} from "../models/product.model";
 import {ProductService} from "../product.service";
 
 @Component({
@@ -15,8 +15,11 @@ export class ProfileComponent implements OnInit {
   userName: string;
   private sub: any;
   userId: string;
+  buyer: Observable<User[]>;
   userInfo: Observable<User[]>;
-  public products: Observable<Product[]>;
+  products: Observable<Product[]>;
+  soldOffers: Observable<Sale[]>;
+  boughtOffers: Observable<Sale[]>;
 
   constructor(private activatedRoute: ActivatedRoute, public auth: AuthService, private productService: ProductService) { }
 
@@ -27,6 +30,8 @@ export class ProfileComponent implements OnInit {
     this.userId = localStorage.getItem('userId');
     this.userInfo = this.auth.getInfoByUser(this.userId);
     this.products = this.productService.getProductsByUser(this.userId);
+    this.soldOffers = this.productService.getSoldSales();
+    this.boughtOffers = this.productService.getBoughtSales();
   }
 
   ngOnDestroy() {
@@ -36,4 +41,13 @@ export class ProfileComponent implements OnInit {
   getUserName(): string {
     return this.auth.getUserName();
   }
+
+  onDelete(): void{
+
+  }
+
+  onChange(): void{
+
+  }
+
 }

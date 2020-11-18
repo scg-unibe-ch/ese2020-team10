@@ -50,13 +50,94 @@
       <h2 style="margin-top: 10px">Your Offers</h2>
       <div class="row">
         <div *ngFor="let product of products | async">
-          <app-product-item [product] = "product"></app-product-item>
+          <app-product-item *ngIf="product.status == true" [product] = "product"></app-product-item>
         </div>
       </div>
     </mat-tab>
 
-    <mat-tab label="Sold">Sold</mat-tab> <!-- should only be viewable by user -->
-    <mat-tab label="Bought">Bought</mat-tab> <!-- should only be viewable by user -->
+    <mat-tab label="Sold">
+      <div class="row">
+        <div class="col">
+          <h2 style="margin-top: 10px">Your Sold Offers</h2>
+          <div *ngFor="let sold of soldOffers | async">
+            <mat-card style="width: 300px;" *ngIf="sold.type == 'Sell'">
+              <mat-card-title>{{sold.title}}</mat-card-title>
+              <mat-card-content>
+                <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
+                <p>Delivery Address: {{sold.deliveryAddress}}</p>
+                <button class="btn btn-sm btn-light" (click)="onDelete()">Delete Product</button>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class="col">
+          <h2 style="margin-top: 10px">Your Lent Offers</h2>
+          <div *ngFor="let sold of soldOffers | async">
+            <mat-card style="width: 300px;" *ngIf="sold.type == 'Lent'">
+              <mat-card-title>{{sold.title}}</mat-card-title>
+              <mat-card-content>
+                <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
+                <p>Delivery Address: {{sold.deliveryAddress}}</p>
+                <button class="btn btn-lg" (click)="onChange()">Change to available</button>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class="col">
+          <h2 style="margin-top: 10px">Your Hire Offers</h2>
+          <div *ngFor="let sold of soldOffers | async">
+            <mat-card style="width: 300px;" *ngIf="sold.type == 'Hire'">
+              <mat-card-title>{{sold.title}}</mat-card-title>
+              <mat-card-content>
+                <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
+                <p>Delivery Address: {{sold.deliveryAddress}}</p>
+                <button class="btn btn-lg" (click)="onChange()">Change to available</button>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </mat-tab>
+
+
+
+    <mat-tab label="Bought">
+      <div class="row">
+        <div class="col">
+          <h2 style="margin-top: 10px">Offers you bought</h2>
+          <div *ngFor="let bought of boughtOffers | async" >
+            <mat-card style="width: 300px;" *ngIf="bought.type == 'Sell'">
+              <mat-card-title>{{bought.title}}</mat-card-title>
+              <mat-card-content>
+                <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        <div class="col"></div>
+        <h2 style="margin-top: 10px">Offers you lent</h2>
+        <div *ngFor="let bought of boughtOffers | async">
+          <mat-card style="width: 300px;" *ngIf="bought.type == 'Lent'">
+            <mat-card-title>{{bought.title}}</mat-card-title>
+            <mat-card-content>
+              <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col"></div>
+        <h2 style="margin-top: 10px">Offers you hired</h2>
+        <div *ngFor="let bought of boughtOffers | async">
+          <mat-card style="width: 300px;" *ngIf="bought.type == 'Hire'">
+            <mat-card-title>{{bought.title}}</mat-card-title>
+            <mat-card-content>
+              <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+
+
     <mat-tab label="Wallet">
       <h2 style="margin-top: 10px;">Wallet</h2>
       <div *ngFor="let user of userInfo | async">

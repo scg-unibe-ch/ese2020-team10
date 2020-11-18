@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { Product, Type } from './models/product.model';
+import {Product, Sale, Type} from './models/product.model';
 import { environment } from '../environments/environment';
 
 @Injectable({
@@ -49,5 +49,14 @@ export class ProductService {
   // Products that have yet to be approved by an administrator. Function works only for users with admin rights
   getUnapprovedProducts(): Observable<Product[]>{
     return this.httpClient.get<Product[]>(environment.endpointURL+ 'product/unapprovedProducts');
+  }
+
+  getSoldSales(): Observable<Sale[]>{
+    return this.httpClient.get<Sale[]>(environment.endpointURL + 'sale/sold');
+  }
+
+  getBoughtSales(): Observable<Sale[]>{
+    return this.httpClient.get<Sale[]>(environment.endpointURL + 'sale/bought');
+
   }
 }
