@@ -12,7 +12,13 @@ saleController.post('/buy', verifyToken,
         saleService.buy(req.body, req.body.tokenPayload.userId).then(bought => res.send(bought)).catch(err => res.status(500).send(err));
     }
 );
+saleController.get('/sold', verifyToken, (req: Request, res: Response) => {
+    saleService.getSoldSales(req.body.tokenPayload.userId).then(sold => res.send(sold)).catch(err => res.status(500).send(err));
+});
 
+saleController.get('/bought', verifyToken, (req: Request, res: Response) => {
+    saleService.getBoughtSales(req.body.tokenPayload.userId).then(bought => res.send(bought)).catch(err => res.status(500).send(err));
+});
 
 
 
