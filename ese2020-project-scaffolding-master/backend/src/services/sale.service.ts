@@ -1,6 +1,6 @@
 import { UserAttributes, User } from '../models/user.model';
 import { LoginResponse, LoginRequest } from '../models/login.model';
-import { Product} from '../models/product.model';
+import { Product, } from '../models/product.model';
 import { SaleAttributes, Sale } from '../models/sale.model';
 import { PurchaseRequest, PurchaseResponse } from '../models/purchase.model';
 import { Transaction } from 'sequelize/types';
@@ -21,14 +21,13 @@ export class SaleService {
             }
             // make sure product is available
             if (!product.status) {
-                throw new Error('Product is not shippable');
+                throw new Error('Product is not available');
             }
             // find out the Price of this Purchase
             let price: number = product.price;
-            if (purchaseRequest.amountOfHours != null) {
+            if ((product.type.toString() === 'Lend' || product.type.toString() === 'Hire') && purchaseRequest.amountOfHours != null) {
                 price = price * purchaseRequest.amountOfHours;
             }
-
             // find buyer
             const buyer = await User.findByPk(buyerId);
             // make sure the buyer has sufficient money
