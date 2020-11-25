@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
-body { margin-left: 12%; margin-right: 12%; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: rgb(248, 230, 250); }
+body { margin-left: 12%; margin-right: 12%; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: rgba(107, 150, 231, 0.116); }
 
 .mat-card {
   margin: 20px 0;
