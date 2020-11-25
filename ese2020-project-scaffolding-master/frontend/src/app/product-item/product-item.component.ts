@@ -73,7 +73,11 @@ export class ProductItemComponent {
   onBuy():void{
     this.httpClient.post(environment.endpointURL + 'sale/buy',{
       "productId": this.product.productId,
-      "deliveryAddress": this.deliveryAddress
-    }).subscribe();
+      "deliveryAddress": this.deliveryAddress,
+      "amountOfHours": this.amountOfHours
+    }).subscribe((res:any) =>{
+        window.location.reload()
+      }
+    );
   }
 }
