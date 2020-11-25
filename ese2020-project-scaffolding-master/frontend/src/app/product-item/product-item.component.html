@@ -67,6 +67,7 @@
                             [productStatus]="product.status"
                             [product]="product" >
         </app-product-update>
+        <a [hidden]="!change" (click)="change=false" style="float: right; text-decoration-line: underline">Close</a>
       </div>
     </div>
   </div>
