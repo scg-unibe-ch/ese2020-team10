@@ -4,8 +4,20 @@ import { Product } from '../models/product.model';
 import { ProductService } from '../services/product.service';
 import { verifyToken } from '../middlewares/checkAuth';
 
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: function(req: any, file: any, cb: any) {
+        cb(null, './src/public/uploads/');
+    },
+    filename: function(req: any, file: any, cb: any) {
+        cb(null, new Date().toISOString().replace(/:/g, '-') + file.originalname);
+    }
+});
+const upload = multer({storage: storage});
 const productController: Router = express.Router();
 const productService = new ProductService();
+
 
 productController.get('/productList',
     (req: Request, res: Response) => {
@@ -31,6 +43,14 @@ productController.get('/productByUser/:user',
 productController.get('/unapprovedProducts',
     (req: Request, res: Response) => {
     productService.getUnapprovedProducts().then(products => res.send(products)).catch(err => res.status(500).send(err));
+});
+
+productController.post('/newProduct', upload.single('productImage'), verifyToken,
+(req: MulterRequest, res: Response) => {
+    console.log(req.file);
+    req.body.picture = req.file.path;
+    productService.addProduct(req.body, req.body.tokenPayload.userId).then(productAdded =>
+        res.send(productAdded)).catch(err => res.status(500).send(err));
 });
 
 productController.post('/add', verifyToken,
@@ -66,6 +86,8 @@ productController.put('/:id', verifyToken,
         })
         .catch(err => res.status(500).send(err));
 });
-
-
 export const ProductController: Router = productController;
+
+interface MulterRequest extends Request {
+    file: any;
+}

@@ -17,6 +17,7 @@ export interface ProductAttributes {
     shippable: boolean;
     userId: number;
     approved: boolean;
+    picture: string;
 
 }
 
@@ -34,6 +35,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     shippable!: boolean;
     userId!: number;
     approved!: boolean;
+    picture!: string;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -73,6 +75,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             approved: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
+            },
+            picture: {
+                type: DataTypes.STRING
             }
         },
             {
