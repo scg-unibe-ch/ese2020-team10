@@ -17,6 +17,11 @@
   </div>
 </mat-card>
 
+<mat-card>
+  <button mat-flat-button color="primary" (click)="accessSecuredEndpoint()">Access Secure Endpoint (only for logged in users)</button>
+  {{ secureEndpointResponse }}
+</mat-card>
+
 <mat-card *ngIf="isAdmin">
   <div>
     You are an administrator

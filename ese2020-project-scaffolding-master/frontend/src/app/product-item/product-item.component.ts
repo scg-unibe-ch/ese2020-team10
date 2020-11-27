@@ -7,7 +7,6 @@ import {HttpClient} from "@angular/common/http";
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { PurchaseDialogComponent } from './purchase-dialog/purchase-dialog.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { ToastrService} from 'ngx-toastr';
 
 export interface DialogData {
   animal: string;
@@ -33,8 +32,7 @@ export class ProductItemComponent {
 
   constructor(private auth: AuthService,
     private httpClient: HttpClient,
-    public dialog: MatDialog,
-    public toastr: ToastrService) {
+    public dialog: MatDialog) {
   }
 
   openPurchaseDialog(): void {
@@ -78,10 +76,7 @@ export class ProductItemComponent {
       "deliveryAddress": this.deliveryAddress,
       "amountOfHours": this.amountOfHours
     }).subscribe((res:any) =>{
-        this.toastr.success('Bought successfully')
-      },
-      (error: any) => {
-        this.toastr.error('Could not be purchased')
+        window.location.reload()
       }
     );
   }
