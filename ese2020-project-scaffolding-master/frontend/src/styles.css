@@ -16,3 +16,14 @@ button, input {
 .mat-form-field-wrapper {
   margin-right: 25px !important;
 }
+
+@media (max-width: 1024px){
+
+
+  body{
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+
+}
