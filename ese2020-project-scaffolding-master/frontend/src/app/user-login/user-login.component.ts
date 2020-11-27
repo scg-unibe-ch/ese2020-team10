@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-login',
@@ -20,7 +21,10 @@ export class UserLoginComponent implements OnInit {
 
   secureEndpointResponse = '';
 
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.checkUserStatus();
@@ -50,8 +54,9 @@ export class UserLoginComponent implements OnInit {
 
       this.checkUserStatus();
       this.router.navigate(['']);
+      this.toastr.success('Logged in');
     }, (error: any) => {
-      window.alert('Username/Email or password incorrect. Please try again');
+      this.toastr.error('Invalid username or password');
     });
   }
 
@@ -62,16 +67,6 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('userName');
     localStorage.removeItem('isAdmin');
     this.checkUserStatus();
-  }
-
-  /**
-   * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.
-   */
-  accessSecuredEndpoint(): void {
-    this.httpClient.get(environment.endpointURL + 'secured').subscribe((res: any) => {
-      this.secureEndpointResponse = 'Successfully accessed secure endpoint. Message from server: ' + res.message;
-    }, (error: any) => {
-      this.secureEndpointResponse = 'Unauthorized';
-    });
+    this.toastr.success('Logged out')
   }
 }
