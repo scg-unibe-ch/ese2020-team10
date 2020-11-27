@@ -1,9 +1,12 @@
 .mat-card{
-    width: 500px;
+    width: 70%;
     height: auto;
     display: block;
+    margin-top: 8rem;
     margin-left:auto;
     margin-right:auto;
+    background-color: white;
+    border-radius: 1rem;
   }
 
 .createOffer {
@@ -20,4 +23,26 @@
 
 .select {
   margin-left: 5px;
+}
+
+@media (max-width: 1024px){
+
+
+  body{
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .mat-card{
+    width: 95%;
+    height: auto;
+    display: block;
+    margin-top: 5rem;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: white;
+    border-radius: 1rem;
+  }
+
+
 }
