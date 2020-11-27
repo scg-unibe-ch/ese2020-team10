@@ -87,6 +87,13 @@ export class CreateOfferComponent implements OnInit {
   onSubmit(){
     const formData = new FormData();
     formData.append('productImage', this.createOfferForm.get('fileSource').value);
+    formData.append('category', this.createOfferForm.get('selectedCategory').value);
+    formData.append('title', this.createOfferForm.get('title').value);
+    formData.append('price', this.createOfferForm.get('price').value);
+    formData.append('description', this.createOfferForm.get('description').value);
+    formData.append('location', this.createOfferForm.get('location').value);
+    formData.append('type', this.createOfferForm.get('type').value);
+    formData.append('shippable', this.createOfferForm.get('shippable').value);
 
     this.httpClient.post(environment.endpointURL + 'product/newProduct', formData).subscribe((res: any) => {
         this.router.navigate(['']);
