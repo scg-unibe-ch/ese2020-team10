@@ -3,14 +3,56 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {Product, Sale, Type} from './models/product.model';
 import { environment } from '../environments/environment';
+import { ToastrService} from 'ngx-toastr'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor( private httpClient: HttpClient) { }
+  constructor( 
+    private httpClient: HttpClient,
+    private toastr: ToastrService) { }
 
+  private dataStore: { unapprovedProducts: Product[]} = { unapprovedProducts: []}
+  private _unApprovedProducts = new BehaviorSubject<Product[]>([]);
+  readonly unapprovedProducts = this._unApprovedProducts.asObservable();
+  
+  // fetch all unapproved products from server
+  loadUnApprovedProducts(){
+    this.httpClient.get<Product[]>(environment.endpointURL+ 'product/unapprovedProducts').subscribe(
+      (data: Product[]) => {
+        this.dataStore.unapprovedProducts = data;
+        this._unApprovedProducts.next(Object.assign({}, this.dataStore).unapprovedProducts);
+        console.log('works')
+      },
+      error => console.log('Could not load unapproved Products')
+      
+    );
+  }
+
+  // approve a product on the server and on the frontend
+  approveProduct(product: Product){
+    this.httpClient.put(environment.endpointURL + 'product/' + product.productId, {"approved": true}).subscribe(
+      response => {
+        this.dataStore.unapprovedProducts.forEach((t, i) => {
+          if (t.productId === product.productId) {
+            this.dataStore.unapprovedProducts.splice(i,1);
+          }
+        });
+
+        this._unApprovedProducts.next(Object.assign({}, this.dataStore).unapprovedProducts)
+        this.toastr.success('Product approved')
+      },
+      error => {
+        console.log('Could not remove item from basket')
+        this.toastr.error('Product not Approved')
+      });
+  }
+  
+  
+  
+  
   products: Observable<Product[]>;
 
   ngOnInit(): void {
@@ -45,10 +87,6 @@ export class ProductService {
     this.httpClient.put(environment.endpointURL + 'product/' + productId, {
       product
     });
-  }
-  // Products that have yet to be approved by an administrator. Function works only for users with admin rights
-  getUnapprovedProducts(): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(environment.endpointURL+ 'product/unapprovedProducts');
   }
 
   getSoldSales(): Observable<Sale[]>{

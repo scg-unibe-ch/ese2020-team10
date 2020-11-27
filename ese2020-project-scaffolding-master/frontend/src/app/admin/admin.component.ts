@@ -14,7 +14,8 @@ export class AdminComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.products = this.productService.getUnapprovedProducts();
+    this.productService.loadUnApprovedProducts();
+    this.products = this.productService.unapprovedProducts;
   }
 
 }

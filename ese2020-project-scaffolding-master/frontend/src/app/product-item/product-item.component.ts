@@ -8,6 +8,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { PurchaseDialogComponent } from './purchase-dialog/purchase-dialog.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ToastrService} from 'ngx-toastr';
+import { ProductService } from '../product.service';
 
 export interface DialogData {
   animal: string;
@@ -34,7 +35,8 @@ export class ProductItemComponent {
   constructor(private auth: AuthService,
     private httpClient: HttpClient,
     public dialog: MatDialog,
-    public toastr: ToastrService) {
+    public toastr: ToastrService,
+    public productService: ProductService) {
   }
 
   openPurchaseDialog(): void {
@@ -66,10 +68,8 @@ export class ProductItemComponent {
     });
   }
 
-  onApprove(productId: number): void{
-    this.httpClient.put(environment.endpointURL + 'product/' + productId, {
-      approved: true
-    }).subscribe();
+  onApprove(): void{
+    this.productService.approveProduct(this.product);
   }
 
   onBuy():void{
