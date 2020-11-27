@@ -13,6 +13,7 @@ export class Product {
     shippable: boolean;
     userId: number;
     approved: boolean;
+    picture:string;
     constructor(
         productId: number,
         category: string,
@@ -24,7 +25,8 @@ export class Product {
         status: boolean,
         shippable: boolean,
         userId: string,
-        approved: boolean
+        approved: boolean,
+        picture: string
     ) {}
 }
 

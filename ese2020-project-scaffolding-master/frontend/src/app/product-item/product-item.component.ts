@@ -8,6 +8,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { PurchaseDialogComponent } from './purchase-dialog/purchase-dialog.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
+
+
 export interface DialogData {
   animal: string;
   name: string;
@@ -26,14 +28,16 @@ export class ProductItemComponent {
   change: boolean;
   deliveryAddress: string;
   amountOfHours: number;
-
+  picture: string;
+  
   @Input()
-  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
+  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null,null, ' ');
 
   constructor(private auth: AuthService,
     private httpClient: HttpClient,
     public dialog: MatDialog) {
   }
+  endpointURL = environment.endpointURL;
 
   openPurchaseDialog(): void {
     const dialogRef = this.dialog.open(PurchaseDialogComponent, {
