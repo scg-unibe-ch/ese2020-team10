@@ -29,11 +29,12 @@ export class ProfileComponent implements OnInit {
     private httpClient: HttpClient) { }
 
   ngOnInit(): void {
+    this.auth.checkUserStatus();
     this.sub = this.activatedRoute.paramMap.subscribe(params => {
       this.userName = params['userName'];
     });
     this.userId = localStorage.getItem('userId');
-    this.userInfo = this.auth.getInfoByUser(this.userId);
+    this.userInfo = this.auth.getUser(this.userId);
     this.products = this.productService.getProductsByUser(this.userId);
     this.soldOffers = this.productService.getSoldSales();
     this.boughtOffers = this.productService.getBoughtSales();

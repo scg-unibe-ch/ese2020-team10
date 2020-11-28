@@ -3,7 +3,6 @@ import {categoryTypes, Product} from "../../models/product.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CurrencyPipe} from "@angular/common";
-import {AuthService} from "../../auth.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import { environment } from 'src/environments/environment';
 
@@ -36,7 +35,7 @@ export class ProductUpdateComponent implements OnInit {
     price: new FormControl(),
   });
 
-  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe) { }
 
   ngOnInit(): void {
     this.title.setValue(this.productTitle);

@@ -54,12 +54,12 @@
 
      </div>
       <hr>
-      <button type="button" class="btn btn-md btn-info" *ngIf="userId!=product.userId.toString() && userId != null && product.status == true && !admin" (click)="openPurchaseDialog()" style="float:right">Buy</button>
-      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(userId==product.userId.toString())" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
-      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(product.approved == false && admin)" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
-      <button type="button" class="btn btn-md btn-dark" *ngIf="admin && !product.approved" (click)="onApprove()" style="float:right">Approve</button>
+      <button type="button" class="btn btn-md btn-info" *ngIf="(userId | async) != product.userId.toString() && (userId | async) != null && product.status == true && !(isAdmin | async)" (click)="openPurchaseDialog()" style="float:right">Buy</button>
+      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="((userId | async)==product.userId.toString())" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
+      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(product.approved == false && (isAdmin | async))" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
+      <button type="button" class="btn btn-md btn-dark" *ngIf="(isAdmin | async) && !product.approved" (click)="onApprove()" style="float:right">Approve</button>
       <!--<button type="button" class="btn btn-md btn-outline-danger" *ngIf="admin" (click)="onProductDelete(product.productId)" style="float:right">Delete</button> -->
-      <button type="button" class="btn btn-md btn-dark" *ngIf="userId==product.userId.toString()" (click)="change=true" [hidden]="change" style="float:right">Change</button>
+      <button type="button" class="btn btn-md btn-dark" *ngIf="(userId | async)==product.userId" (click)="change=true" [hidden]="change" style="float:right">Change</button>
       <div id="change" [hidden]="!change">
         <app-product-update [productTitle]="product.title"
                             [productDescription]="product.description"

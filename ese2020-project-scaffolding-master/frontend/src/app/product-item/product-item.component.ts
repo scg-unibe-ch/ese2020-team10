@@ -9,6 +9,7 @@ import { PurchaseDialogComponent } from './purchase-dialog/purchase-dialog.compo
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ToastrService} from 'ngx-toastr';
 import { ProductService } from '../product.service';
+import { Observable } from 'rxjs';
 
 export interface DialogData {
   animal: string;
@@ -21,9 +22,10 @@ export interface DialogData {
   styleUrls: ['./product-item.component.css']
 })
 export class ProductItemComponent {
-  userId: string;
-  userName: string;
-  admin: boolean;
+  userId = new Observable<number>();
+  userName = new Observable<string>();
+  isAdmin = new Observable<boolean>();
+  
   panelOpenState: boolean;
   change: boolean;
   deliveryAddress: string;
@@ -55,9 +57,10 @@ export class ProductItemComponent {
   }
 
   ngOnInit(): void{
-    this.userId = this.auth.getUserId();
-    this.userName = this.auth.getUserName();
-    this.admin = this.auth.getAdmin();
+    this.auth.checkUserStatus();
+    this.userId = this.auth.userId;
+    this.userName = this.auth.userName;
+    this.isAdmin = this.auth.isAdmin;
     this.change = false;
     this.panelOpenState = false;
   }

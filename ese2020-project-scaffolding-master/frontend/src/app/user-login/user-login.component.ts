@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
+import { AuthService } from '../auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-login',
@@ -14,59 +16,24 @@ export class UserLoginComponent implements OnInit {
   userName = '';
   password = '';
 
-  userToken: string;
-  userId: string;
-  loggedIn = false;
-  isAdmin: boolean = false;
+  loggedIn = new Observable<boolean>();
+  isAdmin = new Observable<boolean>();
 
-  secureEndpointResponse = '';
 
   constructor(
-    private httpClient: HttpClient,
-    private router: Router,
-    private toastr: ToastrService) { }
+    private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.checkUserStatus();
+    this.auth.checkUserStatus();
+    this.loggedIn = this.auth.loggedIn;
+    this.isAdmin = this.auth.isAdmin;
   }
 
-  checkUserStatus(): void {
-    // Get user data from local storage
-    this.userToken = localStorage.getItem('userToken');
-    this.userId = localStorage.getItem('userId');
-    this.userName = localStorage.getItem('userName');
-    this.isAdmin = (localStorage.getItem('isAdmin') === 'true');
-    // Set boolean whether a user is logged in or not
-    this.loggedIn = !!(this.userToken);
+
+  onLogout(){
+    this.auth.logout();
   }
-
-  login(): void {
-    this.httpClient.post(environment.endpointURL + 'user/login', {
-      userName: this.userName,
-      password: this.password
-    }).subscribe((res: any) => {
-      // Set user data in local storage
-      localStorage.setItem('userId', res.user.userId);
-      localStorage.setItem('userToken', res.token);
-      localStorage.setItem('userName', res.user.userName);
-      localStorage.setItem('isAdmin', res.user.isAdmin);
-      localStorage.setItem('userId', res.user.userId);
-
-      this.checkUserStatus();
-      this.router.navigate(['']);
-      this.toastr.success('Logged in');
-    }, (error: any) => {
-      this.toastr.error('Invalid username or password');
-    });
-  }
-
-  logout(): void {
-    // Remove user data from local storage
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('isAdmin');
-    this.checkUserStatus();
-    this.toastr.success('Logged out')
+  onLogin(){
+    this.auth.login(this.userName, this.password);
   }
 }

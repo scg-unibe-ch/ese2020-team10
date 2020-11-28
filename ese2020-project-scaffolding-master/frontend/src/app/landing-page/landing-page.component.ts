@@ -21,6 +21,7 @@ export class LandingPageComponent implements OnInit {
   constructor(public auth: AuthService, public productService: ProductService) { }
 
   ngOnInit(): void {
+    this.auth.checkUserStatus();
     this.sellProducts = this.productService.getProductsByType('Sell'); // Gets all the current 'sell' products from the backend via productService
     this.lendProducts = this.productService.getProductsByType('Lend');
     this.hireProducts = this.productService.getProductsByType('Hire');
