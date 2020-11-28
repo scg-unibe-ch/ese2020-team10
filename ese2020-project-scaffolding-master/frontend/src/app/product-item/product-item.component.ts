@@ -25,14 +25,14 @@ export class ProductItemComponent {
   userId = new Observable<number>();
   userName = new Observable<string>();
   isAdmin = new Observable<boolean>();
+  loggedIn = new Observable<boolean>();
   
   panelOpenState: boolean;
   change: boolean;
   deliveryAddress: string;
   amountOfHours: number;
 
-  @Input()
-  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
+  @Input() product: Product; // = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
 
   constructor(private auth: AuthService,
     private httpClient: HttpClient,
@@ -61,6 +61,7 @@ export class ProductItemComponent {
     this.userId = this.auth.userId;
     this.userName = this.auth.userName;
     this.isAdmin = this.auth.isAdmin;
+    this.loggedIn = this.auth.loggedIn;
     this.change = false;
     this.panelOpenState = false;
   }
