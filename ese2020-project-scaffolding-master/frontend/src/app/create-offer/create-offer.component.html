@@ -1,83 +1,104 @@
-<hr>
-<mat-card>
-  <form [(formGroup)]="createOfferForm" (ngSubmit)="onSubmit()">
-    <h1>Create Offer</h1>
-    <div>
+<br>
+<br>
+<h1 class="createOffer" style="margin-top: 20px; margin-left: 20px;">Create Offer</h1>
+
+<mat-horizontal-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>Product or Service?</ng-template>
+      <mat-form-field>
+        <mat-label>Type</mat-label>
+        <mat-select matInput formControlName="productOrService">
+          <mat-option value="Product">Product</mat-option>
+          <mat-option value="Service">Service</mat-option>
+        </mat-select>
+      </mat-form-field>
       <div>
-        <mat-form-field appearance="fill">
-          <mat-label>Select Type:</mat-label>
-          <mat-select matInput formControlName="productOrService">
-            <mat-option value="Product">Product</mat-option>
-            <mat-option value="Service">Service</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input [class.is-invalid]="title.touched && title.invalid" type="text" matInput class="form-control" placeholder="Title" formControlName="title" maxlength="40">
-          <mat-hint align="end">{{title.value.length}} /40</mat-hint>
-          <mat-error *ngIf="(title.invalid && title.touched) || title.dirty || title.errors?.required" class="text.danger">Title is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field [hidden]="isService()" appearance="fill">
-          <mat-label>Do you want to ... ?</mat-label>
-          <mat-select formControlName="type">
-            <mat-option value="Sell">Sell</mat-option>
-            <mat-option value="Lend">Lend</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field [hidden]="isService()">
-          <textarea [class.is-invalid]="description.touched && description.invalid"  matInput class="form-control" placeholder="Description" formControlName="description" maxlength="5000"></textarea>
-          <mat-hint align="end">{{description.value.length}} / 5000</mat-hint>
-          <mat-error *ngIf="(description.invalid && description.touched) || description.dirty || description.errors?.required" class="text.danger">Description is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>Choose a category</mat-label>
-          <mat-select formControlName="selectedCategory">
-            <mat-option *ngFor="let category of categories" value="{{category}}">
-              {{category}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <mat-form-field [hidden]="isProduct()">
-          <textarea [class.is-invalid]="description.touched && description.invalid"  matInput class="form-control" placeholder="Description" formControlName="description" maxlength="5000"></textarea>
-          <mat-hint align="end">{{description.value.length}} / 5000</mat-hint>
-          <mat-error *ngIf="(description.invalid && description.touched) || description.dirty || description.errors?.required" class="text.danger">Description is required</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-          <input [class.is-invalid]="price.touched && price.invalid" type="text" matInput class="form-control" placeholder="{{priceFormat()}}" formControlName="price">
-          <mat-error *ngIf="(price.invalid && price.touched) || price.dirty || price.errors?.required" class="text.danger">Price is required</mat-error>
-          <mat-error *ngIf="price.errors?.pattern">Please only enter numbers</mat-error>
-        </mat-form-field>
-
-        <mat-form-field [hidden]="isService()" appearance="fill">
-          <mat-label>Is delivery available?</mat-label>
-          <mat-select formControlName="shippable">
-            <mat-option value="true">Yes</mat-option>
-            <mat-option value="false">No</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <div [hidden]="isProduct()" appearance="fill">
-          <mat-form-field>
-            <input type="text" matInput class="form-control" placeholder="Location" formControlName="location">
-          </mat-form-field>
-        </div>
-
+        <button mat-button matStepperNext>Next</button>
       </div>
-      <div class="custom-file">
-        <input (change)="onFileChange($event)" formControlName = "file" type="file" class="custom-file-input" id="customFile">
-        <label class="custom-file-label" for="customFile">Choose Picture</label>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Category</ng-template>
+      <mat-form-field>
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="selectedCategory">
+          <mat-option *ngFor="let category of categories" value="{{category}}">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field [hidden]=isService()>
+        <mat-label>Do you want to ... ?</mat-label>
+        <mat-select formControlName="type">
+          <mat-option value="Sell">Sell</mat-option>
+          <mat-option value="Lend">Lend</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field [hidden]=isService()>
+        <mat-label>Is delivery available?</mat-label>
+        <mat-select formControlName="shippable">
+          <mat-option value="true">Yes</mat-option>
+          <mat-option value="false">No</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
       </div>
+    </form>
+  </mat-step>
 
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Product Information</ng-template>
+      <mat-form-field class="align-top">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" formControlName="title" maxlength="40">
+        <mat-hint mat-align="end">{{title.value.length}} /40</mat-hint>
+        <mat-error *ngIf="((title.invalid && title.touched) || title.dirty) && title.errors?.required">
+          Title is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput placeholder="Description" formControlName="description" maxlength="5000" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"></textarea>
+        <mat-hint mat-align="end">{{description.value.length}} / 5000</mat-hint>
+        <mat-error *ngIf="((description.invalid && description.touched) || description.dirty) && description.errors?.required">
+          Description is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="align-top">
+        <mat-label>{{priceFormat()}}</mat-label>
+        <input matInput placeholder="{{priceFormat()}}" formControlName="price">
+        <mat-error *ngIf="((price.invalid && price.touched) || price.dirty) && price.errors?.required">
+          Price is required
+        </mat-error>
+        <mat-error *ngIf="((price.invalid && price.touched) || price.dirty) && price.errors?.pattern">
+          Please only enter numbers
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf=isShippable() class="align-top">
+        <mat-label>Location</mat-label>
+        <input matInput placeholder="Location" formControlName="location">
+      </mat-form-field>
+      <br>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
 
-    </div>
-    <br>
+  <mat-step>
+    <ng-template matStepLabel>Create Offer</ng-template>
+    <p>Review offer information and then click create offer</p>
     <div>
-      <button type = "submit" mat-flat-button color="primary" [disabled] = "!createOfferForm.valid">Create Offer</button>
+      <button mat-button matStepperPrevious>Back</button>
+      <button (click)="onSubmit()" mat-flat-button color="primary" [disabled]="!firstFormGroup.valid||!secondFormGroup.valid||!thirdFormGroup.valid">Create Offer</button>
     </div>
-  </form>
-</mat-card>
+  </mat-step>
+
+</mat-horizontal-stepper>
