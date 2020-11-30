@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class ProductUpdateComponent implements OnInit {
 
   @Input()
-  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
+  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null,' ');
 
   userId: string;
   @Input()
