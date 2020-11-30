@@ -7,13 +7,14 @@ export class Product {
     price: number;
     description: string;
     location: string;
-    type: Type;
+    type: ProductType;
     sellOrLend: boolean;
     status: boolean;
     shippable: boolean;
     userId: number;
     approved: boolean;
     picture:string;
+    onWishlist:boolean;
     constructor(
         productId: number,
         category: string,
@@ -26,7 +27,8 @@ export class Product {
         shippable: boolean,
         userId: string,
         approved: boolean,
-        picture: string
+        picture: string,
+        onwishlist: boolean = false
     ) {}
 }
 
@@ -45,7 +47,9 @@ export let categoryTypes: string[] = [
   'PartyCatering'
 ]
 
-  export type Type = 'Sell' | 'Lend' | 'Hire'
+export type Category = 'Accessories' | 'AudioTV' | 'Books' | 'Clothing' | 'Electronics' | 'Games' | 'Animals' | 'ClassesTutoring' | 'ComputerMobilePhones' | 'HouseholdCleaning' | 'MovingTransport' | 'PartyCatering'
+
+export type ProductType = 'Sell' | 'Lend' | 'Hire'
 
 export class Sale {
   buyerId: number;
@@ -54,5 +58,11 @@ export class Sale {
   deliveryAddress: string;
   amountOfHours: number;
   title: string;
-  type: Type;
+  type: ProductType;
+}
+
+export class Wish {
+  wishId: number;
+  userId: number;
+  productId: number;
 }

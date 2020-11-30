@@ -14,16 +14,12 @@ export class WishlistService {
     public async getWishlist(userId: number) {
 
         try {
-            const productIds = await Wish.findAll({
+            const wishes = await Wish.findAll({
                 where: {
                     userId: userId
                 }
             });
-            const wishlist: Product[] = new Array(productIds.length);
-            for (let i = 0; i < productIds.length; i++) {
-                wishlist[i] = await Product.findByPk(productIds[i].productId);
-            }
-            return wishlist;
+            return wishes;
         } catch (err) {
             return err;
         }

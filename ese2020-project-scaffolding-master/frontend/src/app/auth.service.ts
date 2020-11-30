@@ -6,6 +6,7 @@ import {User} from "./models/user.model";
 import {HttpClient} from "@angular/common/http";
 import {ToastrService} from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { ProductService } from './product.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
   constructor(
     private httpClient: HttpClient,
     private toastr: ToastrService,
-    private router: Router) { }
+    private router: Router,
+    private productService: ProductService) { }
 
   private _token = new BehaviorSubject<string>('');
   private _userId = new BehaviorSubject<number>(null);
@@ -67,6 +69,7 @@ export class AuthService {
     localStorage.removeItem('userName');
     localStorage.removeItem('isAdmin');
     this.checkUserStatus();
+    this.productService.clearLocalWishlist();
     this.toastr.success('Logged out')
   }
 
@@ -86,6 +89,7 @@ export class AuthService {
       localStorage.setItem('isAdmin', res.user.isAdmin);
 
       this.checkUserStatus();
+      this.productService.loadWishlist();
       this.router.navigate(['']);
       this.toastr.success('Logged in');
     }, (error: any) => {

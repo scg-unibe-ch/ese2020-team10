@@ -12,7 +12,6 @@ import { ProductService } from '../product.service';
 import { Observable } from 'rxjs';
 
 
-
 export interface DialogData {
   animal: string;
   name: string;
@@ -28,6 +27,7 @@ export class ProductItemComponent {
   userName = new Observable<string>();
   isAdmin = new Observable<boolean>();
   loggedIn = new Observable<boolean>();
+  icon = new Observable<string>();
   
   panelOpenState: boolean;
   change: boolean;
@@ -67,6 +67,7 @@ export class ProductItemComponent {
     this.loggedIn = this.auth.loggedIn;
     this.change = false;
     this.panelOpenState = false;
+    
   }
 
   onProductDelete(productId: number): void{
@@ -92,4 +93,25 @@ export class ProductItemComponent {
       }
     );
   }
+  onAddToWishlist():void{
+    this.productService.addToWishlist(this.product);
+  }
+  onRemoveFromWishlist():void{
+    this.productService.removeFromWishlist(this.product);
+  }
+  changeWishlist(){
+    if(this.product.onWishlist){
+      this.onRemoveFromWishlist();
+    }else{
+      this.onAddToWishlist();
+    }
+  }
+  iconPath():string{
+    if(this.product.onWishlist){
+      return 'assets/icons/heart-fill.svg';
+    } else{
+      return 'assets/icons/heart.svg';
+    }
+  }
+
 }
