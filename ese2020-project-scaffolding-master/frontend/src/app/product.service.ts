@@ -174,6 +174,10 @@ export class ProductService {
     })
   }
 
+  getWishlist():Observable<Product[]>{
+    return this.products.pipe(map(products => products.filter(product => product.onWishlist == true)))
+  }
+
   // Make changes to an existing Product. Make sure to use the original productId as it can't be changed
   // tslint:disable-next-line:typedef
   updateProduct(product: Product, productId: number){

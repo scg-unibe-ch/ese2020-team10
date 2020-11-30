@@ -28,7 +28,7 @@ export class Product {
         userId: string,
         approved: boolean,
         picture: string,
-        onwishlist: boolean = false
+        onwishlist: boolean
     ) {}
 }
 
