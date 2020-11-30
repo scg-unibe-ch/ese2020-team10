@@ -62,6 +62,7 @@ export class UserLoginComponent implements OnInit {
     localStorage.removeItem('userName');
     localStorage.removeItem('isAdmin');
     this.checkUserStatus();
+    this.router.navigate(['']);
   }
 
   /**
