@@ -3,9 +3,7 @@ import { Validators, FormGroup, FormControl, FormsModule } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { CommonModule, CurrencyPipe } from '@angular/common';
 import { categoryTypes, Product} from '../models/product.model';
-import { AuthService } from '../auth.service';
 
 interface Select {
   value: string,
@@ -22,7 +20,7 @@ export class CreateOfferComponent implements OnInit {
   userId: string;
   product: Product;
 
-  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
   ngOnInit(): void {
     //sets default value for select
@@ -72,7 +70,6 @@ export class CreateOfferComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.userId =  this.auth.getUserId();
     if(this.createOfferForm.valid){
       this.httpClient.post(environment.endpointURL + 'product/add', {
         category: this.selectedCategory.value,
@@ -83,7 +80,6 @@ export class CreateOfferComponent implements OnInit {
         type: this.type.value,
         shippable: this.shippable.value,
         status: true,
-        userId: this.userId
       })
       .subscribe((res: any) => {
         this.router.navigate(['']);

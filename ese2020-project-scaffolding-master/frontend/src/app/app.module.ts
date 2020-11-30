@@ -41,6 +41,8 @@ import { PurchaseDialogComponent } from './product-item/purchase-dialog/purchase
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatStepperModule} from "@angular/material/stepper";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
+import { CategoryCatalogComponent } from './landing-page/category-catalog/category-catalog.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
     SearchUIComponent,
     ProductfilterPipe,
     PurchaseDialogComponent,
+    CategoryCatalogComponent,
 
   ],
   imports: [
@@ -83,7 +86,9 @@ import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
     MatSliderModule,
     MatSlideToggleModule,
     MatExpansionModule,
-    MatStepperModule
+    MatStepperModule,
+    CommonModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {

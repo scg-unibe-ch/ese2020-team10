@@ -9,13 +9,13 @@
   <div *ngIf="data.shippable">
     <mat-form-field>
       <mat-label>Delivery Address</mat-label>
-      <input matInput type="text" placeholder="Delivery Address" [(ngModel)]="data.deliveryAddress">
+      <input matInput type="text" placeholder="Delivery Address" [(ngModel)]="data.deliveryAddress" name="deliveryAddress">
     </mat-form-field>
   </div>
   <div *ngIf="data.type == 'Lend'|| data.type == 'Hire'">
     <mat-form-field>
       <mat-label>How many hours?</mat-label>
-      <input matInput type="number" min="1" max="10" value="1" [(ngModel)]="data.amountOfHours">
+      <input matInput type="number" min="1" max="10" value="1" [(ngModel)]="data.amountOfHours" name="amountOfHours">
     </mat-form-field>
   </div>
   <div mat-dialog-actions>

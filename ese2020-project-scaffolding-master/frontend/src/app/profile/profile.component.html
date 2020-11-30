@@ -74,8 +74,8 @@
             <mat-card style="width: 300px;" *ngIf="sold.type == 'Sell'">
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
-                <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
-                <p>Delivery Address: {{sold.deliveryAddress}}</p>
+                <p>Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
+                <p *ngIf="sold.deliveryAddress != null">Delivery Address: {{sold.deliveryAddress}}</p>
               </mat-card-content>
             </mat-card>
           </div>
@@ -86,7 +86,9 @@
             <mat-card style="width: 300px;" *ngIf="sold.type == 'Lend'">
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
-                <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
+                <p *ngIf="sold.deliveryAddress != null">Delivery Address: {{sold.deliveryAddress}}</p>
+                <p *ngIf="sold.amountOfHours != null">Price at point of sale: {{sold.amountOfHours}} hours à {{sold.pointOfSalePrice}} CHF</p>
+                <p *ngIf="sold.amountOfHours == null">Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
               </mat-card-content>
             </mat-card>
           </div>
@@ -97,7 +99,8 @@
             <mat-card style="width: 300px;" *ngIf="sold.type == 'Hire'">
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
-                <p>Price at point of sale: {{sold.pointOfSalePrice}}</p>
+                <p *ngIf="sold.amountOfHours != null">Price at point of sale: {{sold.amountOfHours}} hours à {{sold.pointOfSalePrice}} CHF</p>
+                <p *ngIf="sold.amountOfHours == null">Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
               </mat-card-content>
             </mat-card>
           </div>
@@ -127,7 +130,8 @@
             <mat-card style="width: 300px;" *ngIf="bought.type == 'Lend'">
               <mat-card-title>{{bought.title}}</mat-card-title>
               <mat-card-content>
-                <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
+                <p *ngIf="bought.amountOfHours != null">Price at point of sale: {{bought.amountOfHours}} hours à {{bought.pointOfSalePrice}} CHF</p>
+                <p *ngIf="bought.amountOfHours == null">Price at point of sale: {{bought.pointOfSalePrice}} CHF</p>
               </mat-card-content>
             </mat-card>
           </div>
@@ -138,7 +142,8 @@
             <mat-card style="width: 300px;" *ngIf="bought.type == 'Hire'">
               <mat-card-title>{{bought.title}}</mat-card-title>
               <mat-card-content>
-                <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
+                <p *ngIf="bought.amountOfHours != null">Price at point of sale: {{bought.amountOfHours}} hours à {{bought.pointOfSalePrice}} CHF</p>
+                <p *ngIf="bought.amountOfHours == null">Price at point of sale: {{bought.pointOfSalePrice}} CHF</p>
               </mat-card-content>
             </mat-card>
           </div>

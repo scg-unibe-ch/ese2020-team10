@@ -50,6 +50,7 @@ export class Sale {
   sellerId: number;
   pointOfSalePrice: number;
   deliveryAddress: string;
+  amountOfHours: number;
   title: string;
   type: Type;
 }
