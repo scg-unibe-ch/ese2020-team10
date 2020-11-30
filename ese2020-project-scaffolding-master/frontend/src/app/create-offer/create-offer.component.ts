@@ -42,7 +42,20 @@ export class CreateOfferComponent implements OnInit {
     location: new FormControl(),
     type: new FormControl(),
     shippable: new FormControl(),
+    file: new FormControl(''),
+    fileSource: new FormControl('')
   });
+
+
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.createOfferForm.patchValue({
+        fileSource: file
+      });
+    }
+  }
+
 
   get selectedCategory() {
     return this.createOfferForm.get('selectedCategory');
@@ -69,22 +82,20 @@ export class CreateOfferComponent implements OnInit {
     return this.createOfferForm.get('shippable');
   }
 
-  onSubmit(): void {
-    if(this.createOfferForm.valid){
-      this.httpClient.post(environment.endpointURL + 'product/add', {
-        category: this.selectedCategory.value,
-        title: this.title.value,
-        description: this.description.value,
-        price: this.price.value,
-        location: this.location.value,
-        type: this.type.value,
-        shippable: this.shippable.value,
-        status: true,
-      })
-      .subscribe((res: any) => {
+  onSubmit(){
+    const formData = new FormData();
+    formData.append('productImage', this.createOfferForm.get('fileSource').value);
+    formData.append('category', this.createOfferForm.get('selectedCategory').value);
+    formData.append('title', this.createOfferForm.get('title').value);
+    formData.append('price', this.createOfferForm.get('price').value);
+    formData.append('description', this.createOfferForm.get('description').value);
+    formData.append('location', this.createOfferForm.get('location').value);
+    formData.append('type', this.createOfferForm.get('type').value);
+    formData.append('shippable', this.createOfferForm.get('shippable').value);
+
+    this.httpClient.post(environment.endpointURL + 'product/newProduct', formData).subscribe((res: any) => {
         this.router.navigate(['']);
     });
-   }
   }
 
   isService(): boolean {

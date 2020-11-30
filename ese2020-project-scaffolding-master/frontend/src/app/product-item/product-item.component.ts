@@ -11,6 +11,8 @@ import { ToastrService} from 'ngx-toastr';
 import { ProductService } from '../product.service';
 import { Observable } from 'rxjs';
 
+
+
 export interface DialogData {
   animal: string;
   name: string;
@@ -40,6 +42,7 @@ export class ProductItemComponent {
     public toastr: ToastrService,
     public productService: ProductService) {
   }
+  endpointURL = environment.endpointURL;
 
   openPurchaseDialog(): void {
     const dialogRef = this.dialog.open(PurchaseDialogComponent, {
