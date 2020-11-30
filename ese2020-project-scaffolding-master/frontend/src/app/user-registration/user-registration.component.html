@@ -1,5 +1,7 @@
 <hr>
-<h1 class="register" style="margin-top: 20px; margin-left: 20px;">Registration</h1>
+
+<mat-card>
+  <h1 style="margin-left: 1.5rem">Registration</h1>
 
 <mat-horizontal-stepper  #stepper>
   <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
@@ -96,3 +98,5 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper>
+
+</mat-card>

@@ -1,14 +1,11 @@
 .mat-card{
-  width: 350px;
+  width: 70%;
   height: auto;
   display: block;
+  margin-top: 4rem;
   margin-left:auto;
   margin-right:auto;
-  vertical-align:middle;
+  background-color: white;
+  border-radius: 1rem;
 }
 
-.register{
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
