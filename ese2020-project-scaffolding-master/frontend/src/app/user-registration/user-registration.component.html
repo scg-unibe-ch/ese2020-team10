@@ -1,27 +1,25 @@
-<hr>
+<br>
+<br>
+<h1 class="register" style="margin-top: 20px; margin-left: 20px;">Registration</h1>
 
-<mat-card>
-  <h1 style="margin-left: 1.5rem">Registration</h1>
-
-<mat-horizontal-stepper  #stepper>
+<mat-horizontal-stepper #stepper>
   <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
     <form [formGroup]="firstFormGroup">
       <ng-template matStepLabel>Fill out your name</ng-template>
       <mat-form-field>
         <mat-label>Firstname</mat-label>
         <input matInput placeholder="First name" formControlName="firstName" required>
+        <mat-error *ngIf="((firstName.invalid && firstName.touched) || firstName.dirty)&&firstName.errors?.required">
+          First Name is required
+        </mat-error>
       </mat-form-field>
-      <div style="color: red" *ngIf="(firstName.invalid && firstName.touched) || firstName.dirty">
-        <small *ngIf="firstName.errors?.required" class="text.danger">First Name is required</small>
-      </div>
       <mat-form-field>
         <mat-label>Lastname</mat-label>
         <input matInput placeholder="Last name" formControlName="lastName" required>
+        <mat-error *ngIf="((lastName.invalid && lastName.touched) || lastName.dirty)&&lastName.errors?.required">
+          Last Name is required
+        </mat-error>
       </mat-form-field>
-      <div style="color: red" *ngIf="(lastName.invalid && lastName.touched) || lastName.dirty">
-        <small *ngIf="lastName.errors?.required" class="text.danger">Last Name is required</small>
-      </div>
-
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
@@ -34,28 +32,32 @@
       <mat-form-field>
         <mat-label>Username</mat-label>
         <input matInput placeholder="Username" formControlName="userName" required>
+        <mat-error *ngIf="((userName.invalid && userName.touched) || userName.dirty)&&userName.errors?.required">
+          User Name is required
+        </mat-error>
       </mat-form-field>
-      <div style="color: red" *ngIf="(userName.invalid && userName.touched) || userName.dirty">
-        <small *ngIf="userName.errors?.required" class="text.danger">User Name is required</small>
-      </div>
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput placeholder="e.g. email@email.com" formControlName="email" required>
+        <mat-error *ngIf="((email.invalid && email.touched) || email.dirty)&&email.errors?.required">
+          Email is required
+        </mat-error>
+        <mat-error *ngIf="((email.invalid && email.touched) || email.dirty)&&email.errors?.pattern">
+          Please provide a valid email address
+        </mat-error>
       </mat-form-field>
-      <div style="color: red" *ngIf="(email.invalid && email.touched) || email.dirty">
-        <small *ngIf="email.errors?.required" class="text.danger">Email is required</small>
-        <small *ngIf="email.errors?.pattern" class="text.danger">Please provide a valid email address</small>
-      </div>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput placeholder="Password"  [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+        <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+        <mat-error *ngIf="((password.invalid && password.touched) || password.dirty)&&password.errors?.required">
+          Password is required
+        </mat-error>
+        <mat-error *ngIf="((password.invalid && password.touched) || password.dirty)&&password.errors?.pattern">
+          Password requires minimum 7 characters, at least one uppercase letter, one lowercase letter and one special character.
+        </mat-error>
         <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
       </mat-form-field>
-      <div style="color: red" *ngIf="(password.invalid && password.touched) || password.dirty">
-        <small *ngIf="password.errors?.required" class="text.danger">Password is required</small>
-        <small *ngIf="password.errors?.pattern" class="text.danger">Password requires minimum 7 characters, at least one uppercase letter, one lowercase letter and one special character:</small>
-      </div>
-
+    
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
@@ -69,10 +71,10 @@
       <mat-form-field>
         <mat-label>Phone</mat-label>
         <input matInput placeholder="e.g. +41 123 45 67" formControlName="phone">
+        <mat-error *ngIf="((phone.invalid && phone.touched) || password.dirty)&&phone.errors?.pattern">
+          Please enter a valid phone number
+        </mat-error>
       </mat-form-field>
-      <div style="color: red" *ngIf="(phone.invalid && phone.touched) || phone.dirty">
-        <small *ngIf="phone.errors?.pattern" class="text.danger">Please enter a valid phone number</small>
-      </div>
       <mat-form-field>
         <mat-label>Address</mat-label>
         <input matInput placeholder="Address" formControlName="address">
@@ -98,5 +100,3 @@
     </div>
   </mat-step>
 </mat-horizontal-stepper>
-
-</mat-card>
