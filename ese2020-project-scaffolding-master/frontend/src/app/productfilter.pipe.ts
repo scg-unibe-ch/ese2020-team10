@@ -10,7 +10,7 @@ import { ProductService } from './product.service';
 })
 export class WishlistPipe implements PipeTransform{
   transform(products: Product[]):Product[]{
-    return products.filter(product => product.onWishlist);
+    return products.filter(product => product.onWishlist == true);
   }
 
   
