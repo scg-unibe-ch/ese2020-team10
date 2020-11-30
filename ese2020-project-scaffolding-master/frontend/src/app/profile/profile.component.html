@@ -1,8 +1,9 @@
 <hr>
-<div style="margin-top: 10px">
+<mat-card>
+<div>
   <h1>Profile - {{getUserName()}}</h1>
 </div>
-<mat-card>
+
   <mat-tab-group>
     <mat-tab label="User Information"> <div *ngFor="let user of userInfo | async">
       <div class="row">

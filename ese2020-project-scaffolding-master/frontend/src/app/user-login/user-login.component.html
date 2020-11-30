@@ -1,17 +1,18 @@
+<hr>
 <mat-card>
   <div *ngIf="!loggedIn">
-    <div class="log">Login</div>
-    <mat-form-field>
+    <h1 style="margin-left: 1rem">Login</h1>
+    <mat-form-field style="margin-left: 1rem">
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
     </mat-form-field>
-    <mat-form-field>
+    <mat-form-field style="margin-left: 1rem">
       <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" (keydown.enter)="login()">
     </mat-form-field>
     <button mat-flat-button color="primary" (click)="login()" >Login</button>
   </div>
 
   <div *ngIf="loggedIn">
-    <div class="log">Logout</div>
+    <h1 style="margin-left: 1rem">Logout</h1>
     <button mat-flat-button color="warn" (click)="logout()">Logout</button>
     You are currently logged in as {{ userName }}
   </div>
