@@ -14,6 +14,8 @@ import { User } from './models/user.model';
 import { Sale} from './models/sale.model';
 
 import cors from 'cors';
+import { WishlistController } from './controllers/wishlist.controller';
+import { Wish } from './models/wish.model';
 
 export class Server {
     private server: Application;
@@ -31,9 +33,11 @@ export class Server {
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         Sale.initialize(this.sequelize);
+        Wish.initialize(this.sequelize);
         Product.createAssociations();
         User.createAssociations();
         Sale.createAssociations();
+        Wish.createAssociations();
 
 
         this.sequelize.sync().then(() => {                           // create connection to the database
@@ -69,6 +73,7 @@ export class Server {
             .use('/secured', SecuredController)
             .use('/product', ProductController)
             .use('/sale', SaleController)
+            .use('/wishlist', WishlistController)
             .options('*', cors(options))
             .use('/src/public/uploads', express.static('./src/public/uploads'))
             // this is the message you get if you open http://localhost:3000/ when the server is running

@@ -43,6 +43,7 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import { CategoryCatalogComponent } from './landing-page/category-catalog/category-catalog.component';
 import { ToastrModule } from 'ngx-toastr';
+import { WishlistComponent } from './wishlist/wishlist.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ToastrModule } from 'ngx-toastr';
     ProductfilterPipe,
     PurchaseDialogComponent,
     CategoryCatalogComponent,
+    WishlistComponent,
 
   ],
   imports: [

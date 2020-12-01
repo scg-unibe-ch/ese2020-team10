@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth.service';
 import {Observable} from "rxjs";
 import {User} from "../models/user.model";
-import {Product, Sale, Type} from "../models/product.model";
+import {Product, Sale, ProductType} from "../models/product.model";
 import {ProductService} from "../product.service";
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';

@@ -2,12 +2,28 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Product } from './models/product.model';
 import { ProductService } from './product.service';
 
+
+
+
+@Pipe({
+  name: 'wishlistfilter'
+})
+export class WishlistPipe implements PipeTransform{
+  transform(products: Product[]):Product[]{
+    return products.filter(product => product.onWishlist == true);
+  }
+
+  
+}
+
+
+
 @Pipe({
   name: 'productfilter'
 })
 export class ProductfilterPipe implements PipeTransform {
 
-  transform(Products: Product[], searchText: String, location: String, maxPrice:number, minPrice:number , availability:boolean): Product[] {
+  transform(Products: Product[], searchText: String, location: String, maxPrice:number, minPrice:number , availability:boolean, onWishlist: boolean): Product[] {
     if(!Products)
       return Products;
     
