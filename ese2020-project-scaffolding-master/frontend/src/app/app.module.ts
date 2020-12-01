@@ -45,6 +45,8 @@ import { CategoryCatalogComponent } from './landing-page/category-catalog/catego
 import { ToastrModule } from 'ngx-toastr';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProfileUpdateComponent } from './profile/profile-update/profile-update.component';
+import { ProductDescriptionComponent } from './product-item/product-description/product-description.component';
+import { ProductDetailsComponent } from './product-item/product-description/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { ProfileUpdateComponent } from './profile/profile-update/profile-update.
     CategoryCatalogComponent,
     WishlistComponent,
     ProfileUpdateComponent,
+    ProductDescriptionComponent,
+    ProductDetailsComponent,
 
   ],
   imports: [

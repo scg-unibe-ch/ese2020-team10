@@ -22,7 +22,7 @@ const routes: Routes = [
   { path: 'search', component: SearchUIComponent},
   { path: 'catalog/:category', component: CategoryCatalogComponent},
   { path: 'wishlist', component: WishlistComponent},
-  { path: 'update/:userId', component: ProfileUpdateComponent}
+  { path: 'update/:userId', component: ProfileUpdateComponent},
 ];
 
 @NgModule({

@@ -17,6 +17,7 @@ export class CategoryCatalogComponent implements OnInit {
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit(): void {
+    this.productService.load();
     this.route.params.subscribe(params => {
       this.category = params['category'];
     });

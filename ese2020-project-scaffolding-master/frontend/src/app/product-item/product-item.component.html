@@ -1,7 +1,10 @@
 <div class="card-group">
   <div class="card">
+    <a href="product/{{product.productId}}" style="text-decoration-line: none; color: black;">
     <img [src]="endpointURL + product.picture" class="card-img-top img-fluid" style="padding: 1rem">
+    </a>
     <div class="card-body">
+      <a href="product/{{product.productId}}" style="text-decoration-line: none; color: black;">
       <div>
         <h1 style="float:left; width: 300px;" class="card-title">{{product.title}}<span *ngIf="product.approved" style="margin-left: 15px"><mat-icon>verified</mat-icon></span>
         </h1>
@@ -15,45 +18,8 @@
       <small *ngIf="product.type == 'Sell'">Product to buy.</small>
       <small *ngIf="product.type == 'Hire'">Service to hire.</small>
       <small *ngIf="product.type == 'Lend'">Product to lend.</small>
-      <div class="card-description">
-      <div style="margin-bottom: 10px">
-        <mat-accordion>
-          <mat-expansion-panel (opened)="panelOpenState = true"
-                               (closed)="panelOpenState = false">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Description
-              </mat-panel-title>
-              <mat-panel-description>
-                Click to {{panelOpenState ? 'close' : 'read'}} description.
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <p>{{product.description}}</p>
-          </mat-expansion-panel>
-        </mat-accordion>
-      </div>
 
-      <div>
-        <p *ngIf="product.location != ''">Location: {{product.location}}</p>
-        <p *ngIf="product.location == ''" style="color: white;">...</p>
-        <p *ngIf="product.status == true" style="float:left; margin-right: 5px">
-          available
-        </p>
-        <p *ngIf="product.status == false" style="float:left">
-          unavailable
-        </p>
-
-        <p class="card-category" style="float:right">{{product.category}}</p>
-
-        <p *ngIf="product.shippable == true">
-          / shippable
-        </p>
-        <p *ngIf="product.shippable == false">
-          / unshippable
-        </p>
-      </div>
-
-     </div>
+      </a>
       <hr>
       <img *ngIf="(loggedIn | async )" src="{{iconPath()}}" id="wishlistIcon" (click)="changeWishlist()">
       <button type="button" class="btn btn-md" *ngIf="(userId | async) != product.userId.toString() && (loggedIn | async) && product.status == true && !(isAdmin | async)" (click)="openPurchaseDialog()" style="float:right; background-color: rgb(116, 153, 255); color: rgb(255, 255, 255)">Buy</button>
