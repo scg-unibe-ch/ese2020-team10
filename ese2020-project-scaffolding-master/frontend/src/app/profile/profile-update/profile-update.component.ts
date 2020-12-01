@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {CurrencyPipe} from "@angular/common";
 import {environment} from "../../../environments/environment";
 import {User} from "../../models/user.model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-profile-update',
@@ -17,7 +18,7 @@ export class ProfileUpdateComponent implements OnInit {
   @Input()
   user: User;
 
-  constructor(private httpClient: HttpClient, private router: Router,private formBuilder: FormBuilder) { }
+  constructor(private httpClient: HttpClient, private router: Router,private formBuilder: FormBuilder, public toastr: ToastrService) { }
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -45,7 +46,6 @@ export class ProfileUpdateComponent implements OnInit {
     this.firstFormGroup.controls['lastName'].setValue(this.user.lastName);
     this.secondFormGroup.controls['userName'].setValue(this.user.userName);
     this.secondFormGroup.controls['email'].setValue(this.user.email);
-    this.secondFormGroup.controls['password'].setValue(this.user.password);
     this.thirdFormGroup.controls['phone'].setValue(this.user.phone);
     this.thirdFormGroup.controls['address'].setValue(this.user.address);
     this.thirdFormGroup.controls['city'].setValue(this.user.city);
@@ -92,8 +92,8 @@ export class ProfileUpdateComponent implements OnInit {
         address: this.address.value,
         city: this.city.value,
       }).subscribe((res: any) => {
-        window.location.reload();
-      });
+          window.location.reload();
+        });
     }
   }
 
