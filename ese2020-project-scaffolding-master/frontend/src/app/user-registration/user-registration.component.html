@@ -97,7 +97,7 @@
       <p>Review your information and then click register.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button (click)="onSubmit()" mat-flat-button color="primary" [disabled] ="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Register</button>
+        <button (click)="onSubmit()" mat-flat-button color="primary" [disabled] ="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid" [class.color] ="firstFormGroup.valid || secondFormGroup.valid || thirdFormGroup.valid">Register</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>

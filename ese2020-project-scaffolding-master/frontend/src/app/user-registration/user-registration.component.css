@@ -9,6 +9,10 @@
   border-radius: 1rem;
 }
 
+.color {
+  background-color: rgb(116, 153, 255); 
+  color: rgb(255, 255, 255);
+}
 
 @media (max-width: 1024px){
 
