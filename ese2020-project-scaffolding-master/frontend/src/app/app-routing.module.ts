@@ -10,6 +10,7 @@ import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { SearchUIComponent } from './search-UI/search-UI.component';
 import {CategoryCatalogComponent} from "./landing-page/category-catalog/category-catalog.component";
 import { WishlistComponent} from './wishlist/wishlist.component'
+import {ProfileUpdateComponent} from "./profile/profile-update/profile-update.component";
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -20,8 +21,8 @@ const routes: Routes = [
   { path: 'createOffer', component: CreateOfferComponent},
   { path: 'search', component: SearchUIComponent},
   { path: 'catalog/:category', component: CategoryCatalogComponent},
-  { path: 'wishlist', component: WishlistComponent}
-
+  { path: 'wishlist', component: WishlistComponent},
+  { path: 'update/:userId', component: ProfileUpdateComponent}
 ];
 
 @NgModule({

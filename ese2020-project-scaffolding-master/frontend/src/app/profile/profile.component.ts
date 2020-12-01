@@ -17,14 +17,15 @@ export class ProfileComponent implements OnInit {
   userName: string;
   private sub: any;
   userId: string;
+  change: boolean;
   buyer: Observable<User[]>;
   userInfo: Observable<User[]>;
   products: Observable<Product[]>;
   soldOffers: Observable<Sale[]>;
   boughtOffers: Observable<Sale[]>;
 
-  constructor(private activatedRoute: ActivatedRoute, 
-    public auth: AuthService, 
+  constructor(private activatedRoute: ActivatedRoute,
+    public auth: AuthService,
     private productService: ProductService,
     private httpClient: HttpClient) { }
 
@@ -38,6 +39,7 @@ export class ProfileComponent implements OnInit {
     this.products = this.productService.getProductsByUser(this.userId);
     this.soldOffers = this.productService.getSoldSales();
     this.boughtOffers = this.productService.getBoughtSales();
+    this.change = false;
   }
 
   ngOnDestroy() {

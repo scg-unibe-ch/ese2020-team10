@@ -6,7 +6,8 @@
   <h1>Profile - {{getUserName()}}</h1>
 </div>
   <mat-tab-group>
-    <mat-tab label="User Information"> <div *ngFor="let user of userInfo | async"  style="padding: 1rem">
+    <mat-tab label="User Information">
+      <div *ngFor="let user of userInfo | async"  style="padding: 1rem">
       <div class="row">
         <div class="col-lg-4">
           <h2 style="margin-top: 10px">Account Details</h2>
@@ -39,13 +40,19 @@
           <div class="card" style="width: 100%;">
             <ul class="list-group list-group-flush">
               <li class="list-group-item" *ngIf="user.address==null">Address: none</li>
-              <li class="list-group-item" *ngIf="user.address!=null">Phone Number: {{user.address}}</li>
+              <li class="list-group-item" *ngIf="user.address!=null">Address: {{user.address}}</li>
               <li class="list-group-item" *ngIf="user.city==null">City: none</li>
-              <li class="list-group-item" *ngIf="user.city!=null">Phone Number: {{user.city}}</li>
+              <li class="list-group-item" *ngIf="user.city!=null">City: {{user.city}}</li>
             </ul>
           </div>
         </div>
       </div>
+
+      <button (click)="change = true" [hidden]="change" type="button" class="btn btn-md" style="float:right; background-color: rgb(116, 153, 255); color: rgb(255, 255, 255)">Change</button>
+        <div *ngIf="change">
+          <button (click)="change = false" [hidden]="!change" type="button" class="btn btn-md" style="float:right; background-color: rgb(116, 153, 255); color: rgb(255, 255, 255)">Close</button>
+          <app-profile-update [user] = "user"></app-profile-update>
+        </div>
     </div>
     </mat-tab>
 

@@ -44,6 +44,7 @@ import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import { CategoryCatalogComponent } from './landing-page/category-catalog/category-catalog.component';
 import { ToastrModule } from 'ngx-toastr';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { ProfileUpdateComponent } from './profile/profile-update/profile-update.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     PurchaseDialogComponent,
     CategoryCatalogComponent,
     WishlistComponent,
+    ProfileUpdateComponent,
 
   ],
   imports: [
