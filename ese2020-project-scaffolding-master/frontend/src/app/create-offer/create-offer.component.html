@@ -104,7 +104,7 @@
       <p>Review offer information and then click create offer</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button (click)="onSubmit()" mat-flat-button color="primary" [disabled]="!firstFormGroup.valid||!secondFormGroup.valid||!thirdFormGroup.valid">Create Offer</button>
+        <button (click)="onSubmit()" mat-flat-button color="primary" [disabled]="!firstFormGroup.valid||!secondFormGroup.valid||!thirdFormGroup.valid" [class.color]="firstFormGroup.valid||secondFormGroup.valid||thirdFormGroup.valid">Create Offer</button>
       </div>
     </mat-step>
 

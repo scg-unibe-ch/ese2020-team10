@@ -1,8 +1,8 @@
 <br>
 <br>
-<h1 class="register" style="margin-top: 20px; margin-left: 20px;">Registration</h1>
 
 <mat-card>
+  <h1 class="register" style="padding-left: 1rem;">Registration</h1>
   <mat-horizontal-stepper #stepper>
     <mat-step [stepControl]="firstFormGroup" errorMessage="Name is required.">
       <form [formGroup]="firstFormGroup">
@@ -97,7 +97,7 @@
       <p>Review your information and then click register.</p>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button (click)="onSubmit()" mat-flat-button color="primary" [disabled] ="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid">Register</button>
+        <button (click)="onSubmit()" mat-flat-button color="primary" [disabled] ="!firstFormGroup.valid || !secondFormGroup.valid || !thirdFormGroup.valid" [class.color] ="firstFormGroup.valid || secondFormGroup.valid || thirdFormGroup.valid">Register</button>
       </div>
     </mat-step>
   </mat-horizontal-stepper>
