@@ -1,7 +1,10 @@
 <div class="card-group">
   <div class="card">
+    <a href="product/{{product.productId}}" style="text-decoration-line: none; color: black;">
     <img [src]="endpointURL + product.picture" class="card-img-top img-fluid" style="padding: 1rem">
+    </a>
     <div class="card-body">
+      <a href="product/{{product.productId}}" style="text-decoration-line: none; color: black;">
       <div>
         <h1 style="float:left; width: 300px;" class="card-title">{{product.title}}<span *ngIf="product.approved" style="margin-left: 15px"><mat-icon>verified</mat-icon></span>
         </h1>
@@ -16,7 +19,7 @@
       <small *ngIf="product.type == 'Hire'">Service to hire.</small>
       <small *ngIf="product.type == 'Lend'">Product to lend.</small>
 
-      <a href="product/{{product.productId}}" style="float: right">Read more</a>
+      </a>
       <hr>
       <img *ngIf="(loggedIn | async )" src="{{iconPath()}}" id="wishlistIcon" (click)="changeWishlist()">
       <button type="button" class="btn btn-md" *ngIf="(userId | async) != product.userId.toString() && (loggedIn | async) && product.status == true && !(isAdmin | async)" (click)="openPurchaseDialog()" style="float:right; background-color: rgb(116, 153, 255); color: rgb(255, 255, 255)">Buy</button>
