@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import {AuthService} from '../auth.service';
 import { ProductService} from '../product.service';
-import { Product, Type} from '../models/product.model'
+import { Product} from '../models/product.model'
 
 @Component({
   selector: 'app-landing-page',
@@ -16,16 +16,19 @@ export class LandingPageComponent implements OnInit {
   public sellProducts: Observable<Product[]>;
   public lendProducts: Observable<Product[]>;
   public hireProducts: Observable<Product[]>;
+  public products: Observable<Product[]>;
 
 
   constructor(public auth: AuthService, public productService: ProductService) { }
 
   ngOnInit(): void {
     this.auth.checkUserStatus();
+    this.productService.load();
     this.sellProducts = this.productService.getProductsByType('Sell'); // Gets all the current 'sell' products from the backend via productService
     this.lendProducts = this.productService.getProductsByType('Lend');
     this.hireProducts = this.productService.getProductsByType('Hire');
     this.user = this.auth.getUserName();
+    this.products = this.productService.products;
   }
 
   search(): void{

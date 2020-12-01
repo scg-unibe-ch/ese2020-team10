@@ -9,6 +9,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
 import { SearchUIComponent } from './search-UI/search-UI.component';
 import {CategoryCatalogComponent} from "./landing-page/category-catalog/category-catalog.component";
+import { WishlistComponent} from './wishlist/wishlist.component'
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'profile/:userName', component: ProfileComponent },
   { path: 'createOffer', component: CreateOfferComponent},
   { path: 'search', component: SearchUIComponent},
-  { path: 'catalog/:category', component: CategoryCatalogComponent}
+  { path: 'catalog/:category', component: CategoryCatalogComponent},
+  { path: 'wishlist', component: WishlistComponent}
 
 ];
 

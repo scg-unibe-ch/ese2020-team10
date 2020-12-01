@@ -2,6 +2,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Product } from './models/product.model';
 import { ProductService } from './product.service';
 
+
+
+
+
 @Pipe({
   name: 'productfilter'
 })
