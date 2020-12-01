@@ -11,6 +11,7 @@ import { SearchUIComponent } from './search-UI/search-UI.component';
 import {CategoryCatalogComponent} from "./landing-page/category-catalog/category-catalog.component";
 import { WishlistComponent} from './wishlist/wishlist.component'
 import {ProfileUpdateComponent} from "./profile/profile-update/profile-update.component";
+import {ProductDescriptionComponent} from "./product-item/product-description/product-description.component";
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'catalog/:category', component: CategoryCatalogComponent},
   { path: 'wishlist', component: WishlistComponent},
   { path: 'update/:userId', component: ProfileUpdateComponent},
+  { path: 'product/:productId', component: ProductDescriptionComponent}
 ];
 
 @NgModule({
