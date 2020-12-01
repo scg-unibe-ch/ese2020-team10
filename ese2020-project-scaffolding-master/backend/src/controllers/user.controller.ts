@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { verifyToken } from '../middlewares/checkAuth';
 import {Product} from '../models/product.model';
 import {User} from '../models/user.model';
+import bcrypt from 'bcrypt';
 
 const userController: Router = express.Router();
 const userService = new UserService();
@@ -33,6 +34,9 @@ userController.get('/:user',
 
 userController.put('/:id', verifyToken,
     (req: Request, res: Response) => {
+        const saltRounds = 12;
+        req.body.password = bcrypt.hashSync(req.body.password, saltRounds);
+
         User.findByPk(req.params.id)
             .then(found => {
                 if (found != null) {
