@@ -17,6 +17,12 @@ button, input {
   margin-right: 25px !important;
 }
 
+.mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, 
+.mat-step-header .mat-step-icon-state-edit {
+  background-color: rgb(116, 153, 255); 
+  color: rgb(255, 255, 255);
+}
+
 @media (max-width: 1024px){
 
 
