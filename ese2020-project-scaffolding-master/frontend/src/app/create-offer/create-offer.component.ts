@@ -7,6 +7,7 @@ import { categoryTypes, Product} from '../models/product.model';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
+import { ProductService } from '../product.service';
 
 interface Select {
   value: string,
@@ -20,7 +21,10 @@ interface Select {
 })
 export class CreateOfferComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient, private router: Router, private formBuilder: FormBuilder, private _ngZone: NgZone) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private _ngZone: NgZone,
+    private productService: ProductService) { }
 
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   @Input() categories = categoryTypes;
@@ -98,9 +102,7 @@ export class CreateOfferComponent implements OnInit {
       formData.append('type', this.secondFormGroup.get('type').value);
       formData.append('shippable', this.secondFormGroup.get('shippable').value);
 
-      this.httpClient.post(environment.endpointURL + 'product/newProduct', formData).subscribe((res: any) => {
-          this.router.navigate(['']);
-      });
+      this.productService.createProduct(formData)
     }
   }
 

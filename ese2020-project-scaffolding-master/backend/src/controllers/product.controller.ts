@@ -48,7 +48,12 @@ productController.get('/unapprovedProducts',
 productController.post('/newProduct', upload.single('productImage'), verifyToken,
 (req: MulterRequest, res: Response) => {
     console.log(req.file);
-    req.body.picture = req.file.path;
+
+    if (!req.file) {
+        req.body.picture = undefined;
+    } else {
+        req.body.picture = req.file.path;
+    }
     productService.addProduct(req.body, req.body.tokenPayload.userId).then(productAdded =>
         res.send(productAdded)).catch(err => res.status(500).send(err));
 });

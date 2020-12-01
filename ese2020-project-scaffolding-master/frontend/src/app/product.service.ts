@@ -5,6 +5,7 @@ import {Product, Sale, ProductType, Category, Wish} from './models/product.model
 import { environment } from '../environments/environment';
 import { ToastrService} from 'ngx-toastr'
 import { map} from 'rxjs/operators'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,8 @@ export class ProductService {
 
   constructor( 
     private httpClient: HttpClient,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private router: Router ) { }
 
   private dataStore: { unapprovedProducts: Product[], products:Product[]} = { unapprovedProducts: [], products: []}
     
@@ -98,6 +100,7 @@ export class ProductService {
         this.dataStore.products.push(response)
         this._products.next(Object.assign({}, this.dataStore).products)
         this.toastr.success('Product Created')
+        this.router.navigate(['']);
       },
       error => {
         this.toastr.error('Product not Created')
