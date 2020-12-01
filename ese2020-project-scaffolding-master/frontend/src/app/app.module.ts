@@ -44,6 +44,8 @@ import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
 import { CategoryCatalogComponent } from './landing-page/category-catalog/category-catalog.component';
 import { ToastrModule } from 'ngx-toastr';
 import { WishlistComponent } from './wishlist/wishlist.component';
+import { ProductDescriptionComponent } from './product-item/product-description/product-description.component';
+import { ProductDetailsComponent } from './product-item/product-description/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { WishlistComponent } from './wishlist/wishlist.component';
     PurchaseDialogComponent,
     CategoryCatalogComponent,
     WishlistComponent,
+    ProductDescriptionComponent,
+    ProductDetailsComponent,
 
   ],
   imports: [

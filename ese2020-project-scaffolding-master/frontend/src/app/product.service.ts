@@ -12,13 +12,13 @@ import { Router } from '@angular/router';
 })
 export class ProductService {
 
-  constructor( 
+  constructor(
     private httpClient: HttpClient,
     private toastr: ToastrService,
     private router: Router ) { }
 
   private dataStore: { unapprovedProducts: Product[], products:Product[]} = { unapprovedProducts: [], products: []}
-    
+
   private _unApprovedProducts = new BehaviorSubject<Product[]>([]);
   readonly unapprovedProducts = this._unApprovedProducts.asObservable();
 
@@ -31,7 +31,7 @@ export class ProductService {
     this.loadProducts();
     this.loadWishlist();
   }
-  
+
   loadUnApprovedProducts(){
     this.httpClient.get<Product[]>(environment.endpointURL+ 'product/unapprovedProducts').subscribe(
       (data: Product[]) => {
@@ -40,7 +40,7 @@ export class ProductService {
         console.log('works')
       },
       error => console.log('Could not load unapproved Products')
-      
+
     );
   }
 
@@ -61,10 +61,10 @@ export class ProductService {
         this.toastr.error('Product not Approved')
       });
   }
-  
-  
 
-  
+
+
+
   // fetch all products from server
   loadProducts(){
     this.httpClient.get<Product[]>(environment.endpointURL+ 'product/productList').subscribe(
@@ -74,7 +74,7 @@ export class ProductService {
         console.log('works')
       },
       error => console.log('Could not load Products')
-      
+
     );
   }
   getProducts(): Observable<Product[]>{
@@ -83,6 +83,10 @@ export class ProductService {
   // Returns all current offers of the specified User. Doesen't require admin rights
   getProductsByUser(userId: string): Observable<Product[]>{
     return this.products.pipe(map(products => products.filter(product => product.userId.toString() == userId)))
+  }
+
+  getProductsByProductId(productId: string): Observable<Product[]>{
+    return this.products.pipe(map(products => products.filter(product => product.productId.toString() === productId)))
   }
 
   getProductsByCategory(category: string): Observable<Product[]>{
@@ -141,7 +145,7 @@ export class ProductService {
         })
       },
       error => console.log('Could not load wishlist')
-      
+
     );
   }
   addToWishlist(product: Product){
@@ -150,7 +154,7 @@ export class ProductService {
         this.dataStore.products.forEach((p,i)=>{
           if(p.productId == product.productId){
             this.dataStore.products[i].onWishlist = true;
-          } 
+          }
         });
         this._products.next(Object.assign({}, this.dataStore).products)
       },
