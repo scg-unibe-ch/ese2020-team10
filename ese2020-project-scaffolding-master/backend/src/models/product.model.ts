@@ -1,4 +1,5 @@
 import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { Review } from './review.model';
 import { Sale } from './sale.model';
 import { User} from './user.model';
 import { Wish } from './wish.model';
@@ -97,6 +98,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             foreignKey: 'productId'
         });
         Product.hasMany(Wish, {
+            foreignKey: 'productId'
+        });
+        Product.hasMany(Review, {
             foreignKey: 'productId'
         });
     }

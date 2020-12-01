@@ -1,21 +1,18 @@
 import express, { Application , Request, Response } from 'express';
 import morgan from 'morgan';
-import { TodoItemController } from './controllers/todoitem.controller';
-import { TodoListController } from './controllers/todolist.controller';
 import { UserController } from './controllers/user.controller';
 import { SecuredController } from './controllers/secured.controller';
 import { ProductController } from './controllers/product.controller';
 import { SaleController} from './controllers/sale.contorller';
 import { Sequelize } from 'sequelize';
-import { TodoList } from './models/todolist.model';
-import { TodoItem } from './models/todoitem.model';
 import { Product} from './models/product.model';
 import { User } from './models/user.model';
 import { Sale} from './models/sale.model';
-
+import { ReviewController} from './controllers/review.controller';
 import cors from 'cors';
 import { WishlistController } from './controllers/wishlist.controller';
 import { Wish } from './models/wish.model';
+import { Review } from './models/review.model';
 
 export class Server {
     private server: Application;
@@ -26,18 +23,16 @@ export class Server {
         this.server = this.configureServer();
         this.sequelize = this.configureSequelize();
 
-        TodoItem.initialize(this.sequelize); // creates the tables if they dont exist
-        TodoList.initialize(this.sequelize);
-        TodoItem.createAssociations();
-        TodoList.createAssociations();
         User.initialize(this.sequelize);
         Product.initialize(this.sequelize);
         Sale.initialize(this.sequelize);
         Wish.initialize(this.sequelize);
+        Review.initialize(this.sequelize);
         Product.createAssociations();
         User.createAssociations();
         Sale.createAssociations();
         Wish.createAssociations();
+        Review.createAssociations();
 
 
         this.sequelize.sync().then(() => {                           // create connection to the database
@@ -67,13 +62,12 @@ export class Server {
             .use(cors())
             .use(express.json())                    // parses an incoming json to an object
             .use(morgan('tiny'))                    // logs incoming requests
-            .use('/todoitem', TodoItemController)   // any request on this path is forwarded to the TodoItemController
-            .use('/todolist', TodoListController)
             .use('/user', UserController)
             .use('/secured', SecuredController)
             .use('/product', ProductController)
             .use('/sale', SaleController)
             .use('/wishlist', WishlistController)
+            .use('/review', ReviewController)
             .options('*', cors(options))
             .use('/src/public/uploads', express.static('./src/public/uploads'))
             // this is the message you get if you open http://localhost:3000/ when the server is running

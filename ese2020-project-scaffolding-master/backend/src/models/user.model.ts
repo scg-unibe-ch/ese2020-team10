@@ -1,6 +1,6 @@
-import { TodoItem, TodoItemAttributes, TodoItemCreationAttributes } from './todoitem.model';
 import { Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { Product} from './product.model';
+import { Review } from './review.model';
 import { Sale} from './sale.model';
 import { Wish } from './wish.model';
 
@@ -95,6 +95,9 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
             foreignKey: 'buyerId'
         });
         User.hasMany(Wish, {
+            foreignKey: 'userId'
+        });
+        User.hasMany(Review, {
             foreignKey: 'userId'
         });
     }
