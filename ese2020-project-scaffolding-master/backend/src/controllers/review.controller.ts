@@ -1,10 +1,6 @@
 import express, { Router, Request, Response } from 'express';
-import { UserService } from '../services/user.service';
 import { verifyToken } from '../middlewares/checkAuth';
-import { userInfo } from 'os';
-import { SaleService } from '../services/sale.service';
 import { ReviewService } from '../services/review.service';
-import { Sale } from '../models/sale.model';
 
 const reviewController: Router = express.Router();
 const reviewService =  new ReviewService();

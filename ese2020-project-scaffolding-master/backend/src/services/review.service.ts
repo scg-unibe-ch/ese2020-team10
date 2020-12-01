@@ -1,9 +1,4 @@
-import { UserAttributes, User } from '../models/user.model';
-import { LoginResponse, LoginRequest } from '../models/login.model';
-import { Product, } from '../models/product.model';
-import { SaleAttributes, Sale } from '../models/sale.model';
-import { PurchaseRequest, PurchaseResponse } from '../models/purchase.model';
-import { Server} from '../server';
+import {  Sale } from '../models/sale.model';
 import { SaleService } from './sale.service';
 import { Review} from '../models/review.model';
 
