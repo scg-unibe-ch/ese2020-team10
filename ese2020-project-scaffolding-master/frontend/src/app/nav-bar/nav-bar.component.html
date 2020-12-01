@@ -1,13 +1,13 @@
-<nav class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm p-3 mb-5 rounded" style="height: 80px; background-color: rgb(226, 230, 241)">
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light shadow-sm p-3 mb-5 rounded" style="background-color: rgb(226, 230, 241)">
   <a class="navbar-brand" routerLink="/">
-    <img src="assets/icons/eduardologo.png" height="40px" alt="eduardo-logo">
+    <img src="assets/icons/eduardologo.png" style="height: 40px" alt="eduardo-logo">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="navbar-nav ml-auto">
-<!--      <img src = "assets/icons/heart-fill.svg" class="mat-icon" routerLink="/wishlist" [hidden]='!(loggedIn | async)'>-->
       <a class="nav-link" routerLink="/wishlist" [hidden]='!(loggedIn | async)'><i class="far fa-heart"></i> Wishlist</a>
       <a class="nav-link" routerLink="/admin" [hidden]='!(isAdmin | async)'><i class="far fa-user"></i> Admin</a>
       <a class="nav-link" routerLink="/createOffer" *ngIf='loggedIn | async'><i class="fas fa-plus"></i> Create Offer</a>
