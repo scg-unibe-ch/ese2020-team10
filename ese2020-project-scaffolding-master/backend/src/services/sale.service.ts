@@ -86,5 +86,12 @@ export class SaleService {
             }
         });
     }
+    public getSalesByProduct(productId: number): Promise<Sale[]> {
+        return Sale.findAll({
+            where: {
+                productId: productId
+            }
+        });
+    }
 
 }

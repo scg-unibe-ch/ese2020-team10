@@ -1,12 +1,13 @@
 import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
 import { User} from './user.model';
 import {Product} from './product.model';
+import { Review } from './review.model';
 
 
 
 
 export interface SaleAttributes {
-    SaleId: number;
+    saleId: number;
     productId: number;
     buyerId: number;
     sellerId: number;
@@ -17,10 +18,10 @@ export interface SaleAttributes {
     amountOfHours?: number;
 }
 
-export interface SaleCreationAttributes extends Optional<SaleAttributes, 'SaleId'> { }
+export interface SaleCreationAttributes extends Optional<SaleAttributes, 'saleId'> { }
 
 export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implements SaleAttributes {
-    SaleId: number;
+    saleId: number;
     productId: number;
     buyerId: number;
     sellerId: number;
@@ -32,7 +33,7 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
 
     public static initialize(sequelize: Sequelize) {
         Sale.init({
-            SaleId: {
+            saleId: {
                 type: DataTypes.INTEGER,
                 autoIncrement: true,
                 primaryKey: true
@@ -88,6 +89,9 @@ export class Sale extends Model<SaleAttributes, SaleCreationAttributes> implemen
             targetKey: 'productId',
             onDelete: 'set null',
             foreignKey: 'productId'
+        });
+        Sale.hasOne(Review, {
+            foreignKey: 'reviewId'
         });
     }
 }
