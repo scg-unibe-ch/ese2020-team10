@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {Product, Sale, Type} from './models/product.model';
+import {Product, Sale, ProductType, Category, Wish} from './models/product.model';
 import { environment } from '../environments/environment';
 import { ToastrService} from 'ngx-toastr'
+import { map} from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +15,21 @@ export class ProductService {
     private httpClient: HttpClient,
     private toastr: ToastrService) { }
 
-  private dataStore: { unapprovedProducts: Product[]} = { unapprovedProducts: []}
+  private dataStore: { unapprovedProducts: Product[], products:Product[]} = { unapprovedProducts: [], products: []}
+    
   private _unApprovedProducts = new BehaviorSubject<Product[]>([]);
   readonly unapprovedProducts = this._unApprovedProducts.asObservable();
-  
+
+  private _products = new BehaviorSubject<Product[]>([]);
+  readonly products = this._products.asObservable();
+
   // fetch all unapproved products from server
+  load(){
+    this.loadUnApprovedProducts();
+    this.loadProducts();
+    this.loadWishlist();
+  }
+  
   loadUnApprovedProducts(){
     this.httpClient.get<Product[]>(environment.endpointURL+ 'product/unapprovedProducts').subscribe(
       (data: Product[]) => {
@@ -45,43 +56,129 @@ export class ProductService {
         this.toastr.success('Product approved')
       },
       error => {
-        console.log('Could not remove item from basket')
         this.toastr.error('Product not Approved')
       });
   }
   
   
-  
-  
-  products: Observable<Product[]>;
 
-  ngOnInit(): void {
-    this.getProducts();
+  
+  // fetch all products from server
+  loadProducts(){
+    this.httpClient.get<Product[]>(environment.endpointURL+ 'product/productList').subscribe(
+      (data: Product[]) => {
+        this.dataStore.products = data;
+        this._products.next(Object.assign({}, this.dataStore).products);
+        console.log('works')
+      },
+      error => console.log('Could not load Products')
+      
+    );
   }
-  // Returns all current offers
-  getProducts(): Observable<Product[]> {
-    return this.products = this.httpClient.get<Product[]>(environment.endpointURL + 'product/productList');
-  }
-
-  getProductsByCategory(category: string): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(environment.endpointURL + 'product/productByCategory/' + category);
-  }
-  // Returns all current offers of the specified type (sell, lend or hire)
-  getProductsByType(type: Type): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(environment.endpointURL + 'product/productByType/' + type);
+  getProducts(): Observable<Product[]>{
+    return this.products;
   }
   // Returns all current offers of the specified User. Doesen't require admin rights
   getProductsByUser(userId: string): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(environment.endpointURL + 'product/productByUser/' + userId);
+    return this.products.pipe(map(products => products.filter(product => product.userId.toString() == userId)))
+  }
+
+  getProductsByCategory(category: string): Observable<Product[]>{
+    return this.products.pipe(map(products => products.filter(product => product.category.toString() == category)))
+  }
+
+  getProductsByType(type: string): Observable<Product[]>{
+    return this.products.pipe(map(products => products.filter(product => product.type.toString() == type)))
   }
   // Adds a completly new Product. It belongs automaticly to the currently logged in user
   // tslint:disable-next-line:typedef
-  addProducts(product: Product) {
-    this.httpClient.post(environment.endpointURL + 'product/add', {
-      product
-    });
+  createProduct(product: FormData){
+    this.httpClient.post<Product>(environment.endpointURL + 'product/newProduct', product).subscribe(
+      response => {
+        this.dataStore.products.push(response)
+        this._products.next(Object.assign({}, this.dataStore).products)
+        this.toastr.success('Product Created')
+      },
+      error => {
+        this.toastr.error('Product not Created')
+      }
+  );
   }
-  // Make changes to an existin Product. Make sure to use the original productId as it can't be changed
+  deleteProduct(productId){
+    this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe(
+      response => {
+        this.dataStore.products.forEach((t, i) => {
+          if (t.productId === productId) {
+            this.dataStore.products.splice(i,1);
+          }
+        });
+
+        this._products.next(Object.assign({}, this.dataStore).products)
+        this.toastr.success('Product deleted')
+      },
+      error => {
+        this.toastr.error('Could not delete Product')
+      });
+  }
+
+
+  // load Wishlist
+  loadWishlist(){
+    this.httpClient.get(environment.endpointURL + 'wishlist').subscribe(
+      (data: Wish[]) => {
+        data.forEach((wish) => {
+          this.dataStore.products.forEach((p,i) =>{
+            if(p.productId == wish.productId){
+              this.dataStore.products[i].onWishlist = true;
+            } else {
+              this.dataStore.products[i].onWishlist == false;
+            }
+          });
+          this._products.next(Object.assign({}, this.dataStore).products)
+        })
+      },
+      error => console.log('Could not load wishlist')
+      
+    );
+  }
+  addToWishlist(product: Product){
+    this.httpClient.post<Product>(environment.endpointURL + 'wishlist/add/' + product.productId, {}).subscribe(
+      data => {
+        this.dataStore.products.forEach((p,i)=>{
+          if(p.productId == product.productId){
+            this.dataStore.products[i].onWishlist = true;
+          } 
+        });
+        this._products.next(Object.assign({}, this.dataStore).products)
+      },
+      error => console.log('Could not add item to wishlist')
+    )
+  }
+  removeFromWishlist(product: Product){
+    this.httpClient.delete(environment.endpointURL + 'wishlist/remove/' + product.productId).subscribe(
+      response => {
+        this.dataStore.products.forEach((p,i) => {
+          if (p.productId == product.productId) {
+            this.dataStore.products[i].onWishlist = false;
+          }
+        });
+
+        this._products.next(Object.assign({}, this.dataStore).products)
+      },
+      error => console.log('Could not remove item from wishlist')
+    );
+  }
+  clearLocalWishlist(){
+    this.dataStore.products.forEach((p,i)=>{
+      this.dataStore.products[i].onWishlist = false;
+    })
+  }
+
+  getWishlist():Observable<Product[]>{
+    return this.products.pipe(map(products => products.filter(product => product.onWishlist == true)))
+  }
+
+  // Make changes to an existing Product. Make sure to use the original productId as it can't be changed
   // tslint:disable-next-line:typedef
   updateProduct(product: Product, productId: number){
     this.httpClient.put(environment.endpointURL + 'product/' + productId, {
@@ -96,5 +193,8 @@ export class ProductService {
   getBoughtSales(): Observable<Sale[]>{
     return this.httpClient.get<Sale[]>(environment.endpointURL + 'sale/bought');
 
+  }
+  ngOnInit(): void {
+    this.loadProducts();
   }
 }

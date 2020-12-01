@@ -27,7 +27,7 @@ import {ProductService} from "../product.service";
   }
 
   ngOnInit(): void{
-    this.products = this.productService.getProducts();
+    this.products = this.productService.products;
   }
 
   }
