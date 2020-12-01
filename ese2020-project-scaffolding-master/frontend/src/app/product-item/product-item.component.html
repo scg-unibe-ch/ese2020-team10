@@ -55,7 +55,7 @@
 
      </div>
       <hr>
-      <img src="{{iconPath()}}" id="wishlistIcon" (click)="changeWishlist()">
+      <img *ngIf="(loggedIn | async )" src="{{iconPath()}}" id="wishlistIcon" (click)="changeWishlist()">
       <button type="button" class="btn btn-md btn-info" *ngIf="(userId | async) != product.userId.toString() && (loggedIn | async) && product.status == true && !(isAdmin | async)" (click)="openPurchaseDialog()" style="float:right">Buy</button>
       <button type="button" class="btn btn-md btn-outline-danger" *ngIf="((userId | async)==product.userId.toString())" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
       <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(product.approved == false && (isAdmin | async))" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
