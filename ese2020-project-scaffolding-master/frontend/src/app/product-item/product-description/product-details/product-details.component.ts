@@ -8,6 +8,7 @@ import {ToastrService} from "ngx-toastr";
 import {ProductService} from "../../../product.service";
 import {environment} from "../../../../environments/environment";
 import {PurchaseDialogComponent} from "../../purchase-dialog/purchase-dialog.component";
+import {Router} from "@angular/router";
 
 
 export interface DialogData {
@@ -39,7 +40,8 @@ export class ProductDetailsComponent implements OnInit {
               private httpClient: HttpClient,
               public dialog: MatDialog,
               public toastr: ToastrService,
-              public productService: ProductService) {
+              public productService: ProductService,
+              private router: Router) {
   }
   endpointURL = environment.endpointURL;
 
@@ -85,7 +87,8 @@ export class ProductDetailsComponent implements OnInit {
       "deliveryAddress": this.deliveryAddress,
       "amountOfHours": this.amountOfHours
     }).subscribe((res:any) =>{
-        this.toastr.success('Bought successfully')
+        this.toastr.success('Bought successfully');
+        this.router.navigate(['']);
       },
       (error: any) => {
         this.toastr.error('Could not be purchased')
