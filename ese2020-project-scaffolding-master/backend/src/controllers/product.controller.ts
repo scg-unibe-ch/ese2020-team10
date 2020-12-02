@@ -77,7 +77,7 @@ productController.delete('/:id', verifyToken,
         .catch(err => res.status(500).send(err));
 });
 
-productController.post('/:id', verifyToken,
+productController.put('/:id', verifyToken,
 (req: Request, res: Response) => {
     Product.findByPk(req.params.id)
         .then(found => {
