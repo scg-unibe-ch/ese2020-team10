@@ -4,9 +4,13 @@
 </div>
 
 <mat-card *ngIf="loggedIn | async">
-  <h1 style="padding-left: 1rem;">Reviews</h1>
   <form [formGroup]="formGroup">
     <h3 style="padding-left: 1rem;">Your Review</h3>
+    <div>
+      <ngb-rating max = 5 [(rate)]="currentRate" style="outline: none;"></ngb-rating>
+      <b style="margin-left: 10px;">{{currentRate}} /5 stars</b>
+    </div>
+    <br>
     <mat-form-field appearance="fill">
       <mat-label>Review</mat-label>
       <textarea matInput placeholder="Review" formControlName="reviewText" maxlength="5000" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
@@ -17,7 +21,7 @@
   </mat-form-field>
   <br>
   <br>
-  <button mat-raised-button color="primary" (click)="onSubmit()">Publish Review</button>
+  <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!formGroup.valid||currentRate==0">Publish Review</button>
   </form>
 </mat-card>
 

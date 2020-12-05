@@ -16,8 +16,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { TodoListComponent } from './todo-list/todo-list.component';
-import { TodoItemComponent } from './todo-list/todo-item/todo-item.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AuthInterceptor } from './auth/auth.interceptor';
@@ -38,21 +36,20 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { ProductfilterPipe } from './productfilter.pipe';
 import { PurchaseDialogComponent } from './product-item/purchase-dialog/purchase-dialog.component';
-import {MatExpansionModule} from "@angular/material/expansion";
-import {MatStepperModule} from "@angular/material/stepper";
-import {STEPPER_GLOBAL_OPTIONS} from "@angular/cdk/stepper";
+import { MatExpansionModule } from "@angular/material/expansion";
+import { MatStepperModule } from "@angular/material/stepper";
+import { STEPPER_GLOBAL_OPTIONS } from "@angular/cdk/stepper";
 import { CategoryCatalogComponent } from './landing-page/category-catalog/category-catalog.component';
 import { ToastrModule } from 'ngx-toastr';
 import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProfileUpdateComponent } from './profile/profile-update/profile-update.component';
 import { ProductDescriptionComponent } from './product-item/product-description/product-description.component';
 import { ProductDetailsComponent } from './product-item/product-description/product-details/product-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoListComponent,
-    TodoItemComponent,
     UserLoginComponent,
     UserRegistrationComponent,
     NavBarComponent,
@@ -96,7 +93,8 @@ import { ProductDetailsComponent } from './product-item/product-description/prod
     MatExpansionModule,
     MatStepperModule,
     CommonModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [
     {
