@@ -3,4 +3,22 @@
   <app-product-details [productInfo] = "productInfo"></app-product-details>
 </div>
 
+<mat-card *ngIf="loggedIn | async">
+  <h1 style="padding-left: 1rem;">Reviews</h1>
+  <form [formGroup]="formGroup">
+    <h3 style="padding-left: 1rem;">Your Review</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Review</mat-label>
+      <textarea matInput placeholder="Review" formControlName="reviewText" maxlength="5000" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+      <mat-hint mat-align="end">{{reviewText.value.length}} / 5000</mat-hint>
+      <mat-error *ngIf="((reviewText.invalid && reviewText.touched) || reviewText.dirty) && reviewText.errors?.required">
+        Review is empty
+      </mat-error>
+  </mat-form-field>
+  <br>
+  <br>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Publish Review</button>
+  </form>
+</mat-card>
 
+<br>
