@@ -10,9 +10,9 @@
         </h1>
       </div>
       <div style="float: right">
-        <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price}} CHF</h1>
-        <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price}} CHF/h</h1>
-        <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price}} CHF/h</h1>
+        <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price | number : '1.2-2'}} CHF</h1>
+        <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price | number : '1.2-2'}} CHF/h</h1>
+        <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price | number : '1.2-2'}} CHF/h</h1>
       </div>
       <div style="clear:left;"></div>
       <small *ngIf="product.type == 'Sell'">Product to buy.</small>

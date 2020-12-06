@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, NgZone, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -33,6 +33,8 @@ export class CreateOfferComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   thirdFormGroup: FormGroup;
+  isFileChosen = false;
+  fileName = '';
 
 
   ngOnInit(): void {
@@ -57,9 +59,11 @@ export class CreateOfferComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
+      this.isFileChosen = true;
       this.thirdFormGroup.patchValue({
         fileSource: file
       });
+      this.fileName = file.name;
     }
   }
 
@@ -87,7 +91,6 @@ export class CreateOfferComponent implements OnInit {
   get location() {
     return this.thirdFormGroup.get('location');
   }
-
  
 
   onSubmit(){
