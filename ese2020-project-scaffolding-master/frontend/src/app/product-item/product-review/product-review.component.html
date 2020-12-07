@@ -1,4 +1,6 @@
-<mat-card>
+<small *ngIf="alreadyReviewed != null">Already reviewed.</small>
+
+<mat-card *ngIf="alreadyReviewed == null">
   <form [formGroup]="formGroup">
     <h3 style="padding-left: 1rem;">Your Review</h3>
     <div>

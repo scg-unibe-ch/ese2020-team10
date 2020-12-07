@@ -86,7 +86,6 @@
                 <p>Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
                 <p *ngIf="sold.deliveryAddress != null">Delivery Address: {{sold.deliveryAddress}}</p>
               </mat-card-content>
-              <a (click)="showReview = true">Show reviews</a>
               <a href="/review/{{sold.productId}}">Show reviews</a>
             </mat-card>
           </div>

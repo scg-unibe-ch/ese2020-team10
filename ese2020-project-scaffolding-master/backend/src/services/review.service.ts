@@ -19,7 +19,7 @@ export class ReviewService {
         const review = Review.findOne({
             where: {
                 [Op.and]: [
-                    { buyerId: userId },
+                    { userId: userId },
                     { productId: Number(productId) }
                 ]
             }

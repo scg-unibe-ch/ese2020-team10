@@ -23,6 +23,7 @@ export class ProductReviewComponent implements OnInit {
   formGroup: FormGroup;
   loggedIn: Observable<boolean>;
   currentRate = 0;
+  alreadyReviewed: Observable<Review>;
 
   constructor(private auth: AuthService,
               private httpClient: HttpClient,
@@ -38,6 +39,7 @@ export class ProductReviewComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       reviewText: ['', Validators.required],
     });
+    this.productService.getReviewsByProductAndUser(this.productId).subscribe(review => this.alreadyReviewed = review as Review);
   }
 
   get reviewText() {
