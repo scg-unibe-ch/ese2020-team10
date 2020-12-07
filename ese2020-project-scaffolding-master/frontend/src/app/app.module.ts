@@ -47,6 +47,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { ProfileUpdateComponent } from './profile/profile-update/profile-update.component';
 import { ProductDescriptionComponent } from './product-item/product-description/product-description.component';
 import { ProductDetailsComponent } from './product-item/product-description/product-details/product-details.component';
+import { TypeCatalogComponent } from './landing-page/type-catalog/type-catalog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ProductDetailsComponent } from './product-item/product-description/prod
     ProfileUpdateComponent,
     ProductDescriptionComponent,
     ProductDetailsComponent,
+    TypeCatalogComponent,
 
   ],
   imports: [

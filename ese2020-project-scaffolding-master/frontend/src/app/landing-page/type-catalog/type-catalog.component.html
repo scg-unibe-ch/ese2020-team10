@@ -1,0 +1,10 @@
+<br>
+<br>
+<h1 style="margin-top: 10px">Product Catalog by {{type}}</h1>
+
+<div class="row">
+  <div *ngFor="let product of products | async">
+      <app-product-item [product]="product"></app-product-item>
+  </div>
+</div>
+
