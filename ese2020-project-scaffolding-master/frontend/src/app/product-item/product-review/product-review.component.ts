@@ -23,6 +23,7 @@ export class ProductReviewComponent implements OnInit {
   formGroup: FormGroup;
   loggedIn: Observable<boolean>;
   currentRate = 0;
+  isReviewed = false;
 
   constructor(private auth: AuthService,
               private httpClient: HttpClient,
@@ -60,6 +61,7 @@ export class ProductReviewComponent implements OnInit {
         (error: any) => {
           this.toastr.error('Review could not be sent')
         });
+        this.isReviewed = true;
     }
   }
 }
