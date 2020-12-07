@@ -15,7 +15,7 @@ export class UserLoginComponent implements OnInit {
 
   userName = '';
   password = '';
-
+  hidePassword = true;
   loggedIn = new Observable<boolean>();
   isAdmin = new Observable<boolean>();
 
