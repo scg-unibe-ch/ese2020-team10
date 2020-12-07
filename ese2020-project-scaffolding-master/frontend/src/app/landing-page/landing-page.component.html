@@ -61,7 +61,7 @@
     </button>
   </h1>
   <div class="row">
-    <div *ngFor="let product of sellProd | slice:sellProd.length-2:sellProd.length">
+    <div *ngFor="let product of sellProd | slice:sellProd.length-2:sellProd.length" class="col-md-6">
       <app-product-item [product] = "product"></app-product-item>
     </div>
   </div>
@@ -73,7 +73,7 @@
    </button>
   </h1>
   <div class="row">
-    <div *ngFor="let product of lendProd | slice:lendProd.length-2:lendProd.length">
+    <div *ngFor="let product of lendProd | slice:lendProd.length-2:lendProd.length" class="col-md-6">
       <app-product-item [product] = "product"></app-product-item>
     </div>
   </div>
@@ -85,7 +85,7 @@
     </button>
   </h1>
   <div class="row">
-    <div *ngFor="let product of hireProd | slice:hireProd.length-2:hireProd.length">
+    <div *ngFor="let product of hireProd | slice:hireProd.length-2:hireProd.length" class="col-md-6">
       <app-product-item [product] = "product"></app-product-item>
     </div>
   </div>
