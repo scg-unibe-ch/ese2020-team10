@@ -6,18 +6,19 @@
   </div>
 
   <div class="col">
-    <h1>Reviews</h1>
-    <div *ngFor="let review of reviews | async">
-      <div class="card" style="width: 18rem;">
-        <div class="body">
-          <h5 class="card-title">Review from {{review.userName}}</h5>
-          <ngb-rating [rate]="review.rating" max = 5></ngb-rating>
+    <mat-card>
+      <h1>Reviews</h1>
+      <div *ngFor="let review of reviews | async">
+        <div class="body" style="margin-bottom: 30px;">
+          <b class="card-title"><mat-icon style="align-content: center;">face</mat-icon>{{review.userName}}</b>
+          <br/>
+          <ngb-rating readonly="true" style="outline: none;" [rate]="review.rating" max = 5></ngb-rating>
           <p class="card-text">{{review.reviewText}}</p>
+          <p class="card-text">Reviewed on {{review.createdAt| date: 'MMMM d, y'}}</p>
         </div>
-      </div>
     </div>
+    </mat-card>
   </div>
-
 </div>
 
 

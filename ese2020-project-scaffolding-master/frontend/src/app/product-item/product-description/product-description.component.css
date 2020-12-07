@@ -1,4 +1,4 @@
-.mat-card{
+.mat-card {
     width: 50%;
     height: auto;
     display: block;
@@ -8,3 +8,8 @@
     background-color: white;
     border-radius: 1rem;
   }
+
+.mat-icon {
+  vertical-align: middle;
+  margin-right: 10px;
+}
