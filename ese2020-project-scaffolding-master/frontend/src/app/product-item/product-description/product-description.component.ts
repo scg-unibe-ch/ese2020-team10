@@ -3,7 +3,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from "@angular/router";
 import { ProductService } from "../../product.service";
 import { Observable } from "rxjs";
-import { Product, Review} from "../../models/product.model";
+import {Product, Review, Sale} from "../../models/product.model";
 import { environment } from "../../../environments/environment";
 import { take } from 'rxjs/operators';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -27,7 +27,7 @@ export class ProductDescriptionComponent implements OnInit {
   loggedIn= new Observable<boolean>();
   currentRate = 0;
   reviews: Observable<Review[]>;
-  review: Review[];
+  reviewAllowed: Sale;
 
   constructor(private auth: AuthService,
     private httpClient: HttpClient,
@@ -48,6 +48,7 @@ export class ProductDescriptionComponent implements OnInit {
       reviewText: ['', Validators.required],
     });
     this.reviews = this.productService.getReviewsByProduct(this.productId);
+    this.productService.getSalesForReview(this.productId).subscribe(sales => {this.reviewAllowed = sales as Sale});
   }
 
   get reviewText() {

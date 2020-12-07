@@ -206,6 +206,10 @@ export class ProductService {
     return this.httpClient.get<Review[]>(environment.endpointURL + 'review/' + productId);
   }
 
+  getSalesForReview(productId: string): Observable<Sale>{
+    return this.httpClient.get<Sale>(environment.endpointURL + 'sale/' + productId);
+  }
+
   ngOnInit(): void {
     this.loadProducts();
   }

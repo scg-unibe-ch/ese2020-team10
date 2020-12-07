@@ -1,6 +1,5 @@
 <br>
 
-
 <div class="row">
   <div *ngFor="let productInfo of product | async" class="col">
     <app-product-details [productInfo] = "productInfo"></app-product-details>
@@ -22,7 +21,7 @@
 </div>
 
 
-<mat-card *ngIf="loggedIn | async">
+<mat-card *ngIf="(loggedIn | async) && (reviewAllowed != null)">
   <form [formGroup]="formGroup">
     <h3 style="padding-left: 1rem;">Your Review</h3>
     <div>

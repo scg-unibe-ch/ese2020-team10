@@ -20,6 +20,10 @@ saleController.get('/bought', verifyToken, (req: Request, res: Response) => {
     saleService.getBoughtSales(req.body.tokenPayload.userId).then(bought => res.send(bought)).catch(err => res.status(500).send(err));
 });
 
-
+saleController.get('/:productId', verifyToken,
+    (req: Request, res: Response) => {
+    saleService.getSalesForReview(req.params.productId, req.body.tokenPayload.userId).then(found =>
+        res.send(found)).catch(err => res.status(500).send(err));
+});
 
 export const SaleController: Router = saleController;
