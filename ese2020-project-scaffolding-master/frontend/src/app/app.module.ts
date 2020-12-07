@@ -47,6 +47,8 @@ import { ProductDescriptionComponent } from './product-item/product-description/
 import { ProductDetailsComponent } from './product-item/product-description/product-details/product-details.component';
 import { TypeCatalogComponent } from './landing-page/type-catalog/type-catalog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ProductReviewComponent } from './product-item/product-review/product-review.component';
+import { ReviewsComponent } from './profile/reviews/reviews.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProductDescriptionComponent,
     ProductDetailsComponent,
     TypeCatalogComponent,
+    ProductReviewComponent,
+    ReviewsComponent,
 
   ],
   imports: [

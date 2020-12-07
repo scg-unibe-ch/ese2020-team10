@@ -19,5 +19,10 @@ reviewController.get('/:productId',  (req: Request, res: Response) => {
         res.send(err);
     });
 });
+reviewController.get('/reviewByProduct/:productId', verifyToken,
+    (req: Request, res: Response) => {
+        reviewService.getReviewsByProductAndUser(req.params.productId, req.body.tokenPayload.userId).then(found =>
+            res.send(found)).catch(err => res.status(500).send(err));
+    });
 
 export const ReviewController: Router = reviewController;

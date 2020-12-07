@@ -86,6 +86,8 @@
                 <p>Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
                 <p *ngIf="sold.deliveryAddress != null">Delivery Address: {{sold.deliveryAddress}}</p>
               </mat-card-content>
+              <a (click)="showReview = true">Show reviews</a>
+              <a href="/review/{{sold.productId}}">Show reviews</a>
             </mat-card>
           </div>
         </div>
@@ -99,6 +101,7 @@
                 <p *ngIf="sold.amountOfHours != null">Price at point of sale: {{sold.amountOfHours}} hours à {{sold.pointOfSalePrice}} CHF</p>
                 <p *ngIf="sold.amountOfHours == null">Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
               </mat-card-content>
+              <a href="/review/{{sold.productId}}">Show reviews</a>
             </mat-card>
           </div>
         </div>
@@ -111,6 +114,7 @@
                 <p *ngIf="sold.amountOfHours != null">Price at point of sale: {{sold.amountOfHours}} hours à {{sold.pointOfSalePrice}} CHF</p>
                 <p *ngIf="sold.amountOfHours == null">Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
               </mat-card-content>
+              <a href="/review/{{sold.productId}}">Show reviews</a>
             </mat-card>
           </div>
         </div>
@@ -130,6 +134,7 @@
               <mat-card-content>
                 <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
               </mat-card-content>
+              <app-product-review [productId]="bought.productId"></app-product-review>
             </mat-card>
           </div>
         </div>
@@ -142,6 +147,7 @@
                 <p *ngIf="bought.amountOfHours != null">Price at point of sale: {{bought.amountOfHours}} hours à {{bought.pointOfSalePrice}} CHF</p>
                 <p *ngIf="bought.amountOfHours == null">Price at point of sale: {{bought.pointOfSalePrice}} CHF</p>
               </mat-card-content>
+              <app-product-review [productId]="bought.productId"></app-product-review>
             </mat-card>
           </div>
         </div>
@@ -154,6 +160,7 @@
                 <p *ngIf="bought.amountOfHours != null">Price at point of sale: {{bought.amountOfHours}} hours à {{bought.pointOfSalePrice}} CHF</p>
                 <p *ngIf="bought.amountOfHours == null">Price at point of sale: {{bought.pointOfSalePrice}} CHF</p>
               </mat-card-content>
+              <app-product-review [productId]="bought.productId"></app-product-review>
             </mat-card>
           </div>
         </div>

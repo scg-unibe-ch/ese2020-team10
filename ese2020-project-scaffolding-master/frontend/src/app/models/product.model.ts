@@ -52,6 +52,7 @@ export type Category = 'Accessories' | 'AudioTV' | 'Books' | 'Clothing' | 'Elect
 export type ProductType = 'Sell' | 'Lend' | 'Hire'
 
 export class Sale {
+  productId: number;
   buyerId: number;
   sellerId: number;
   pointOfSalePrice: number;
@@ -75,4 +76,5 @@ export class Review {
   userName: string;
   rating: number;
   reviewText: string;
+  createdAt: string;
 }

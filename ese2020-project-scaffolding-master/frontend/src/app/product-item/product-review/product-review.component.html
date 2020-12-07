@@ -1,0 +1,21 @@
+<mat-card>
+  <form [formGroup]="formGroup">
+    <h3 style="padding-left: 1rem;">Your Review</h3>
+    <div>
+      <ngb-rating max = 5 [(rate)]="currentRate" style="outline: none;"></ngb-rating>
+      <b style="margin-left: 10px;">{{currentRate}} /5 stars</b>
+    </div>
+    <br>
+    <mat-form-field appearance="fill">
+      <mat-label>Review</mat-label>
+      <textarea matInput placeholder="Review" formControlName="reviewText" maxlength="100" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+      <mat-hint mat-align="end">{{reviewText.value.length}} / 100</mat-hint>
+      <mat-error *ngIf="((reviewText.invalid && reviewText.touched) || reviewText.dirty) && reviewText.errors?.required">
+        Review is empty
+      </mat-error>
+    </mat-form-field>
+    <br>
+    <br>
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!formGroup.valid||currentRate==0">Publish Review</button>
+  </form>
+</mat-card>
