@@ -81,15 +81,16 @@
             Please only enter numbers
           </mat-error>
         </mat-form-field>
-        <mat-form-field *ngIf=isShippable() class="align-top">
+        <mat-form-field *ngIf=isService() class="align-top">
           <mat-label>Location</mat-label>
           <input matInput placeholder="Location" formControlName="location">
         </mat-form-field>
         <br>
         <br>
-        <div class="custom-file"  style="margin-left: 1rem; width: 97%;">
-          <input (change)="onFileChange($event)" formControlName = "file" type="file" class="custom-file-input" id="customFile">
-          <label class="custom-file-label" for="customFile">Choose Picture</label>
+        <div class="custom-file" style="margin-left: 1rem; width: 97%;">
+          <input type="file" id="customFile" class="custom-file-input" #fileInput (change)="onFileChange($event)" formControlName = "file">
+          <label class="custom-file-label" *ngIf=!isFileChosen>Choose Picture</label>
+          <label class="custom-file-label" *ngIf=isFileChosen>{{fileName}}</label>
         </div>
         <br>
         <div>

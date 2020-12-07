@@ -1,6 +1,44 @@
 <br>
-<div *ngFor="let productInfo of product | async">
-  <app-product-details [productInfo] = "productInfo"></app-product-details>
+
+<div class="row">
+  <div *ngFor="let productInfo of product | async" class="col-sm-8">
+    <app-product-details [productInfo] = "productInfo"></app-product-details>
+  </div>
+
+  <div class="col-sm-4">
+    <mat-card>
+      <h1>Reviews</h1>
+      <div *ngFor="let review of reviews | async">
+        <div class="body" style="margin-bottom: 30px;">
+          <b class="card-title"><mat-icon style="align-content: center;">face</mat-icon>{{review.userName}}</b>
+          <br/>
+          <ngb-rating readonly="true" style="outline: none;" [rate]="review.rating" max = 5></ngb-rating>
+          <p class="card-text">{{review.reviewText}}</p>
+          <p class="card-text">Reviewed on {{review.createdAt| date: 'MMMM d, y'}}</p>
+        </div>
+    </div>
+    </mat-card>
+    <mat-card *ngIf="(loggedIn | async) && (reviewAllowed != null)">
+      <form [formGroup]="formGroup">
+        <h3 style="padding-left: 1rem;">Your Review</h3>
+        <div>
+          <ngb-rating max = 5 [(rate)]="currentRate" style="outline: none;"></ngb-rating>
+          <b style="margin-left: 10px;">{{currentRate}} /5 stars</b>
+        </div>
+        <br>
+        <mat-form-field appearance="fill">
+          <mat-label>Review</mat-label>
+          <textarea matInput placeholder="Review" formControlName="reviewText" maxlength="100" cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"></textarea>
+          <mat-hint mat-align="end">{{reviewText.value.length}} / 100</mat-hint>
+          <mat-error *ngIf="((reviewText.invalid && reviewText.touched) || reviewText.dirty) && reviewText.errors?.required">
+            Review is empty
+          </mat-error>
+        </mat-form-field>
+        <br>
+        <br>
+        <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!formGroup.valid||currentRate==0">Publish Review</button>
+      </form>
+    </mat-card>
+  </div>
 </div>
-
-
+<br>

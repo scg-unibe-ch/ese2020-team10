@@ -66,3 +66,13 @@ export class Wish {
   userId: number;
   productId: number;
 }
+
+export class Review {
+  reviewId: number;
+  saleId: number;
+  productId: number;
+  userId: number;
+  userName: string;
+  rating: number;
+  reviewText: string;
+}

@@ -94,4 +94,20 @@ export class SaleService {
         });
     }
 
+    public getSalesForReview(productId: string, userId: number): Promise<Sale> {
+        const { Op } = require('sequelize');
+        const sale = Sale.findOne({
+            where: {
+                [Op.and]: [
+                    { buyerId: userId },
+                    { productId: Number(productId) }
+                ]
+            }
+        });
+        if (!sale) {
+            return Promise.reject({message: 'No sale with this product and user'});
+        }
+        return sale;
+    }
+
 }
