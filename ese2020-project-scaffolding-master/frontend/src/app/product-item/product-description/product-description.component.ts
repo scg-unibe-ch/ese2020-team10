@@ -19,23 +19,14 @@ import { ToastrService} from 'ngx-toastr';
 })
 export class ProductDescriptionComponent implements OnInit {
 
-  @ViewChild('autosize') autosize: CdkTextareaAutosize;
   productId: string;
   product: Observable<Product[]>;
-  endpointURL = environment.endpointURL;
-  formGroup: FormGroup;
-  loggedIn= new Observable<boolean>();
-  currentRate = 0;
   reviews: Observable<Review[]>;
   reviewAllowed: Sale;
 
   constructor(private auth: AuthService,
-    private httpClient: HttpClient,
     private route: ActivatedRoute,
-    private productService: ProductService,
-    private _ngZone: NgZone,
-    private formBuilder: FormBuilder,
-    public toastr: ToastrService) {}
+    private productService: ProductService) {}
 
   ngOnInit(): void {
     this.productService.load();
@@ -43,35 +34,8 @@ export class ProductDescriptionComponent implements OnInit {
       this.productId = params['productId'];
     });
     this.product = this.productService.getProductsByProductId(this.productId.toString());
-    this.loggedIn = this.auth.loggedIn;
-    this.formGroup = this.formBuilder.group({
-      reviewText: ['', Validators.required],
-    });
     this.reviews = this.productService.getReviewsByProduct(this.productId);
     this.productService.getSalesForReview(this.productId).subscribe(sales => {this.reviewAllowed = sales as Sale});
-  }
-
-  get reviewText() {
-    return this.formGroup.get('reviewText');
-  }
-
-  triggerResize() { //resizes textarea
-    this._ngZone.onStable.pipe(take(1)).subscribe(() => this.autosize.resizeToFitContent(true));
-  }
-
-  onSubmit(){
-    if(this.formGroup.valid) {
-      this.httpClient.post(environment.endpointURL + 'review/', {
-        productId: this.productId,
-        rating: this.currentRate,
-        reviewText: this.reviewText.value,
-      }).subscribe((res: any) => {
-        this.toastr.success('Review sent')
-      },
-      (error: any) => {
-        this.toastr.error('Review could not be sent')
-      });
-    }
   }
 
 }
