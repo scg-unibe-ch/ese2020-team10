@@ -8,6 +8,7 @@
   <div class="col-sm-4">
     <mat-card>
       <h1>Reviews</h1>
+      <p *ngIf="!(reviews | async)?.length">There aren't any reviews yet!</p>
       <div *ngFor="let review of reviews | async">
         <div class="body" style="margin-bottom: 30px;">
           <b class="card-title"><mat-icon style="align-content: center;">face</mat-icon>{{review.userName}}</b>

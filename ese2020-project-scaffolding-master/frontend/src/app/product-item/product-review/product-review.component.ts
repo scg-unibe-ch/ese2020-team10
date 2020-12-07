@@ -23,7 +23,7 @@ export class ProductReviewComponent implements OnInit {
   formGroup: FormGroup;
   loggedIn: Observable<boolean>;
   currentRate = 0;
-  alreadyReviewed: Observable<Review>;
+  alreadyReviewed: Review;
 
   constructor(private auth: AuthService,
               private httpClient: HttpClient,

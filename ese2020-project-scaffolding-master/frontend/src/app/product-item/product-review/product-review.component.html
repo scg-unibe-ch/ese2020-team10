@@ -1,8 +1,9 @@
+
 <small *ngIf="alreadyReviewed != null">Already reviewed.</small>
 
 <mat-card *ngIf="alreadyReviewed == null">
   <form [formGroup]="formGroup">
-    <h3 style="padding-left: 1rem;">Your Review</h3>
+    <h3 style="padding-left: 1rem;">Review Product?</h3>
     <div>
       <ngb-rating max = 5 [(rate)]="currentRate" style="outline: none;"></ngb-rating>
       <b style="margin-left: 10px;">{{currentRate}} /5 stars</b>
