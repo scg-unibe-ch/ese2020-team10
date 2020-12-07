@@ -4,7 +4,7 @@
 <h1 style="margin-top: 10px">Category Catalog</h1>
 
 <div class="row">
-  <div class="col">
+  <div class="col-md-4">
     <h2 style="margin-top: 10px">Sell</h2>
     <div *ngFor="let product of products | async">
       <div *ngIf="product.type == 'Sell'">
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <div class="col">
+  <div class="col-md-4">
     <h2 style="margin-top: 10px">Lend</h2>
     <div *ngFor="let product of products | async">
       <div *ngIf="product.type == 'Lend'">
@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="col">
+  <div class="col-md-4">
     <h2 style="margin-top: 10px">Hire</h2>
     <div *ngFor="let product of products | async">
       <div *ngIf="product.type == 'Hire'">
