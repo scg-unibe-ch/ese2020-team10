@@ -14,6 +14,23 @@ export class ReviewService {
 
 
     }
+    public async getReviewsByProductAndUser(productId: string, userId: number): Promise<Review> {
+        const { Op } = require('sequelize');
+        const review = Review.findOne({
+            where: {
+                [Op.and]: [
+                    { userId: userId },
+                    { productId: Number(productId) }
+                ]
+            }
+        });
+        if (!review) {
+            return Promise.reject({message: 'No sale with this product and user'});
+        }
+        return review;
+
+
+    }
 
     public async create(productId: number, userId: number, rating: number, reviewText: string, userName: string): Promise<Review> {
         const { Op } = require('sequelize');

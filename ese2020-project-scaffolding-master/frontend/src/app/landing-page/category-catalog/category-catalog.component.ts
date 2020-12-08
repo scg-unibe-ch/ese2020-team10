@@ -22,6 +22,7 @@ export class CategoryCatalogComponent implements OnInit {
       this.category = params['category'];
     });
     this.products = this.productService.getProductsByCategory(this.category);
+    this.category = this.category.charAt(0).toUpperCase() + this.category.substring(1);
   }
 
 }

@@ -13,14 +13,16 @@ reviewController.post('/', verifyToken,
             res.send(created)).catch(err => res.send(err));
     }
 );
-reviewController.get('/reviews/:productId',  (req: Request, res: Response) => {
+reviewController.get('/:productId',  (req: Request, res: Response) => {
     reviewService.getReviewsByProduct(req.params.productId).then(found => res.send(found)).catch(err => {
         console.log(err);
         res.send(err);
     });
 });
-
-
-
+reviewController.get('/reviewByProduct/:productId', verifyToken,
+    (req: Request, res: Response) => {
+        reviewService.getReviewsByProductAndUser(req.params.productId, req.body.tokenPayload.userId).then(found =>
+            res.send(found)).catch(err => res.status(500).send(err));
+    });
 
 export const ReviewController: Router = reviewController;

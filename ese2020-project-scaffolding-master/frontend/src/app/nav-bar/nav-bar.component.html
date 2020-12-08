@@ -8,12 +8,12 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <div class="navbar-nav ml-auto">
-      <a class="nav-link" routerLink="/wishlist" [hidden]='!(loggedIn | async)'><i class="far fa-heart"></i> Wishlist</a>
+      <a class="nav-link" routerLink="/wishlist" [hidden]='(isAdmin | async) || !(loggedIn | async)'><i class="far fa-heart"></i> Wishlist</a>
       <a class="nav-link" routerLink="/admin" [hidden]='!(isAdmin | async)'><i class="far fa-user"></i> Admin</a>
       <a class="nav-link" routerLink="/createOffer" *ngIf="!(isAdmin | async) && (loggedIn | async)"><i class="fas fa-plus"></i> Create Offer</a>
       <a class="nav-link" [routerLink]="['/profile', getUserName()]" *ngIf="!(isAdmin | async) && (loggedIn | async)"><i class="far fa-user"></i> My Profile</a>
       <a class="nav-link" routerLink="/login" [hidden]='loggedIn | async'>Login</a>
-      <a class="nav-link" (click)="onLogout()" [hidden]='!(loggedIn | async)'>Logout</a>
+      <a class="nav-link" style="cursor: pointer;" (click)="onLogout()" [hidden]='!(loggedIn | async)'>Logout</a>
       <a class="nav-link" routerLink="/register" [hidden]='loggedIn | async'>Register</a>
     </div>
   </div>

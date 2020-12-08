@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Inject, Input, Output } from '@angular/core';
 import { Product} from '../models/product.model';
-import {AuthService} from "../auth.service";
-import {TodoItem} from "../models/todo-item.model";
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AuthService } from "../auth.service";
+import { environment } from "../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PurchaseDialogComponent } from './purchase-dialog/purchase-dialog.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ToastrService} from 'ngx-toastr';

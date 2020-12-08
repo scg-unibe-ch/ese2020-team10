@@ -13,26 +13,25 @@ export class LandingPageComponent implements OnInit {
 
   user: string;
   isAdmin: string;
-  public sellProducts: Observable<Product[]>;
-  public lendProducts: Observable<Product[]>;
-  public hireProducts: Observable<Product[]>;
   public products: Observable<Product[]>;
-
+  public sellProd: Product[];
+  public lendProd: Product[];
+  public hireProd: Product[];
 
   constructor(public auth: AuthService, public productService: ProductService) { }
 
   ngOnInit(): void {
     this.auth.checkUserStatus();
     this.productService.load();
-    this.sellProducts = this.productService.getProductsByType('Sell'); // Gets all the current 'sell' products from the backend via productService
-    this.lendProducts = this.productService.getProductsByType('Lend');
-    this.hireProducts = this.productService.getProductsByType('Hire');
+    this.productService.getProductsByType('Sell').subscribe(products => this.sellProd = products as Product[]);
+    this.productService.getProductsByType('Lend').subscribe(products => this.lendProd = products as Product[]);
+    this.productService.getProductsByType('Hire').subscribe(products => this.hireProd = products as Product[]);
     this.user = this.auth.getUserName();
     this.products = this.productService.products;
   }
 
   search(): void{
-    
+
   }
 
 }

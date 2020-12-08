@@ -8,20 +8,8 @@
       <input matInput placeholder="User Name" [(ngModel)]="userName" name="userName">
     </mat-form-field>
     <mat-form-field style= "padding-left: 1rem;">
-      <input matInput placeholder="Password" [(ngModel)]="password" name="password" type="password" (keydown.enter)="onLogin()">
+      <input matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" (keydown.enter)="onLogin()">
+      <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
     </mat-form-field>
     <button mat-flat-button style="background-color: rgb(116, 153, 255); color: rgb(255, 255, 255);" (click)="onLogin()" >Login</button>
   </div>
-
-  <div *ngIf="loggedIn | async">
-    <h1 style= "margin-left: 1rem">Logout </h1>
-    <button mat-flat-button color="warn" (click)="onLogout()">Logout</button>
-    You are currently logged in as {{ userName }}
-  </div>
-</mat-card>
-
-<mat-card *ngIf="isAdmin | async">
-  <div>
-    You are an administrator
-  </div>
-</mat-card>

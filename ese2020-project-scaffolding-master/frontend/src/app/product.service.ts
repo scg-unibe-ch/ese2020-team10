@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import {Product, Sale, ProductType, Category, Wish} from './models/product.model';
+import {Product, Sale, ProductType, Category, Wish, Review} from './models/product.model';
 import { environment } from '../environments/environment';
 import { ToastrService} from 'ngx-toastr'
 import { map} from 'rxjs/operators'
@@ -201,6 +201,19 @@ export class ProductService {
     return this.httpClient.get<Sale[]>(environment.endpointURL + 'sale/bought');
 
   }
+
+  getReviewsByProduct(productId: string): Observable<Review[]>{
+    return this.httpClient.get<Review[]>(environment.endpointURL + 'review/' + productId);
+  }
+
+  getReviewsByProductAndUser(productId: number): Observable<Review>{
+    return this.httpClient.get<Review>(environment.endpointURL + 'review/reviewByProduct/' + productId);
+  }
+
+  getSalesForReview(productId: string): Observable<Sale>{
+    return this.httpClient.get<Sale>(environment.endpointURL + 'sale/' + productId);
+  }
+
   ngOnInit(): void {
     this.loadProducts();
   }

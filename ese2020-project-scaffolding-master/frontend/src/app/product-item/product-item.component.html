@@ -10,9 +10,9 @@
         </h1>
       </div>
       <div style="float: right">
-        <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price}} CHF</h1>
-        <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price}} CHF/h</h1>
-        <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price}} CHF/h</h1>
+        <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price | number : '1.2-2'}} CHF</h1>
+        <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price | number : '1.2-2'}} CHF/h</h1>
+        <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price | number : '1.2-2'}} CHF/h</h1>
       </div>
       <div style="clear:left;"></div>
       <small *ngIf="product.type == 'Sell'">Product to buy.</small>
@@ -21,12 +21,11 @@
 
       </a>
       <hr>
-      <img *ngIf="(loggedIn | async )" src="{{iconPath()}}" id="wishlistIcon" (click)="changeWishlist()">
+      <img *ngIf="(loggedIn | async ) && !(isAdmin | async)" src="{{iconPath()}}" id="wishlistIcon" (click)="changeWishlist()">
       <button type="button" class="btn btn-md" *ngIf="(userId | async) != product.userId.toString() && (loggedIn | async) && product.status == true && !(isAdmin | async)" (click)="openPurchaseDialog()" style="float:right; background-color: rgb(116, 153, 255); color: rgb(255, 255, 255)">Buy</button>
       <button type="button" class="btn btn-md btn-outline-danger" *ngIf="((userId | async)==product.userId.toString())" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
       <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(product.approved == false && (isAdmin | async))" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
       <button type="button" class="btn btn-md" *ngIf="(isAdmin | async) && !product.approved" (click)="onApprove()" style="float:right; background-color: rgb(110, 202, 110); color: rgb(255, 255, 255)">Approve</button>
-      <!--<button type="button" class="btn btn-md btn-outline-danger" *ngIf="admin" (click)="onProductDelete(product.productId)" style="float:right">Delete</button> -->
       <button type="button" class="btn btn-md" *ngIf="(userId | async)==product.userId" (click)="change=true" [hidden]="change" style="float:right; background-color: rgb(57, 68, 97); color: rgb(255, 255, 255)">Change</button>
       <div id="change" [hidden]="!change">
         <app-product-update [productTitle]="product.title"

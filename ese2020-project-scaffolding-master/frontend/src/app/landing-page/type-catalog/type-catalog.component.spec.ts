@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TodoListComponent } from './todo-list.component';
+import { TypeCatalogComponent } from './type-catalog.component';
 
-describe('TodoListComponent', () => {
-  let component: TodoListComponent;
-  let fixture: ComponentFixture<TodoListComponent>;
+describe('TypeCatalogComponent', () => {
+  let component: TypeCatalogComponent;
+  let fixture: ComponentFixture<TypeCatalogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TodoListComponent ]
+      declarations: [ TypeCatalogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TodoListComponent);
+    fixture = TestBed.createComponent(TypeCatalogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

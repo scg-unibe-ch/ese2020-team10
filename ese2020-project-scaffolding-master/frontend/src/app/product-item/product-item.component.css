@@ -15,6 +15,10 @@
     color:grey;
 }
 
+.card-body{
+  overflow: hidden;
+}
+
 .card-title{
   height: 50px;
 }
