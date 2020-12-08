@@ -82,18 +82,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   onBuy():void{
-    this.httpClient.post(environment.endpointURL + 'sale/buy',{
-      "productId": this.productInfo.productId,
-      "deliveryAddress": this.deliveryAddress,
-      "amountOfHours": this.amountOfHours
-    }).subscribe((res:any) =>{
-        this.toastr.success('Bought successfully');
-        this.router.navigate(['']);
-      },
-      (error: any) => {
-        this.toastr.error('Could not be purchased')
-      }
-    );
+    this.productService.buyProduct(this.productInfo.productId, this.deliveryAddress, this.amountOfHours)
   }
   onAddToWishlist():void{
     this.productService.addToWishlist(this.productInfo);

@@ -128,6 +128,25 @@ export class ProductService {
       });
   }
 
+  buyProduct(productId: number, deliveryAddress: string, amountOfHours: number ):void{
+    this.httpClient.post(environment.endpointURL + 'sale/buy',{
+      "productId": productId,
+      "deliveryAddress": deliveryAddress,
+      "amountOfHours": amountOfHours
+    }).subscribe((res:any) =>{
+    this.dataStore.products.forEach((t, i) => {
+      if (t.productId === productId) {
+         t.status = false
+      }
+      });
+      this._products.next(Object.assign({}, this.dataStore).products)
+      this.toastr.success('Bought successfully')
+      },
+      (error: any) => {
+        this.toastr.error('Could not be purchased' + error)
+      }
+    );
+  }
 
   // load Wishlist
   loadWishlist(){

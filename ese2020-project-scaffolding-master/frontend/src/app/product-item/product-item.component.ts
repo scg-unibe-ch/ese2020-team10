@@ -80,17 +80,7 @@ export class ProductItemComponent {
   }
 
   onBuy():void{
-    this.httpClient.post(environment.endpointURL + 'sale/buy',{
-      "productId": this.product.productId,
-      "deliveryAddress": this.deliveryAddress,
-      "amountOfHours": this.amountOfHours
-    }).subscribe((res:any) =>{
-        this.toastr.success('Bought successfully')
-      },
-      (error: any) => {
-        this.toastr.error('Could not be purchased')
-      }
-    );
+    this.productService.buyProduct(this.product.productId, this.deliveryAddress, this.amountOfHours)
   }
   onAddToWishlist():void{
     this.productService.addToWishlist(this.product);
