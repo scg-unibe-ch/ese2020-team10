@@ -10,10 +10,10 @@ export class DeleteDialogComponent {
   constructor(
     public dialogRef:
     MatDialogRef<DeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {title: string, purchaseIt: boolean }) { }
+    @Inject(MAT_DIALOG_DATA) public data: {title: string, deleteIt: boolean }) { }
 
   onNoClick(): void {
-    this.data.purchaseIt = false;
+    this.data.deleteIt = false;
     this.dialogRef.close();
   }
 

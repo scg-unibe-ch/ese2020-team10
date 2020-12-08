@@ -61,14 +61,14 @@ export class ProductItemComponent {
     })
   }
 
-  openDeleteDialog(productId): void {
+  openDeleteDialog(): void {
     const deleteDialogRef = this.deleteDialog.open(DeleteDialogComponent, {
       width: 'auto',
-      data: {title: this.product.title, deleteIt: false}
+      data: {title: this.product.title, deleteIt: true}
     });
     deleteDialogRef.afterClosed().subscribe(result => {
       if(result.deleteIt) {
-        this.onProductDelete(productId);
+        this.onProductDelete();
       }
     })
   }
@@ -84,7 +84,7 @@ export class ProductItemComponent {
     
   }
 
-  onProductDelete(productId: number): void{
+  onProductDelete(): void{
     this.productService.deleteProduct(this.product.productId, ()=>{});
   }
 
