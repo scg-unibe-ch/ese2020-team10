@@ -97,6 +97,24 @@ export class AuthService {
     });
 
   }
+  register(firstName: string, lastName: string, userName: string, email:string, password:string, phone:string, address:string, city:string, callback:()=> void){
+    this.httpClient.post(environment.endpointURL + 'user/register', {
+      firstName: firstName,
+      lastName: lastName,
+      userName: userName,
+      email: email,
+      password: password,
+      phone: phone,
+      address: address,
+      city: city,
+    }).subscribe(response => {
+      callback();
+      this.toastr.success('Registered successfully')
+    }, error => {
+      console.log(error)
+      this.toastr.error(error.error)
+    });
+  }
 
   checkUserStatus(): void {
     // Get user data from local storage

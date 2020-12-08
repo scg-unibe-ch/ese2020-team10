@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-user-registration',
@@ -12,7 +13,10 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 })
 export class UserRegistrationComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient, private router: Router,private formBuilder: FormBuilder) { }
+  constructor(private httpClient: HttpClient,
+    private router: Router,
+    private formBuilder: FormBuilder,
+    private authService: AuthService) { }
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
@@ -69,19 +73,17 @@ export class UserRegistrationComponent implements OnInit {
 
   onSubmit() {
     if(this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid){
-      this.httpClient.post(environment.endpointURL + 'user/register', {
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
-        userName: this.userName.value,
-        email: this.email.value,
-        password: this.password.value,
-        phone: this.phone.value,
-        address: this.address.value,
-        city: this.city.value,
-        wallet: 100
-      }).subscribe((res: any) => {
-        this.router.navigate(['/login']);
-      });
+      this.authService.register(
+        this.firstName.value,
+        this.lastName.value,
+        this.userName.value,
+        this.email.value,
+        this.password.value,
+        this.phone.value,
+        this.address.value,
+        this.city.value,
+        () => { this.router.navigate(['/login'])}
+      )
     }
   }
 
