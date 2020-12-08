@@ -17,6 +17,7 @@ import {take} from "rxjs/operators";
 })
 export class ProductReviewComponent implements OnInit {
   @Input() productId: number;
+  @Input() productType: string;
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
   product: Observable<Product[]>;
   endpointURL = environment.endpointURL;
