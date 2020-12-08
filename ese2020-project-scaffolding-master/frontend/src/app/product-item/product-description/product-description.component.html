@@ -20,7 +20,7 @@
     </div>
     </mat-card>
     <mat-card>
-      <h1>Seller Reviews</h1>
+      <h1>Other Reviews of this Seller</h1>
       <p *ngIf="!(sellerReviews | async)?.length">There aren't any reviews yet!</p>
       <div *ngFor="let review of sellerReviews | async">
         <div class="body" style="margin-bottom: 30px;">
