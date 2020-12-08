@@ -57,16 +57,16 @@
     </mat-tab>
 
     <mat-tab label="Your Offers"> <div style="padding: 1rem">
-      <div class="row">
-        <div class="col">
-          <h2 style="margin-top: 10px">Your Available Offers</h2>
-          <div *ngFor="let product of products | async" style="width: 500px">
+      <div class="col">
+        <h2 style="margin-top: 10px">Your Available Offers</h2>
+        <div class="row">
+          <div *ngFor="let product of products | async">
             <app-product-item *ngIf="product.status == true" [product] = "product"></app-product-item>
           </div>
         </div>
-        <div class="col">
-          <h2 style="margin-top: 10px">Your Unavailable Offers</h2>
-          <div *ngFor="let product of products | async" style="width: 500px">
+        <h2 style="margin-top: 10px">Your Unavailable Offers</h2>
+        <div class="row">
+          <div *ngFor="let product of products | async">
             <app-product-item *ngIf="product.status == false" [product] = "product"></app-product-item>
           </div>
         </div>
@@ -76,11 +76,11 @@
 
     <mat-tab label="Sold"> <div style="padding: 1rem">
       <h2 style="color: rgba(114, 114, 114, 0.658)">Please delete Products you sold and update Services and Products you lent in "Your Offers".</h2>
-      <div class="row">
-        <div class="col">
-          <h2 style="margin-top: 10px">Your Sold Offers</h2>
+      <div class="col">
+        <h2 style="margin-top: 10px">Your Sold Offers</h2>
+        <div class="row">
           <div *ngFor="let sold of soldOffers | async">
-            <mat-card style="width: 300px;" *ngIf="sold.type == 'Sell'">
+            <mat-card style="width: 300px; margin-top: auto;" *ngIf="sold.type == 'Sell'">
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{sold.pointOfSalePrice}} CHF</p>
@@ -90,10 +90,10 @@
             </mat-card>
           </div>
         </div>
-        <div class="col">
-          <h2 style="margin-top: 10px">Your Lent Offers</h2>
+        <h2 style="margin-top: 10px">Your Lent Offers</h2>
+        <div class="row">
           <div *ngFor="let sold of soldOffers | async">
-            <mat-card style="width: 300px;" *ngIf="sold.type == 'Lend'">
+            <mat-card style="width: 300px; margin-top: auto;" *ngIf="sold.type == 'Lend'">
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p *ngIf="sold.deliveryAddress != null">Delivery Address: {{sold.deliveryAddress}}</p>
@@ -104,10 +104,10 @@
             </mat-card>
           </div>
         </div>
-        <div class="col">
-          <h2 style="margin-top: 10px">Your Hire Offers</h2>
+        <h2 style="margin-top: 10px">Your Hire Offers</h2>
+        <div class="row">
           <div *ngFor="let sold of soldOffers | async" style="float:left">
-            <mat-card style="width: 300px;" *ngIf="sold.type == 'Hire'">
+            <mat-card style="width: 300px; margin-top: auto;" *ngIf="sold.type == 'Hire'">
               <mat-card-title>{{sold.title}}</mat-card-title>
               <mat-card-content>
                 <p *ngIf="sold.amountOfHours != null">Price at point of sale: {{sold.amountOfHours}} hours à {{sold.pointOfSalePrice}} CHF</p>
@@ -124,11 +124,11 @@
 
 
     <mat-tab label="Bought"> <div style="padding: 1rem">
-      <div class="row">
-        <div class="col">
-          <h2 style="margin-top: 10px">Offers you bought</h2>
+      <div class="col">
+        <h2 style="margin-top: 10px">Offers you bought</h2>
+        <div class="row">
           <div *ngFor="let bought of boughtOffers | async" >
-            <mat-card style="width: 300px;" *ngIf="bought.type == 'Sell'">
+            <mat-card style="width: 300px; margin-top: auto;" *ngIf="bought.type == 'Sell'">
               <mat-card-title>{{bought.title}}</mat-card-title>
               <mat-card-content>
                 <p>Price at point of sale: {{bought.pointOfSalePrice}}</p>
@@ -137,10 +137,10 @@
             </mat-card>
           </div>
         </div>
-        <div class="col">
-          <h2 style="margin-top: 10px">Offers you lent</h2>
+        <h2 style="margin-top: 10px">Offers you borrowed</h2>
+        <div class="row">
           <div *ngFor="let bought of boughtOffers | async">
-            <mat-card style="width: 300px;" *ngIf="bought.type == 'Lend'">
+            <mat-card style="width: 300px; margin-top: auto;" *ngIf="bought.type == 'Lend'">
               <mat-card-title>{{bought.title}}</mat-card-title>
               <mat-card-content>
                 <p *ngIf="bought.amountOfHours != null">Price at point of sale: {{bought.amountOfHours}} hours à {{bought.pointOfSalePrice}} CHF</p>
@@ -150,10 +150,10 @@
             </mat-card>
           </div>
         </div>
-        <div class="col">
-          <h2 style="margin-top: 10px">Offers you hired</h2>
+        <h2 style="margin-top: 10px">Offers you hired</h2>
+        <div class="row">
           <div *ngFor="let bought of boughtOffers | async">
-            <mat-card style="width: 300px;" *ngIf="bought.type == 'Hire'">
+            <mat-card style="width: 300px; margin-top: auto;" *ngIf="bought.type == 'Hire'">
               <mat-card-title>{{bought.title}}</mat-card-title>
               <mat-card-content>
                 <p *ngIf="bought.amountOfHours != null">Price at point of sale: {{bought.amountOfHours}} hours à {{bought.pointOfSalePrice}} CHF</p>
