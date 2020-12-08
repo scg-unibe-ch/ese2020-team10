@@ -9,6 +9,7 @@ import {ProductService} from "../../../product.service";
 import {environment} from "../../../../environments/environment";
 import {PurchaseDialogComponent} from "../../purchase-dialog/purchase-dialog.component";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common"
 
 
 export interface DialogData {
@@ -41,7 +42,8 @@ export class ProductDetailsComponent implements OnInit {
               public dialog: MatDialog,
               public toastr: ToastrService,
               public productService: ProductService,
-              private router: Router) {
+              private router: Router,
+              private location: Location) {
   }
   endpointURL = environment.endpointURL;
 
@@ -71,9 +73,10 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
-  onProductDelete(productId: number): void{
-    this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe((res:any) =>{
-      window.location.reload();
+  async onProductDelete(productId: number){
+    this.productService.deleteProduct(this.productInfo.productId, () => {
+      this.location.back();
+      this.router.navigate(['']);
     });
   }
 
