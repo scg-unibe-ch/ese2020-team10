@@ -23,6 +23,7 @@ export class ProductDescriptionComponent implements OnInit {
   product: Observable<Product[]>;
   reviews: Observable<Review[]>;
   reviewAllowed: Sale;
+  sellerReviews: Observable<Review[]>;
 
   constructor(private auth: AuthService,
     private route: ActivatedRoute,
@@ -36,6 +37,8 @@ export class ProductDescriptionComponent implements OnInit {
     this.product = this.productService.getProductsByProductId(this.productId.toString());
     this.reviews = this.productService.getReviewsByProduct(this.productId);
     this.productService.getSalesForReview(this.productId).subscribe(sales => {this.reviewAllowed = sales as Sale});
+    this.sellerReviews = this.productService.getSellerReviews(this.productId);
+    console.log(this.sellerReviews)
   }
 
 }

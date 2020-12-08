@@ -243,6 +243,9 @@ export class ProductService {
   getReviewsByProductAndUser(productId: number): Observable<Review>{
     return this.httpClient.get<Review>(environment.endpointURL + 'review/reviewByProduct/' + productId);
   }
+  getSellerReviews(productId: string): Observable<Review[]>{
+    return this.httpClient.get<Review[]>(environment.endpointURL + 'review/sellerReview/' + productId);
+  }
 
   getSalesForReview(productId: string): Observable<Sale>{
     return this.httpClient.get<Sale>(environment.endpointURL + 'sale/' + productId);
