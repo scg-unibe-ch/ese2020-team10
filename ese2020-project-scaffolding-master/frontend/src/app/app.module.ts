@@ -99,7 +99,9 @@ import { ReviewsComponent } from './profile/reviews/reviews.component';
     MatExpansionModule,
     MatStepperModule,
     CommonModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: "toast-bottom-right"
+    }),
     NgbModule
   ],
   providers: [
