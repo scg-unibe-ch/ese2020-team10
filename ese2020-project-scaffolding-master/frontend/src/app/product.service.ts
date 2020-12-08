@@ -144,7 +144,7 @@ export class ProductService {
       this.toastr.success('Bought successfully')
       },
       (error: any) => {
-        this.toastr.error('Could not be purchased')
+        this.toastr.error( error.error.message)
       }
     );
   }
