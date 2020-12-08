@@ -5,10 +5,12 @@ import { environment } from "../../environments/environment";
 import { HttpClient } from "@angular/common/http";
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { PurchaseDialogComponent } from './purchase-dialog/purchase-dialog.component';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { ToastrService} from 'ngx-toastr';
 import { ProductService } from '../product.service';
 import { Observable } from 'rxjs';
+import { ResourceLoader } from '@angular/compiler';
 
 
 export interface DialogData {
@@ -37,23 +39,36 @@ export class ProductItemComponent {
 
   constructor(private auth: AuthService,
     private httpClient: HttpClient,
-    public dialog: MatDialog,
+    public purchaseDialog: MatDialog,
+    public deleteDialog: MatDialog,
     public toastr: ToastrService,
     public productService: ProductService) {
   }
   endpointURL = environment.endpointURL;
 
   openPurchaseDialog(): void {
-    const dialogRef = this.dialog.open(PurchaseDialogComponent, {
+    const purchaseDialogRef = this.purchaseDialog.open(PurchaseDialogComponent, {
       width: '1000 px',
       data: {title: this.product.title, price: this.product.price, shippable: this.product.shippable, type: this.product.type, deliveryAddress: this.deliveryAddress, amountOfHours: this.amountOfHours, purchaseIt: true}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    purchaseDialogRef.afterClosed().subscribe(result => {
       this.deliveryAddress = result.deliveryAddress;
       this.amountOfHours = result.amountOfHours;
       if(result.purchaseIt) {
         this.onBuy();
+      }
+    })
+  }
+
+  openDeleteDialog(): void {
+    const deleteDialogRef = this.deleteDialog.open(DeleteDialogComponent, {
+      width: 'auto',
+      data: {title: this.product.title, deleteIt: true}
+    });
+    deleteDialogRef.afterClosed().subscribe(result => {
+      if(result.deleteIt) {
+        this.onProductDelete();
       }
     })
   }
@@ -69,7 +84,7 @@ export class ProductItemComponent {
     
   }
 
-  onProductDelete(productId: number): void{
+  onProductDelete(): void{
     this.productService.deleteProduct(this.product.productId, ()=>{});
   }
 

@@ -7,9 +7,22 @@
 
   <div class="col-sm-4">
     <mat-card>
-      <h1>Reviews</h1>
+      <h1>Product Reviews</h1>
       <p *ngIf="!(reviews | async)?.length">There aren't any reviews yet!</p>
       <div *ngFor="let review of reviews | async">
+        <div class="body" style="margin-bottom: 30px;">
+          <b class="card-title"><mat-icon style="align-content: center;">face</mat-icon>{{review.userName}}</b>
+          <br/>
+          <ngb-rating readonly="true" style="outline: none;" [rate]="review.rating" max = 5></ngb-rating>
+          <p class="card-text">{{review.reviewText}}</p>
+          <p class="card-text">Reviewed on {{review.createdAt| date: 'MMMM d, y'}}</p>
+        </div>
+    </div>
+    </mat-card>
+    <mat-card>
+      <h1>Other Reviews of this Seller</h1>
+      <p *ngIf="!(sellerReviews | async)?.length">There aren't any reviews yet!</p>
+      <div *ngFor="let review of sellerReviews | async">
         <div class="body" style="margin-bottom: 30px;">
           <b class="card-title"><mat-icon style="align-content: center;">face</mat-icon>{{review.userName}}</b>
           <br/>

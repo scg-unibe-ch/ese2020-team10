@@ -8,18 +8,21 @@ import { User } from './user.model';
 
 export interface ReviewAttributes {
     reviewId: number;
+    sellerId: number;
     saleId: number;
     productId: number;
     userId: number;
     userName: string;
     rating: number;
     reviewText: string;
+
 }
 
 export interface ReviewCreationAttributes extends Optional<ReviewAttributes, 'reviewId'> { }
 
 export class Review extends Model<ReviewAttributes, ReviewCreationAttributes> implements ReviewAttributes {
     reviewId!: number;
+    sellerId: number;
     saleId!: number;
     productId!: number;
     userId!: number;
@@ -33,6 +36,9 @@ export class Review extends Model<ReviewAttributes, ReviewCreationAttributes> im
                 autoIncrement: true,
                 type: DataTypes.INTEGER,
                 primaryKey: true
+            },
+            sellerId: {
+                type: DataTypes.INTEGER
             },
             saleId: {
                 type: DataTypes.INTEGER,
