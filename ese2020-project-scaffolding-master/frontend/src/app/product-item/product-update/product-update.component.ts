@@ -2,9 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {categoryTypes, Product} from "../../models/product.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {CurrencyPipe} from "@angular/common";
 import {FormControl, FormGroup} from "@angular/forms";
 import { environment } from 'src/environments/environment';
+import { ProductService } from 'src/app/product.service';
 
 @Component({
   selector: 'app-product-update',
@@ -35,7 +35,7 @@ export class ProductUpdateComponent implements OnInit {
     price: new FormControl(),
   });
 
-  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe) { }
+  constructor(private httpClient: HttpClient, private router: Router, private productService: ProductService) { }
 
   ngOnInit(): void {
     this.title.setValue(this.productTitle);
@@ -61,15 +61,13 @@ export class ProductUpdateComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
-    this.httpClient.put(environment.endpointURL + 'product/' + this.product.productId, {
-      title: this.title.value,
-      description: this.description.value,
-      price: this.price.value,
-      status: this.productStatus
-    }).subscribe((res:any) =>{
-      window.location.reload()
-    }
-    );
+  
+  onSubmit(): void{
+    this.productService.updateProduct(
+      this.product.productId,
+      this.title.value,
+      this.description.value,
+      this.price.value,
+      this.productStatus)
   }
 }

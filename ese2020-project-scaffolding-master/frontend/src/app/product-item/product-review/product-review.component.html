@@ -1,7 +1,7 @@
 
 <small *ngIf="alreadyReviewed != null">Already reviewed.</small>
 
-<mat-card *ngIf="alreadyReviewed == null">
+<div *ngIf="alreadyReviewed == null">
   <form [formGroup]="formGroup">
     <h3 style="padding-left: 1rem;">Review Product?</h3>
     <div>
@@ -21,4 +21,4 @@
     <br>
     <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!formGroup.valid||currentRate==0">Publish Review</button>
   </form>
-</mat-card>
+</div>

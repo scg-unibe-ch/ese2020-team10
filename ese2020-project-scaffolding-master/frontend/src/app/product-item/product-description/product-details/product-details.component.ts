@@ -9,6 +9,7 @@ import {ProductService} from "../../../product.service";
 import {environment} from "../../../../environments/environment";
 import {PurchaseDialogComponent} from "../../purchase-dialog/purchase-dialog.component";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common"
 
 
 export interface DialogData {
@@ -41,7 +42,8 @@ export class ProductDetailsComponent implements OnInit {
               public dialog: MatDialog,
               public toastr: ToastrService,
               public productService: ProductService,
-              private router: Router) {
+              private router: Router,
+              private location: Location) {
   }
   endpointURL = environment.endpointURL;
 
@@ -71,9 +73,9 @@ export class ProductDetailsComponent implements OnInit {
 
   }
 
-  onProductDelete(productId: number): void{
-    this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe((res:any) =>{
-      window.location.reload();
+  async onProductDelete(productId: number){
+    this.productService.deleteProduct(this.productInfo.productId, () => {
+      this.location.back();
     });
   }
 
@@ -82,18 +84,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   onBuy():void{
-    this.httpClient.post(environment.endpointURL + 'sale/buy',{
-      "productId": this.productInfo.productId,
-      "deliveryAddress": this.deliveryAddress,
-      "amountOfHours": this.amountOfHours
-    }).subscribe((res:any) =>{
-        this.toastr.success('Bought successfully');
-        this.router.navigate(['']);
-      },
-      (error: any) => {
-        this.toastr.error('Could not be purchased')
-      }
-    );
+    this.productService.buyProduct(this.productInfo.productId, this.deliveryAddress, this.amountOfHours)
   }
   onAddToWishlist():void{
     this.productService.addToWishlist(this.productInfo);

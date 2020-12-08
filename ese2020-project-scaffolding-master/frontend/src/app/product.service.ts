@@ -111,7 +111,7 @@ export class ProductService {
       }
   );
   }
-  deleteProduct(productId){
+  deleteProduct(productId: number, callback:()=> void){
     this.httpClient.delete(environment.endpointURL + 'product/' + productId).subscribe(
       response => {
         this.dataStore.products.forEach((t, i) => {
@@ -121,6 +121,7 @@ export class ProductService {
         });
 
         this._products.next(Object.assign({}, this.dataStore).products)
+        callback()
         this.toastr.success('Product deleted')
       },
       error => {
@@ -128,7 +129,47 @@ export class ProductService {
       });
   }
 
-
+  buyProduct(productId: number, deliveryAddress: string, amountOfHours: number ):void{
+    this.httpClient.post(environment.endpointURL + 'sale/buy',{
+      "productId": productId,
+      "deliveryAddress": deliveryAddress,
+      "amountOfHours": amountOfHours
+    }).subscribe((res:any) =>{
+      this.dataStore.products.forEach((t, i) => {
+        if (t.productId === productId) {
+          t.status = false
+        } 
+      });
+      this._products.next(Object.assign({}, this.dataStore).products)
+      this.toastr.success('Bought successfully')
+      },
+      (error: any) => {
+        this.toastr.error( error.error.message)
+      }
+    );
+  }
+  updateProduct(productId: number, title: string, description: string, price: number, status: boolean){
+    this.httpClient.put(environment.endpointURL + 'product/' + productId, {
+      title: title,
+      description: description,
+      price: price,
+      status: status
+    }).subscribe((res:any) =>{
+      this.dataStore.products.forEach((t, i) => {
+        if (t.productId === productId) {
+          t.title = title;
+          t.description = description;
+          t.price = price;
+          t.status = status;
+        } 
+      });
+      this._products.next(Object.assign({}, this.dataStore).products)
+      this.toastr.success('Changed successfully')
+      },
+      (error: any) => {
+        this.toastr.error('Could not be changed')
+    });
+  }
   // load Wishlist
   loadWishlist(){
     this.httpClient.get(environment.endpointURL + 'wishlist').subscribe(
@@ -185,13 +226,6 @@ export class ProductService {
     return this.products.pipe(map(products => products.filter(product => product.onWishlist == true)))
   }
 
-  // Make changes to an existing Product. Make sure to use the original productId as it can't be changed
-  // tslint:disable-next-line:typedef
-  updateProduct(product: Product, productId: number){
-    this.httpClient.put(environment.endpointURL + 'product/' + productId, {
-      product
-    });
-  }
 
   getSoldSales(): Observable<Sale[]>{
     return this.httpClient.get<Sale[]>(environment.endpointURL + 'sale/sold');

@@ -7,9 +7,26 @@ import jwt from 'jsonwebtoken';
 
 export class UserService {
 
-    public register(user: UserAttributes): Promise<UserAttributes> {
+    public async register(user: UserAttributes): Promise<UserAttributes> {
         const saltRounds = 12;
         user.password = bcrypt.hashSync(user.password, saltRounds); // hashes the password, never store passwords as plaintext
+        const userWithSameUserName = await User.findOne({
+            where: {
+                userName: user.userName
+            }
+        });
+        if (userWithSameUserName !== null) {
+            return Promise.reject('username is occupied');
+        }
+        const userWithSameEmail = await User.findOne({
+            where: {
+                email: user.email
+            }
+        });
+        if (userWithSameEmail !== null) {
+            return Promise.reject('email is occupied');
+        }
+
         return User.create(user).then(inserted => Promise.resolve(inserted)).catch(err => Promise.reject(err));
     }
 
