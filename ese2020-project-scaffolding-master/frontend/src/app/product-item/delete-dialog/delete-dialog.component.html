@@ -1,0 +1,8 @@
+<div class="delete">Delete Offer?</div>
+<div>
+    <p>{{data.title}}</p>
+  </div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button class="btn btn-md btn-danger" [mat-dialog-close]="data" cdkFocusInitial>Delete</button>
+  </div>

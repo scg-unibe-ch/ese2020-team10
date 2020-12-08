@@ -49,6 +49,7 @@ import { TypeCatalogComponent } from './landing-page/type-catalog/type-catalog.c
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductReviewComponent } from './product-item/product-review/product-review.component';
 import { ReviewsComponent } from './profile/reviews/reviews.component';
+import { DeleteDialogComponent } from '../app/product-item/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { ReviewsComponent } from './profile/reviews/reviews.component';
     TypeCatalogComponent,
     ProductReviewComponent,
     ReviewsComponent,
+    DeleteDialogComponent,
 
   ],
   imports: [
