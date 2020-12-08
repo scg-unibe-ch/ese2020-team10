@@ -3,7 +3,6 @@ import {categoryTypes, Product} from "../../models/product.model";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {CurrencyPipe} from "@angular/common";
-import {AuthService} from "../../auth.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import { environment } from 'src/environments/environment';
 
@@ -15,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class ProductUpdateComponent implements OnInit {
 
   @Input()
-  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null);
+  product: Product = new Product(null, null, ' ', null, ' ', ' ', null, null, null, null, null,' ',null);
 
   userId: string;
   @Input()
@@ -24,6 +23,8 @@ export class ProductUpdateComponent implements OnInit {
   productDescription: string;
   @Input()
   productPrice: string;
+  @Input()
+  productStatus: boolean;
 
   @Output()
   update = new EventEmitter<Product>();
@@ -34,7 +35,7 @@ export class ProductUpdateComponent implements OnInit {
     price: new FormControl(),
   });
 
-  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
+  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe) { }
 
   ngOnInit(): void {
     this.title.setValue(this.productTitle);
@@ -52,11 +53,20 @@ export class ProductUpdateComponent implements OnInit {
     return this.createOfferForm.get('price');
   }
 
+  setValue(e): void{
+    if (e.checked){
+      this.productStatus = true;
+    } else {
+      this.productStatus = false;
+    }
+  }
+
   onSubmit(): void {
     this.httpClient.put(environment.endpointURL + 'product/' + this.product.productId, {
       title: this.title.value,
       description: this.description.value,
-      price: this.price.value
+      price: this.price.value,
+      status: this.productStatus
     }).subscribe((res:any) =>{
       window.location.reload()
     }

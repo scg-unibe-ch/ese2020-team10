@@ -1,5 +1,8 @@
 import {Optional, Model, Sequelize, DataTypes } from 'sequelize';
+import { Review } from './review.model';
+import { Sale } from './sale.model';
 import { User} from './user.model';
+import { Wish } from './wish.model';
 
 
 
@@ -16,6 +19,7 @@ export interface ProductAttributes {
     shippable: boolean;
     userId: number;
     approved: boolean;
+    picture: string;
 
 }
 
@@ -33,6 +37,7 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
     shippable!: boolean;
     userId!: number;
     approved!: boolean;
+    picture!: string;
 
     public static initialize(sequelize: Sequelize) {
         Product.init({
@@ -72,6 +77,9 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             approved: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false
+            },
+            picture: {
+                type: DataTypes.STRING
             }
         },
             {
@@ -85,6 +93,15 @@ export class Product extends Model<ProductAttributes, ProductCreationAttributes>
             targetKey: 'userId',
             onDelete: 'cascade',
             foreignKey: 'userId'
+        });
+        Product.hasMany(Sale, {
+            foreignKey: 'productId'
+        });
+        Product.hasMany(Wish, {
+            foreignKey: 'productId'
+        });
+        Product.hasMany(Review, {
+            foreignKey: 'productId'
         });
     }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../auth.service';
+import { Observable } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,25 +9,25 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  userName: string;
-  loggedIn: boolean;
-  admin: boolean;
+  userName = new Observable<string>();
+  loggedIn= new Observable<boolean>();
+  isAdmin=  new Observable<boolean>();
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.isLoggedIn();
+    this.auth.checkUserStatus();
+    this.userName = this.auth.userName;
+    this.loggedIn = this.auth.loggedIn;
+    this.isAdmin = this.auth.isAdmin;
   }
 
-  isAdmin(): boolean{
-    return this.auth.getAdmin();
+  onLogout(){
+    this.auth.logout();
+    this.router.navigate(['']);
   }
-
-  isLoggedIn(): boolean{
-    return this.loggedIn = this.auth.isLoggedIn();
-  }
-
-  getUserName(): string {
+  getUserName(){
     return this.auth.getUserName();
   }
+
 }

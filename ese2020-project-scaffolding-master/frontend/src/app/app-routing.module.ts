@@ -7,6 +7,13 @@ import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './auth.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { CreateOfferComponent } from './create-offer/create-offer.component';
+import { SearchUIComponent } from './search-UI/search-UI.component';
+import {CategoryCatalogComponent} from "./landing-page/category-catalog/category-catalog.component";
+import { WishlistComponent} from './wishlist/wishlist.component'
+import {ProfileUpdateComponent} from "./profile/profile-update/profile-update.component";
+import {ProductDescriptionComponent} from "./product-item/product-description/product-description.component";
+import {TypeCatalogComponent} from "./landing-page/type-catalog/type-catalog.component";
+import {ReviewsComponent} from "./profile/reviews/reviews.component";
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent},
@@ -15,7 +22,13 @@ const routes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   { path: 'profile/:userName', component: ProfileComponent },
   { path: 'createOffer', component: CreateOfferComponent},
- 
+  { path: 'search', component: SearchUIComponent},
+  { path: 'catalog/:category', component: CategoryCatalogComponent},
+  { path: 'wishlist', component: WishlistComponent},
+  { path: 'update/:userId', component: ProfileUpdateComponent},
+  { path: 'product/:productId', component: ProductDescriptionComponent},
+  { path: 'product-catalog/:type', component: TypeCatalogComponent},
+  { path: 'review/:productId', component: ReviewsComponent}
 ];
 
 @NgModule({

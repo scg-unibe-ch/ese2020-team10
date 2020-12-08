@@ -1,40 +1,42 @@
-<div class="card">
+<div class="card-group">
+  <div class="card">
+    <a href="product/{{product.productId}}" style="text-decoration-line: none; color: black;">
+    <img [src]="endpointURL + product.picture" class="card-img-top img-fluid" style="padding: 1rem">
+    </a>
     <div class="card-body">
-      <h1 style="float:left">{{product.title}}</h1>
-      <span *ngIf="product.approved" style="margin-left: 15px"><i class="fas fa-check-square"></i></span>
-      <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price}} CHF</h1>
-      <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price}} CHF/h</h1>
-      <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price}} CHF/h</h1>
+      <a href="product/{{product.productId}}" style="text-decoration-line: none; color: black;">
+      <div>
+        <h1 style="float:left; width: 300px;" class="card-title">{{product.title}}<span *ngIf="product.approved" style="margin-left: 15px"><mat-icon>verified</mat-icon></span>
+        </h1>
+      </div>
+      <div style="float: right">
+        <h1 *ngIf="product.type == 'Sell'" style="float:right">{{product.price | number : '1.2-2'}} CHF</h1>
+        <h1 *ngIf="product.type == 'Hire'" style="float:right">{{product.price | number : '1.2-2'}} CHF/h</h1>
+        <h1 *ngIf="product.type == 'Lend'" style="float:right">{{product.price | number : '1.2-2'}} CHF/h</h1>
+      </div>
       <div style="clear:left;"></div>
-      <p>Description: {{product.description}}</p>
-      <p>Location: {{product.location}}</p>
-      <p *ngIf="product.status == true" style="float:left">
-          available /
-      </p>
-      <p *ngIf="product.status == false" style="float:left">
-          unavailable /
-      </p>
+      <small *ngIf="product.type == 'Sell'">Product to buy.</small>
+      <small *ngIf="product.type == 'Hire'">Service to hire.</small>
+      <small *ngIf="product.type == 'Lend'">Product to lend.</small>
 
-      <p class="card-category" style="float:right">{{product.category}}</p>
-
-      <p *ngIf="product.shippable == true">
-          shippable
-      </p>
-      <p *ngIf="product.shippable == false">
-          unshippable
-      </p>
+      </a>
       <hr>
-      <button type="button" class="btn btn-md btn-info" *ngIf="userId!=product.userId.toString() && userId != null" style="float:right">Buy</button>
-      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(userId==product.userId.toString() || admin)" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
-      <button type="button" class="btn btn-md btn-dark" *ngIf="admin && !product.approved" (click)="onApprove(product.productId)" style="float:right">Approve</button>
-      <!--<button type="button" class="btn btn-md btn-outline-danger" *ngIf="admin" (click)="onProductDelete(product.productId)" style="float:right">Delete</button> -->
-      <button type="button" class="btn btn-md btn-dark" *ngIf="(userId==product.userId.toString() || admin)" (click)="change=true" [hidden]="change" style="float:right">Change</button>
+      <img *ngIf="(loggedIn | async ) && !(isAdmin | async)" src="{{iconPath()}}" id="wishlistIcon" (click)="changeWishlist()">
+      <button type="button" class="btn btn-md" *ngIf="(userId | async) != product.userId.toString() && (loggedIn | async) && product.status == true && !(isAdmin | async)" (click)="openPurchaseDialog()" style="float:right; background-color: rgb(116, 153, 255); color: rgb(255, 255, 255)">Buy</button>
+      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="((userId | async)==product.userId.toString())" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
+      <button type="button" class="btn btn-md btn-outline-danger" *ngIf="(product.approved == false && (isAdmin | async))" (click)="onProductDelete(product.productId)" style="float:right">Delete</button>
+      <button type="button" class="btn btn-md" *ngIf="(isAdmin | async) && !product.approved" (click)="onApprove()" style="float:right; background-color: rgb(110, 202, 110); color: rgb(255, 255, 255)">Approve</button>
+      <button type="button" class="btn btn-md" *ngIf="(userId | async)==product.userId" (click)="change=true" [hidden]="change" style="float:right; background-color: rgb(57, 68, 97); color: rgb(255, 255, 255)">Change</button>
       <div id="change" [hidden]="!change">
         <app-product-update [productTitle]="product.title"
-        [productDescription]="product.description"
-        [productPrice]="product.price.toString()"
-        [product]="product" >
+                            [productDescription]="product.description"
+                            [productPrice]="product.price.toString()"
+                            [productStatus]="product.status"
+                            [product]="product" >
         </app-product-update>
+        <a [hidden]="!change" (click)="change=false" style="float: right; text-decoration-line: underline">Close</a>
       </div>
     </div>
   </div>
+
+</div>

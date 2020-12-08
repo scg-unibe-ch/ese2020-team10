@@ -1,0 +1,25 @@
+<form class="example-form">
+  <div class="purchase">Confirm Purchase</div>
+  <div>
+    <p>{{data.title}}</p>
+  </div>
+  <div>
+    <p>Price: {{data.price}} {{data.type == 'Sell' ? 'CHF' : 'CHF/h'}}</p>
+  </div>
+  <div *ngIf="data.shippable">
+    <mat-form-field>
+      <mat-label>Delivery Address</mat-label>
+      <input matInput type="text" placeholder="Delivery Address" [(ngModel)]="data.deliveryAddress" name="deliveryAddress">
+    </mat-form-field>
+  </div>
+  <div *ngIf="data.type == 'Lend'|| data.type == 'Hire'">
+    <mat-form-field>
+      <mat-label>How many hours?</mat-label>
+      <input matInput type="number" min="1" max="10" value="1" [(ngModel)]="data.amountOfHours" name="amountOfHours">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Purchase</button>
+  </div>
+</form>

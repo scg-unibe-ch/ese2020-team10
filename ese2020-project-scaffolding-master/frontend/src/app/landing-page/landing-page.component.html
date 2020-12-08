@@ -1,83 +1,96 @@
-<hr>
-<h1>Welcome {{user}}!</h1>
+<br>
+<br>
+<h1 style="float:left">Welcome {{user}}!</h1>
+  <h2>
+    <button type="button" class="btn btn-md" routerLink="/search" style="float:right; background-color: rgba(116, 153, 255, 0.658); color: rgb(255, 255, 255);"><i class="fas fa-search"></i> Search</button>
+  </h2>
+  <div style="clear:left;"></div>
 
-  <h2>Popular Categories
+  <h1>Popular Categories
   <div class="btn-group">
   <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     all
   </button>
   <div class="dropdown-menu scrollable-menu">
-    <span class="dropdown-item-text">Products</span>
-    <a class="dropdown-item">Accessories</a>
-    <a class="dropdown-item">Audio & TV</a>
-    <a class="dropdown-item">Books</a>
-    <a class="dropdown-item">Clothing</a>
-    <a class="dropdown-item">Electronics</a>
-    <a class="dropdown-item">Games</a>
-    <div class="dropdown-divider"></div>
-    <span class="dropdown-item-text">Services</span>
-    <a class="dropdown-item">Animals</a>
-    <a class="dropdown-item">Classes & Tutoring</a>
-    <a class="dropdown-item">Computer & Mobile Phones</a>
-    <a class="dropdown-item">Household & Cleaning</a>
-    <a class="dropdown-item">Moving & Transport</a>
-    <a class="dropdown-item">Party & Catering</a>
+    <a class="dropdown-item" href="/catalog/Accessories">Accessories</a>
+    <a class="dropdown-item" href="/catalog/AudioTV">Audio & TV</a>
+    <a class="dropdown-item" href="/catalog/Books">Books</a>
+    <a class="dropdown-item" href="/catalog/Clothing">Clothing</a>
+    <a class="dropdown-item" href="/catalog/Electronics">Electronics</a>
+    <a class="dropdown-item" href="/catalog/Games">Games</a>
+    <a class="dropdown-item" href="/catalog/Animals">Animals</a>
+    <a class="dropdown-item" href="/catalog/ClassesTutoring">Classes & Tutoring</a>
+    <a class="dropdown-item" href="/catalog/ComputerMobilePhones">Computer & Mobile Phones</a>
+    <a class="dropdown-item" href="/catalog/HouseholdCleaning">Household & Cleaning</a>
+    <a class="dropdown-item" href="/catalog/MovingTransport">Moving & Transport</a>
+    <a class="dropdown-item" href="/catalog/PartyCatering">Party & Catering</a>
   </div>
   </div>
-  </h2>
+  </h1>
 
   <div class="all-icons row">
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/toast.png" alt="toast-icon"><small>Party & Catering</small></a>
+      <a class="icon-link" href="/catalog/PartyCatering"><img class="icon" src="assets/icons/toast.png" alt="toast-icon"><small>Party & Catering</small></a>
     </div>
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/shirt.png" alt="shirt-icon"><small>Clothing</small></a>
+      <a class="icon-link" href="/catalog/Clothing"><img class="icon" src="assets/icons/shirt.png" alt="shirt-icon"><small>Clothing</small></a>
     </div>
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/gamepad.png" alt="shirt-icon"><small>Games</small></a>
+      <a class="icon-link" href="/catalog/Games"><img class="icon" src="assets/icons/gamepad.png" alt="gamepad-icon"><small>Games</small></a>
     </div>
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/library.png" alt="shirt-icon"><small>Books</small></a>
+      <a class="icon-link" href="/catalog/Books"><img class="icon" src="assets/icons/library.png" alt="library-icon"><small>Books</small></a>
     </div>
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/mouse.png" alt="shirt-icon"><small>Electronics</small></a>
+      <a class="icon-link" href="/catalog/Electronics"><img class="icon" src="assets/icons/mouse.png" alt="mouse-icon"><small>Electronics</small></a>
     </div>
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/truck.png" alt="shirt-icon"><small>Moving & Transport</small></a>
+      <a class="icon-link" href="/catalog/MovingTransport"><img class="icon" src="assets/icons/truck.png" alt="truck-icon"><small>Moving & Transport</small></a>
     </div>
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/blackboard.png" alt="shirt-icon"><small>Classes & Tutoring</small></a>
+      <a class="icon-link" href="/catalog/ClassesTutoring"><img class="icon" src="assets/icons/blackboard.png" alt="blackboard-icon"><small>Classes & Tutoring</small></a>
     </div>
     <div class="icon-div col">
-      <a class="icon-link" href=""><img class="icon" src="assets/icons/vacuum-cleaner.png" alt="shirt-icon"><small>Household & Cleaning</small></a>
+      <a class="icon-link" href="/catalog/HouseholdCleaning"><img class="icon" src="assets/icons/vacuum-cleaner.png" alt="vacuum-icon"><small>Household & Cleaning</small></a>
     </div>
   </div>
 
-
-    <h2 style="margin-top: 16px;">Recently added in "sell"</h2>
-    <div class="row">
-      <div *ngFor="let product of sellProducts | async">
-        <app-product-item [product] = "product"></app-product-item>
-      </div>
-    </div>
-
-
-
-
-    <h2 style="margin-top: 16px;">Recently added in "lend"</h2>
-    <div class="row">
-    <div *ngFor="let product of lendProducts | async">
+  <h1 style="margin-top: 16px;">Recently added in "sell"
+    <button class="btn btn-sm" type="button" routerLink="/product-catalog/sell">
+      Show all
+    </button>
+  </h1>
+  <div class="row">
+    <div *ngFor="let product of sellProd | slice:sellProd.length-2:sellProd.length" class="col-md-6">
       <app-product-item [product] = "product"></app-product-item>
     </div>
-    </div>
+  </div>
 
 
-  <h2 style="margin-top: 16px;">Recently added in "hire"</h2>
+  <h1 style="margin-top: 16px;">Recently added in "lend"
+    <button class="btn btn-sm" type="button" routerLink="/product-catalog/lend">
+    Show all
+   </button>
+  </h1>
   <div class="row">
-  <div *ngFor="let product of hireProducts | async">
-    <app-product-item [product] = "product"></app-product-item>
+    <div *ngFor="let product of lendProd | slice:lendProd.length-2:lendProd.length" class="col-md-6">
+      <app-product-item [product] = "product"></app-product-item>
+    </div>
+  </div>
+
+
+  <h1 style="margin-top: 16px;">Recently added in "hire"
+    <button class="btn btn-sm" type="button" routerLink="/product-catalog/hire">
+    Show all
+    </button>
+  </h1>
+  <div class="row">
+    <div *ngFor="let product of hireProd | slice:hireProd.length-2:hireProd.length" class="col-md-6">
+      <app-product-item [product] = "product"></app-product-item>
+    </div>
   </div>
   </div>
+
 
 
 

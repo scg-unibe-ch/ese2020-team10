@@ -3,8 +3,32 @@
   font-weight: bold;
 }
 
-
 .nav-link{
   font-size: 1.2rem;
   font-weight: lighter;
+}
+
+.mat-icon {
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 24px;
+  width: 24px;
+  align-self: center;
+  margin-right: 20px;
+  }
+
+@media (min-width: 1024px){
+
+
+  nav{
+    margin-left: 12%;
+    margin-right: 12%;
+  }
+
+  img{
+    height: 70px;
+  }
+
+
 }

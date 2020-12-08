@@ -1,11 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormControl, FormsModule } from '@angular/forms';
+import { Component, Input, OnInit, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-import { CommonModule, CurrencyPipe } from '@angular/common';
 import { categoryTypes, Product} from '../models/product.model';
-import { AuthService } from '../auth.service';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { take } from 'rxjs/operators';
+import { ProductService } from '../product.service';
 
 interface Select {
   value: string,
@@ -18,112 +20,119 @@ interface Select {
   styleUrls: ['./create-offer.component.css']
 })
 export class CreateOfferComponent implements OnInit {
-  formattedAmount;
-  amount;
+
+  constructor(
+    private formBuilder: FormBuilder, 
+    private _ngZone: NgZone,
+    private productService: ProductService) { }
+
+  @ViewChild('autosize') autosize: CdkTextareaAutosize;
   @Input() categories = categoryTypes;
   userId: string;
   product: Product;
-  
-  constructor(private httpClient: HttpClient, private router: Router, private currencyPipe: CurrencyPipe, public auth: AuthService) { }
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  thirdFormGroup: FormGroup;
+  isFileChosen = false;
+  fileName = '';
+
 
   ngOnInit(): void {
-    //sets default value for select
-    this.productOrService.setValue('Product');
-    this.type.setValue('Sell');
-    this.selectedCategory.setValue(this.categories[0]);
-    this.shippable.setValue('false');
+    this.firstFormGroup = this.formBuilder.group({
+      productOrService: ['Product', null]
+    });
+    this.secondFormGroup = this.formBuilder.group({
+      selectedCategory: [this.categories[0], null],
+      type: ['Sell', null],
+      shippable: ['false', null]
+    });
+    this.thirdFormGroup = this.formBuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['0.00', Validators.compose([Validators.required, Validators.pattern("(\\d+(\\.\\d{1,2})?)")])],
+      location: ['', null],
+      file: ['', null],
+      fileSource: ['', null]
+    })
   }
 
-  transformAmount(element){
-    this.formattedAmount = this.currencyPipe.transform(this.formattedAmount, '$');
-    element.target.value = this.formattedAmount;
-  }    
-
-  createOfferForm = new FormGroup({
-    selectedCategory: new FormControl(),
-    productOrService: new FormControl(),
-    title: new FormControl('', [
-      Validators.required]),
-    description: new FormControl('', [
-      Validators.required]),
-    price: new FormControl('', [
-      Validators.required]),
-    pictureLink: new FormControl('', [
-      Validators.required]),
-    location: new FormControl(),
-    type: new FormControl(),
-    shippable: new FormControl(),
-  });
- 
-  get selectedCategory() {
-    return this.createOfferForm.get('selectedCategory');
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.isFileChosen = true;
+      this.thirdFormGroup.patchValue({
+        fileSource: file
+      });
+      this.fileName = file.name;
+    }
   }
+
   get productOrService() {
-    return this.createOfferForm.get('productOrService');
+    return this.firstFormGroup.get('productOrService');
   }
-  get title() {
-    return this.createOfferForm.get('title');
-  }
-  get description() {
-    return this.createOfferForm.get('description');
-  }
-  get price() {
-    return this.createOfferForm.get('price');
-  }
-  get pictureLink() {
-    return this.createOfferForm.get('pictureLink');
-  }
-  get location() {
-    return this.createOfferForm.get('location');
+  get selectedCategory() {
+    return this.secondFormGroup.get('selectedCategory');
   }
   get type() {
-    return this.createOfferForm.get('type');
+    return this.secondFormGroup.get('type');
   }
   get shippable() {
-    return this.createOfferForm.get('shippable');
+    return this.secondFormGroup.get('shippable');
   }
+  get title() {
+    return this.thirdFormGroup.get('title');
+  }
+  get description() {
+    return this.thirdFormGroup.get('description');
+  }
+  get price() {
+    return this.thirdFormGroup.get('price');
+  }
+  get location() {
+    return this.thirdFormGroup.get('location');
+  }
+ 
 
-  onSubmit(): void {
-    this.userId =  this.auth.getUserId();
-    if(this.createOfferForm.valid){
-      this.httpClient.post(environment.endpointURL + 'product/add', {
-        "category": this.selectedCategory.value,
-        "title": this.title.value,
-        "description": this.description.value,
-        "price": this.price.value,
-        "location": this.location.value,
-        "type": this.type.value,
-        "shippable": this.shippable.value,
-        "pictureLink": this.pictureLink.value,
-        "userId": this.userId
-      })
-      .subscribe((res: any) => {
-        this.router.navigate(['']);
-    });
-   }
+  onSubmit(){
+    if(this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid) {
+      const formData = new FormData();
+      formData.append('productImage', this.thirdFormGroup.get('fileSource').value);
+      formData.append('category', this.secondFormGroup.get('selectedCategory').value);
+      formData.append('title', this.thirdFormGroup.get('title').value);
+      formData.append('price', this.thirdFormGroup.get('price').value);
+      formData.append('description', this.thirdFormGroup.get('description').value);
+      formData.append('location', this.thirdFormGroup.get('location').value);
+      formData.append('type', this.secondFormGroup.get('type').value);
+      formData.append('shippable', this.secondFormGroup.get('shippable').value);
+
+      this.productService.createProduct(formData)
+    }
   }
 
   isService(): boolean {
     if(this.productOrService.value === 'Service') {
       this.type.setValue('Hire');
-      this.shippable.setValue('false');
     }
     return this.productOrService.value === 'Service';
   }
 
   isProduct(): boolean {
-    if(this.productOrService.value === 'Product') {
-      this.location.setValue('');
-    }
     return this.productOrService.value === 'Product';
   }
 
-priceFormat(): string {
-  if(this.type.value === 'Sell') {
-    return 'Price';
-  } else {
-    return 'Price per Hour'
+  isShippable(): boolean {
+    return this.shippable.value === 'true';  
   }
-}
 
+  priceFormat(): string {
+    if(this.type.value === 'Sell') {
+      return 'Price';
+    } else {
+      return 'Price per Hour';
+    }
+  }
+
+  triggerResize() { //resizes textarea
+    this._ngZone.onStable.pipe(take(1)).subscribe(() => this.autosize.resizeToFitContent(true));
+  }
 }

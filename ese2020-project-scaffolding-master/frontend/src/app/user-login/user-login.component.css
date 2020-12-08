@@ -1,14 +1,32 @@
 .mat-card{
-  width: 450px;
+  width: 500px;
   display: block;
+  margin-top: 4rem;
   margin-left:auto;
   margin-right:auto;
-  vertical-align:middle;
+  background-color: white;
+  border-radius: 1rem;
 }
 
-.log{
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
 
+@media (max-width: 1024px){
+
+
+  body{
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .mat-card{
+    width: 95%;
+    height: auto;
+    display: block;
+    margin-top: 5rem;
+    margin-left:auto;
+    margin-right:auto;
+    background-color: white;
+    border-radius: 1rem;
+  }
+
+
+}

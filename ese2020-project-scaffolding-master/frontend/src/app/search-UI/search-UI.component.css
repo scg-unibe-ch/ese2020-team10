@@ -1,0 +1,10 @@
+mat-slider {
+    width: 300px;
+  }
+
+mat-card {
+    width: 450px;
+    display: block;
+    margin-left:auto;
+    margin-right:auto;
+  }

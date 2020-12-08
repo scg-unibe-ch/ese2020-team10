@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import { AuthService } from '../auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-login',
@@ -12,66 +15,25 @@ export class UserLoginComponent implements OnInit {
 
   userName = '';
   password = '';
+  hidePassword = true;
+  loggedIn = new Observable<boolean>();
+  isAdmin = new Observable<boolean>();
 
-  userToken: string;
-  userId: string;
-  loggedIn = false;
-  isAdmin: boolean = false;
 
-  secureEndpointResponse = '';
-
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(
+    private auth: AuthService) { }
 
   ngOnInit(): void {
-    this.checkUserStatus();
+    this.auth.checkUserStatus();
+    this.loggedIn = this.auth.loggedIn;
+    this.isAdmin = this.auth.isAdmin;
   }
 
-  checkUserStatus(): void {
-    // Get user data from local storage
-    this.userToken = localStorage.getItem('userToken');
-    this.userId = localStorage.getItem('userId');
-    this.userName = localStorage.getItem('userName');
-    this.isAdmin = (localStorage.getItem('isAdmin') === 'true');
-    // Set boolean whether a user is logged in or not
-    this.loggedIn = !!(this.userToken);
+
+  onLogout(){
+    this.auth.logout();
   }
-
-  login(): void {
-    this.httpClient.post(environment.endpointURL + 'user/login', {
-      userName: this.userName,
-      password: this.password
-    }).subscribe((res: any) => {
-      // Set user data in local storage
-      localStorage.setItem('userId', res.user.userId);
-      localStorage.setItem('userToken', res.token);
-      localStorage.setItem('userName', res.user.userName);
-      localStorage.setItem('isAdmin', res.user.isAdmin);
-      localStorage.setItem('userId', res.user.userId);
-
-      this.checkUserStatus();
-      this.router.navigate(['']);
-    }, (error: any) => {
-      window.alert('Username/Email or password incorrect. Please try again');
-    });
-  }
-
-  logout(): void {
-    // Remove user data from local storage
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('isAdmin');
-    this.checkUserStatus();
-  }
-
-  /**
-   * Function to access a secure endpoint that can only be accessed by logged in users by providing their token.
-   */
-  accessSecuredEndpoint(): void {
-    this.httpClient.get(environment.endpointURL + 'secured').subscribe((res: any) => {
-      this.secureEndpointResponse = 'Successfully accessed secure endpoint. Message from server: ' + res.message;
-    }, (error: any) => {
-      this.secureEndpointResponse = 'Unauthorized';
-    });
+  onLogin(){
+    this.auth.login(this.userName, this.password);
   }
 }
