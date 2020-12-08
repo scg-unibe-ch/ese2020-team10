@@ -76,7 +76,6 @@ export class ProductDetailsComponent implements OnInit {
   async onProductDelete(productId: number){
     this.productService.deleteProduct(this.productInfo.productId, () => {
       this.location.back();
-      this.router.navigate(['']);
     });
   }
 
