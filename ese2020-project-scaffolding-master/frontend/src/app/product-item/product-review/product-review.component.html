@@ -3,7 +3,8 @@
 
 <div *ngIf="alreadyReviewed == null">
   <form [formGroup]="formGroup">
-    <h3 style="padding-left: 1rem;">Review Product?</h3>
+    <h3 style="padding-left: 1rem;" *ngIf="productType!='Sell'">Review Product?</h3>
+    <h3 style="padding-left: 1rem;" *ngIf="productType=='Sell'">Review Seller?</h3>
     <div>
       <ngb-rating max = 5 [(rate)]="currentRate" style="outline: none;"></ngb-rating>
       <b style="margin-left: 10px;">{{currentRate}} /5 stars</b>
