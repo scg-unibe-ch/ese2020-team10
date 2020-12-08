@@ -57,7 +57,8 @@ export class ProductReviewComponent implements OnInit {
         rating: this.currentRate,
         reviewText: this.reviewText.value,
       }).subscribe((res: any) => {
-          this.toastr.success('Review sent')
+          this.toastr.success('Review sent');
+          this.alreadyReviewed = new Review
         },
         (error: any) => {
           this.toastr.error('Review could not be sent')
